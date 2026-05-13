@@ -1,5 +1,13 @@
+async function hashText(text) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(text);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
 export async function onRequest(context) {
-  const { env } = context;
+  const { request, env } = context;
 
   const launchDate = new Date(2026, 2, 26, 0, 0);
   const now = new Date();
@@ -10,10 +18,24 @@ export async function onRequest(context) {
   let visitors = 0;
   
   if (env.STATS_KV) {
-    const countStr = await env.STATS_KV.get("site_visitors");
-    visitors = countStr ? parseInt(countStr) + 1 : 1;
+    const ip = request.headers.get("cf-connecting-ip") || "unknown";
     
-    context.waitUntil(env.STATS_KV.put("site_visitors", visitors.toString()));
+    const ipHash = await hashText(ip + "_salt_md3");
+    const dedupKey = `visited_${ipHash}`;
+    
+    const countStr = await env.STATS_KV.get("site_visitors");
+    visitors = countStr ? parseInt(countStr) : 0;
+    
+    const hasVisited = await env.STATS_KV.get(dedupKey);
+    
+    if (!hasVisited) {
+      visitors += 1;
+      
+      context.waitUntil(Promise.all([
+        env.STATS_KV.put("site_visitors", visitors.toString()),
+        env.STATS_KV.put(dedupKey, "1", { expirationTtl: 86400 })
+      ]));
+    }
   } else {
     visitors = "KV未绑定";
   }
