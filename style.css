@@ -297,6 +297,9 @@ body {
   .md-scrim.open {
     display: block;
   }
+  .md-nav-footer {
+    display: none;
+  }
 }
 
 @media (max-width: 600px) {
