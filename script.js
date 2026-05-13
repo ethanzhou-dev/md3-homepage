@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(navDrawer && scrim) {
             navDrawer.classList.toggle('open');
             scrim.classList.toggle('open');
+            document.body.classList.toggle('no-scroll');
         }
     }
 

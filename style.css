@@ -51,6 +51,10 @@ body {
   min-height: 100vh;
 }
 
+body.no-scroll {
+  overflow: hidden;
+}
+
 .md-typescale-headline-medium { font-size: 28px; font-weight: 400; line-height: 36px; margin: 0 0 16px 0; }
 .md-typescale-headline-small { font-size: 24px; font-weight: 400; line-height: 32px; margin: 0 0 16px 0; }
 .md-typescale-title-large { font-size: 22px; font-weight: 500; line-height: 28px; margin: 24px 0 12px 0; }
