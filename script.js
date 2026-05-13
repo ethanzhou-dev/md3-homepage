@@ -56,16 +56,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    const launchDate = new Date(2026, 2, 26, 0, 0);
-    function updateUptime() {
-        const now = new Date();
-        const diff = now - launchDate;
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    async function fetchStats() {
         const uptimeElement = document.getElementById("uptime");
-        if (uptimeElement) {
-            uptimeElement.innerText = days + " days, " + hours + " hrs";
+        const visitorElement = document.getElementById("visitor-count");
+        
+        try {
+            const response = await fetch('/api/stats');
+            if (response.ok) {
+                const data = await response.json();
+                if (uptimeElement) {
+                    uptimeElement.innerText = `${data.uptime.days} days, ${data.uptime.hours} hrs`;
+                }
+                if (visitorElement) {
+                    visitorElement.innerText = data.visitors;
+                }
+            } else {
+                throw new Error('API fetch failed');
+            }
+        } catch (error) {
+            console.error("Failed to fetch stats:", error);
+            const launchDate = new Date(2026, 2, 26, 0, 0);
+            const now = new Date();
+            const diff = now - launchDate;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            if (uptimeElement) {
+                uptimeElement.innerText = days + " days, " + hours + " hrs";
+            }
+            if (visitorElement) {
+                visitorElement.innerText = "--";
+            }
         }
     }
-    updateUptime();
+    fetchStats();
 });
