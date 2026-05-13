@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
-        (function() {
+        (function () {
             var savedLang = localStorage.getItem('preferredLang');
             var lang = 'en';
             if (savedLang) {
@@ -26,8 +26,13 @@
         })();
     </script>
     <style>
-        .lang-en [data-lang="zh"] { display: none !important; }
-        .lang-zh [data-lang="en"] { display: none !important; }
+        .lang-en [data-lang="zh"] {
+            display: none !important;
+        }
+
+        .lang-zh [data-lang="en"] {
+            display: none !important;
+        }
     </style>
     <title>Ekiz's Homepage</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -40,12 +45,16 @@
 <body class="md-typescale-body-medium">
     <div class="layout-container">
         <nav class="md-nav-drawer" id="nav-drawer">
+            <div class="md-nav-header" id="nav-header">
+                <button class="md-icon-button" id="drawer-close-btn"><span class="material-symbols-outlined">menu_open</span></button>
+                <h2 class="md-typescale-title-large" data-lang="en" style="margin:0">Menu</h2>
+                <h2 class="md-typescale-title-large" data-lang="zh" style="margin:0">菜单</h2>
+            </div>
             <div class="md-nav-content">
                 <div class="md-nav-section">
                     <span class="md-nav-title md-typescale-title-small" data-lang="en">LANGUAGE</span>
                     <span class="md-nav-title md-typescale-title-small" data-lang="zh">语言切换</span>
-                    <a href="#" class="md-nav-item" id="btn-lang-en"><span
-                            class="md-nav-label">English</span></a>
+                    <a href="#" class="md-nav-item" id="btn-lang-en"><span class="md-nav-label">English</span></a>
                     <a href="#" class="md-nav-item" id="btn-lang-zh"><span class="md-nav-label">中文</span></a>
                 </div>
                 <div class="md-divider"></div>

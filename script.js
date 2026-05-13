@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const menuBtn = document.getElementById('menu-btn');
+    const drawerCloseBtn = document.getElementById('drawer-close-btn');
     const navDrawer = document.getElementById('nav-drawer');
     const scrim = document.getElementById('scrim');
     const navItems = document.querySelectorAll('.md-nav-item[href^="#"]');
@@ -12,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (menuBtn) menuBtn.addEventListener('click', toggleMenu);
+    if (drawerCloseBtn) drawerCloseBtn.addEventListener('click', toggleMenu);
     if (scrim) scrim.addEventListener('click', toggleMenu);
     
     navItems.forEach(item => {

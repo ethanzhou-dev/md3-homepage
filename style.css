@@ -283,6 +283,14 @@ body {
   .md-nav-drawer.open {
     transform: translateX(0);
   }
+  .md-nav-header {
+    display: flex;
+    align-items: center;
+    min-height: 64px;
+    padding: 0 4px;
+    margin-bottom: 8px;
+    margin-top: -4px;
+  }
   #menu-btn {
     display: flex;
   }
@@ -291,7 +299,6 @@ body {
   }
 }
 
-/* Compact Mobile Screen Tuning (MD3 Guidelines) */
 @media (max-width: 600px) {
   .md-content-body {
     padding: 16px;
