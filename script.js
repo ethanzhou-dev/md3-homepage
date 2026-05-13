@@ -31,12 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if(rootHtml) rootHtml.setAttribute('lang', lang);
         
         if(lang === 'en') {
-            if(btnEn) btnEn.classList.add('active');
-            if(btnZh) btnZh.classList.remove('active');
             document.title = "Ekiz's Homepage";
         } else {
-            if(btnZh) btnZh.classList.add('active');
-            if(btnEn) btnEn.classList.remove('active');
             document.title = "Ekiz 的主页";
         }
         
