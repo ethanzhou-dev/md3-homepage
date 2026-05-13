@@ -4,15 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ekiz's Homepage</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-        rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body class="md-typescale-body-medium lang-en">
     <script>
         (function() {
             var savedLang = localStorage.getItem('preferredLang');
@@ -25,13 +16,28 @@
                     lang = 'zh';
                 }
             }
-            document.body.className = document.body.className.replace(/lang-\w+/, 'lang-' + lang);
             document.documentElement.lang = lang;
+            document.documentElement.className = 'lang-' + lang;
             if (lang === 'zh') {
                 document.title = "Ekiz 的主页";
+            } else {
+                document.title = "Ekiz's Homepage";
             }
         })();
     </script>
+    <style>
+        .lang-en [data-lang="zh"] { display: none !important; }
+        .lang-zh [data-lang="en"] { display: none !important; }
+    </style>
+    <title>Ekiz's Homepage</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="md-typescale-body-medium">
     <div class="layout-container">
         <nav class="md-nav-drawer" id="nav-drawer">
             <div class="md-nav-content">

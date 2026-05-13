@@ -279,9 +279,6 @@ body {
   }
 }
 
-body.lang-en [data-lang="zh"] { display: none !important; }
-body.lang-zh [data-lang="en"] { display: none !important; }
-
 /* Compact Mobile Screen Tuning (MD3 Guidelines) */
 @media (max-width: 600px) {
   .md-content-body {

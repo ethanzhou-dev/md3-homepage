@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const rootHtml = document.getElementById('html-root');
 
     function setLanguage(lang) {
-        document.body.className = document.body.className.replace(/lang-\w+/, 'lang-' + lang);
+        document.documentElement.className = 'lang-' + lang;
         if(rootHtml) rootHtml.setAttribute('lang', lang);
         
         if(lang === 'en') {
