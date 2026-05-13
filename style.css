@@ -51,7 +51,6 @@ body {
   min-height: 100vh;
 }
 
-/* Typography */
 .md-typescale-headline-medium { font-size: 28px; font-weight: 400; line-height: 36px; margin: 0 0 16px 0; }
 .md-typescale-headline-small { font-size: 24px; font-weight: 400; line-height: 32px; margin: 0 0 16px 0; }
 .md-typescale-title-large { font-size: 22px; font-weight: 500; line-height: 28px; margin: 24px 0 12px 0; }
@@ -61,13 +60,11 @@ body {
 .md-typescale-body-small { font-size: 12px; font-weight: 400; line-height: 16px; letter-spacing: 0.4px; }
 .md-typescale-label-large { font-size: 14px; font-weight: 500; line-height: 20px; letter-spacing: 0.1px; }
 
-/* Utilities */
 .text-primary { color: var(--md-sys-color-primary); }
 .text-outline { color: var(--md-sys-color-outline); }
 .text-right { text-align: right; }
 .text-center { text-align: center; }
 
-/* Layout */
 .layout-container {
   display: flex;
   width: 100%;
@@ -201,8 +198,8 @@ body {
   border-radius: 12px;
   padding: 24px;
   box-shadow: var(--md-elevation-1);
-  margin-bottom: 24px; /* Added spacing between cards for SPA */
-  scroll-margin-top: 72px; /* Offset for the sticky 64px top app bar + 8px subtle gap */
+  margin-bottom: 24px;
+  scroll-margin-top: 72px;
 }
 
 .md-list {
@@ -281,3 +278,6 @@ body {
     display: block;
   }
 }
+
+body.lang-en [data-lang="zh"] { display: none !important; }
+body.lang-zh [data-lang="en"] { display: none !important; }

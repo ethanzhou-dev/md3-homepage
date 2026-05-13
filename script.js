@@ -1,6 +1,4 @@
-
 document.addEventListener('DOMContentLoaded', () => {
-    // Drawer Logic
     const menuBtn = document.getElementById('menu-btn');
     const navDrawer = document.getElementById('nav-drawer');
     const scrim = document.getElementById('scrim');
@@ -16,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (menuBtn) menuBtn.addEventListener('click', toggleMenu);
     if (scrim) scrim.addEventListener('click', toggleMenu);
     
-    // Close drawer when clicking a link (mobile)
     navItems.forEach(item => {
         item.addEventListener('click', () => {
             if (window.innerWidth <= 840 && navDrawer.classList.contains('open')) {
@@ -25,7 +22,42 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Uptime Logic
+    const btnEn = document.getElementById('btn-lang-en');
+    const btnZh = document.getElementById('btn-lang-zh');
+    const rootHtml = document.getElementById('html-root');
+
+    function setLanguage(lang) {
+        document.body.className = document.body.className.replace(/lang-\w+/, 'lang-' + lang);
+        if(rootHtml) rootHtml.setAttribute('lang', lang);
+        
+        if(lang === 'en') {
+            if(btnEn) btnEn.classList.add('active');
+            if(btnZh) btnZh.classList.remove('active');
+            document.title = "Ekiz's Homepage";
+        } else {
+            if(btnZh) btnZh.classList.add('active');
+            if(btnEn) btnEn.classList.remove('active');
+            document.title = "Ekiz 的主页";
+        }
+        
+        localStorage.setItem('preferredLang', lang);
+    }
+
+    if (btnEn && btnZh) {
+        btnEn.addEventListener('click', (e) => { e.preventDefault(); setLanguage('en'); });
+        btnZh.addEventListener('click', (e) => { e.preventDefault(); setLanguage('zh'); });
+    }
+
+    const savedLang = localStorage.getItem('preferredLang');
+    if (savedLang) {
+        setLanguage(savedLang);
+    } else {
+        const userLang = navigator.language || navigator.userLanguage;
+        if (userLang && userLang.toLowerCase().startsWith('zh')) {
+            setLanguage('zh');
+        }
+    }
+
     const launchDate = new Date(2026, 2, 26, 0, 0);
     function updateUptime() {
         const now = new Date();
