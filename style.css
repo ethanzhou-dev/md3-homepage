@@ -168,6 +168,10 @@ body {
 
 .md-top-app-bar h1 {
   margin: 0;
+  padding: 0;
+  line-height: 1;
+  display: flex;
+  align-items: center;
 }
 
 .md-icon-button {
@@ -181,7 +185,9 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  margin-right: 12px;
+  margin: 0 12px 0 0;
+  padding: 0;
+  flex-shrink: 0;
 }
 
 .md-icon-button:hover {
