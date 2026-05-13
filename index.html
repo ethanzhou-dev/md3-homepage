@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ekiz's Homepage</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="md-typescale-body-medium">
+    <div class="layout-container">
+        <!-- Navigation Drawer -->
+        <nav class="md-nav-drawer" id="nav-drawer">
+            <div class="md-nav-content">
+                <div class="md-nav-section">
+                    <span class="md-nav-title md-typescale-title-small">LANGUAGE</span>
+                    <a href="index.html" class="md-nav-item active"><span class="md-nav-label">English</span></a>
+                    <a href="zh.html" class="md-nav-item "><span class="md-nav-label">中文</span></a>
+                </div>
+                <div class="md-divider"></div>
+                <div class="md-nav-section">
+                    <span class="md-nav-title md-typescale-title-small">MAIN MENU</span>
+                    <a href="#whoami" class="md-nav-item">
+                        <span class="material-symbols-outlined md-nav-icon">person</span>
+                        <span class="md-nav-label">Whoami</span>
+                    </a>
+                    <a href="#projects" class="md-nav-item">
+                        <span class="material-symbols-outlined md-nav-icon">folder</span>
+                        <span class="md-nav-label">Projects</span>
+                    </a>
+                    <a href="#logs" class="md-nav-item">
+                        <span class="material-symbols-outlined md-nav-icon">article</span>
+                        <span class="md-nav-label">Dev Logs</span>
+                    </a>
+                    <a href="#bookmarks" class="md-nav-item">
+                        <span class="material-symbols-outlined md-nav-icon">bookmarks</span>
+                        <span class="md-nav-label">Bookmarks</span>
+                    </a>
+                    <a href="mailto:zhouyireitik@gmail.com" class="md-nav-item">
+                        <span class="material-symbols-outlined md-nav-icon">mail</span>
+                        <span class="md-nav-label">Ping Me</span>
+                    </a>
+                </div>
+                <div class="md-nav-footer md-typescale-body-small">
+                    <div>System uptime:<br><span id="uptime">Loading...</span></div>
+                    <div style="margin-top:8px;">Visitor Count: <span id="busuanzi_value_site_uv">--</span></div>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Main Content -->
+        <main class="md-main-content">
+            <header class="md-top-app-bar">
+                <button class="md-icon-button" id="menu-btn"><span class="material-symbols-outlined">menu</span></button>
+                <h1 class="md-typescale-title-large">Ekiz's Homepage</h1>
+            </header>
+            <div class="md-content-body">
+
+                <!-- Whoami Section -->
+                <div class="md-card" id="whoami">
+                    <h2 class="md-typescale-headline-medium text-primary">Hello, World.</h2>
+                    <p class="md-typescale-body-large">Welcome to my digital footprint. I am an independent builder who enjoys experimenting with personal devices, finding rhythm in logic, and creating visual media. This page exists as a minimalist documentation of my work.</p>
+                    <div class="md-divider"></div>
+                    <h3 class="md-typescale-title-large text-primary">:: Skill Tree</h3>
+                    <ul class="md-list md-typescale-body-large">
+                        <li>OS: Linux & macOS</li>
+                        <li>Workflow: Vibe Coding</li>
+                        <li>Hardware: Tinkering with smartphones & gadgets</li>
+                        <li>Mana Recharge: Drawing & Gaming</li>
+                    </ul>
+                </div>
+
+                <!-- Projects Section -->
+                <div class="md-card" id="projects">
+                    <h2 class="md-typescale-headline-medium text-primary">Project Archive</h2>
+                    <p class="md-typescale-body-large">Here is a list of projects I am currently working on or have completed.</p>
+                    <div class="md-table-container">
+                        <table class="md-table">
+                            <thead>
+                                <tr><th>Repository</th><th>Version</th><th>Description</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Neural-Lite</td><td>v1.1</td><td>AI Webpage</td></tr>
+                                <tr><td>WapChat_QQ</td><td>v1.0</td><td>QQ Group Link</td></tr>
+                                <tr><td>Ekiz_Navigation</td><td>v0.3</td><td>Web Navigation</td></tr>
+                                <tr><td>WAP_news</td><td>v0.2</td><td>RSS news for legacy</td></tr>
+                                <tr><td>WAP_Weather</td><td>v0.2</td><td>Simple Weather API</td></tr>
+                                <tr><td>WAP_MIDI</td><td>v0.2</td><td>MIDI download</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h3 class="md-typescale-title-large text-primary">:: Upcoming Ideas</h3>
+                    <ul class="md-list md-typescale-body-large">
+                        <li>Personal Wiki System</li>
+                        <li>Raspberry Pi Server Guide</li>
+                        <li>Linux Kernel Logs</li>
+                        <li>Retro Game Engine in C</li>
+                    </ul>
+                </div>
+
+                <!-- Logs Section -->
+                <div class="md-card" id="logs">
+                    <h2 class="md-typescale-headline-medium text-primary">Development Logs</h2>
+                    <p class="md-typescale-body-large">System logs, update notes, and random development thoughts. Documenting the process step by step.</p>
+                    <div class="md-divider"></div>
+                    <h3 class="md-typescale-title-large text-primary">:: [2026.03.26] System Update v1.2</h3>
+                    <p class="md-typescale-body-large">
+                        - <b>TinyHTTPd_fork:</b> Fixed the parsing bug in request headers.<br>
+                        - <b>Neural-Lite:</b> Added new weights for the test model.<br>
+                        - Re-wrote the CSS/HTML layout for the Dev Logs page to keep it clean.
+                    </p>
+                    <div class="md-divider"></div>
+                    <h3 class="md-typescale-title-large text-primary">:: [2026.03.20] Init CGI Blog Engine</h3>
+                    <p class="md-typescale-body-large">Started working on the Perl-based static blog generator. Currently testing local Markdown to HTML parsing. It's a bit slow but working as intended.</p>
+                </div>
+
+                <!-- Bookmarks Section -->
+                <div class="md-card" id="bookmarks">
+                    <h2 class="md-typescale-headline-medium text-primary">Bookmarks</h2>
+                    <p class="md-typescale-body-large">A curated list of links, tools, and digital resources I frequently use or find interesting.</p>
+                    <div class="md-divider"></div>
+                    <h3 class="md-typescale-title-large text-primary">:: Tech & Dev</h3>
+                    <ul class="md-list md-typescale-body-large">
+                        <li><a href="https://github.com" target="_blank" class="md-link">GitHub</a> - Where the code lives.</li>
+                        <li><a href="https://news.ycombinator.com" target="_blank" class="md-link">Hacker News</a> - Daily tech news.</li>
+                    </ul>
+                    <h3 class="md-typescale-title-large text-primary">:: Design & Vibe</h3>
+                    <ul class="md-list md-typescale-body-large">
+                        <li><a href="https://dribbble.com" target="_blank" class="md-link">Dribbble</a> - UI/UX inspiration.</li>
+                        <li><a href="https://brutalistwebsites.com" target="_blank" class="md-link">Brutalist Websites</a> - Design.</li>
+                    </ul>
+                    <h3 class="md-typescale-title-large text-primary">:: Useful Tools</h3>
+                    <ul class="md-list md-typescale-body-large">
+                        <li><a href="https://regex101.com" target="_blank" class="md-link">Regex101</a> - Regex tester.</li>
+                        <li><a href="https://cyberchef.org" target="_blank" class="md-link">CyberChef</a> - Swiss Army Knife.</li>
+                    </ul>
+                    <p class="text-right md-typescale-label-large text-outline" style="margin-top:24px;">EOF.</p>
+                </div>
+
+            </div>
+            <footer class="md-footer md-typescale-body-small">
+                Copyright &copy; 2026. All rights reserved. | Material Design 3
+            </footer>
+        </main>
+    </div>
+    <!-- Scrim for mobile drawer -->
+    <div class="md-scrim" id="scrim"></div>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
