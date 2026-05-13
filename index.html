@@ -13,6 +13,25 @@
 </head>
 
 <body class="md-typescale-body-medium lang-en">
+    <script>
+        (function() {
+            var savedLang = localStorage.getItem('preferredLang');
+            var lang = 'en';
+            if (savedLang) {
+                lang = savedLang;
+            } else {
+                var userLang = navigator.language || navigator.userLanguage;
+                if (userLang && userLang.toLowerCase().startsWith('zh')) {
+                    lang = 'zh';
+                }
+            }
+            document.body.className = document.body.className.replace(/lang-\w+/, 'lang-' + lang);
+            document.documentElement.lang = lang;
+            if (lang === 'zh') {
+                document.title = "Ekiz 的主页";
+            }
+        })();
+    </script>
     <div class="layout-container">
         <nav class="md-nav-drawer" id="nav-drawer">
             <div class="md-nav-content">
