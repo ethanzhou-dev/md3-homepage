@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('js-enabled');
     const menuBtn = document.getElementById('menu-btn');
     const drawerCloseBtn = document.getElementById('drawer-close-btn');
     const navDrawer = document.getElementById('nav-drawer');
@@ -292,4 +293,40 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     fetchStats();
+
+    const backToTopFab = document.getElementById('back-to-top-fab');
+    if (backToTopFab) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopFab.classList.add('visible');
+            } else {
+                backToTopFab.classList.remove('visible');
+            }
+        });
+        backToTopFab.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    const cardObserverOptions = {
+        root: null,
+        rootMargin: '0px 0px -8% 0px',
+        threshold: 0.05
+    };
+
+    const cardObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, cardObserverOptions);
+
+    document.querySelectorAll('.md-card').forEach(card => {
+        cardObserver.observe(card);
+    });
 });
