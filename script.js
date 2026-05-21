@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('js-enabled');
 
-    let themeReady = false;
+    let themeReady = !!localStorage.getItem('themeStyles');
     let componentsReady = false;
 
     const fadeOutLoader = () => {
@@ -55,15 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('load', markComponentsReady);
     setTimeout(markComponentsReady, 1500);
-
-    // Safety timeout: if the dynamic theme CDN takes too long,
-    // reveal the page anyway (cached/default styles are fine).
-    setTimeout(() => {
-        if (!themeReady) {
-            themeReady = true;
-            fadeOutLoader();
-        }
-    }, 2500);
 
     const menuBtn = document.getElementById('menu-btn');
     const drawerCloseBtn = document.getElementById('drawer-close-btn');
