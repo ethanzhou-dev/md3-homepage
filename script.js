@@ -1,15 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('js-enabled');
 
-    // Preloader Fade-out & Page Fade-in Logic
     const fadeOutLoader = () => {
         const preloader = document.getElementById('app-preloader');
         const container = document.querySelector('.layout-container');
         if (preloader && !preloader.classList.contains('fade-out')) {
             document.documentElement.classList.add('app-loaded');
 
-            // Pre-mark cards that are already in the viewport so they
-            // don't flash in separately after the container appears.
             document.querySelectorAll('.md-card').forEach(card => {
                 const rect = card.getBoundingClientRect();
                 if (rect.top < window.innerHeight && rect.bottom > 0) {
@@ -17,17 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Step 1: Fade out the preloader
             preloader.classList.add('fade-out');
 
-            // Step 2: After the preloader is mostly gone, fade in the content
             setTimeout(() => {
                 if (container) {
                     container.style.opacity = '1';
                 }
             }, 200);
 
-            // Step 3: Remove preloader from DOM after transitions complete
             setTimeout(() => {
                 preloader.remove();
             }, 600);
@@ -43,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ]).then(fadeOutLoader);
 
     window.addEventListener('load', fadeOutLoader);
-    setTimeout(fadeOutLoader, 1500); // 1.5s fallback to prevent loading hang
+    setTimeout(fadeOutLoader, 1500);
 
     const menuBtn = document.getElementById('menu-btn');
     const drawerCloseBtn = document.getElementById('drawer-close-btn');
