@@ -332,4 +332,33 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.md-card').forEach(card => {
         cardObserver.observe(card);
     });
+
+    // Preloader fade-out once components are defined and page is fully ready
+    if (window.customElements && window.customElements.whenDefined) {
+        const componentsToWait = [
+            'md-icon-button',
+            'md-icon',
+            'md-list',
+            'md-list-item',
+            'md-divider',
+            'md-elevation',
+            'md-fab'
+        ];
+        Promise.all(componentsToWait.map(tag => customElements.whenDefined(tag)))
+            .then(() => {
+                setTimeout(() => {
+                    document.documentElement.classList.remove('theme-loading');
+                    const preloader = document.getElementById('app-preloader');
+                    if (preloader) {
+                        preloader.style.opacity = '0';
+                        preloader.style.visibility = 'hidden';
+                        setTimeout(() => preloader.remove(), 300);
+                    }
+                }, 100);
+            });
+    } else {
+        document.documentElement.classList.remove('theme-loading');
+        const preloader = document.getElementById('app-preloader');
+        if (preloader) preloader.remove();
+    }
 });
