@@ -216,6 +216,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Freeze preloader colors before dynamic theme changes CSS variables.
+    // This prevents the preloader background/spinner from flashing when
+    // applyDynamicTheme updates CSS variables while the preloader is visible.
+    const preloaderEl = document.getElementById('app-preloader');
+    if (preloaderEl) {
+        preloaderEl.style.backgroundColor = getComputedStyle(preloaderEl).backgroundColor;
+        const spinnerEl = preloaderEl.querySelector('.preloader-spinner');
+        if (spinnerEl) {
+            const spinnerStyles = getComputedStyle(spinnerEl);
+            spinnerEl.style.borderColor = spinnerStyles.borderColor;
+            spinnerEl.style.borderTopColor = spinnerStyles.borderTopColor;
+        }
+    }
+
     // Pass skipIfCached=true on initial load to avoid re-applying styles
     // that the inline head script already set from localStorage
     applyDynamicTheme(activeSeedColor, isDarkMode, true);
