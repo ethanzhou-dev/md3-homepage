@@ -122,7 +122,14 @@
 
         html.js-enabled .layout-container {
             opacity: 0;
-            transition: opacity 500ms cubic-bezier(0, 0, 0.2, 1);
+        }
+
+        /* Suppress ALL transitions in main content until fully loaded.
+           This prevents CSS variable changes from causing brightness flashes
+           while the preloader is still covering the page. */
+        html.js-enabled:not(.app-loaded) .layout-container,
+        html.js-enabled:not(.app-loaded) .layout-container * {
+            transition: none !important;
         }
     </style>
     <title>Ekiz's Homepage</title>
@@ -536,7 +543,7 @@
     <md-fab id="back-to-top-fab" aria-label="Back to top">
         <md-icon slot="icon">arrow_upward</md-icon>
     </md-fab>
-    <script src="script.js?v=20260521_10"></script>
+    <script src="script.js?v=20260521_11"></script>
 </body>
 
 </html>
