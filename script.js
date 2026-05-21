@@ -7,13 +7,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const container = document.querySelector('.layout-container');
         if (preloader && !preloader.classList.contains('fade-out')) {
             document.documentElement.classList.add('app-loaded');
+
+            // Pre-mark cards that are already in the viewport so they
+            // don't flash in separately after the container appears.
+            document.querySelectorAll('.md-card').forEach(card => {
+                const rect = card.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    card.classList.add('visible');
+                }
+            });
+
+            // Step 1: Fade out the preloader
             preloader.classList.add('fade-out');
-            if (container) {
-                container.style.opacity = '1';
-            }
+
+            // Step 2: After the preloader is mostly gone, fade in the content
+            setTimeout(() => {
+                if (container) {
+                    container.style.opacity = '1';
+                }
+            }, 200);
+
+            // Step 3: Remove preloader from DOM after transitions complete
             setTimeout(() => {
                 preloader.remove();
-            }, 400);
+            }, 600);
         }
     };
 
