@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const preloader = document.getElementById('app-preloader');
         const container = document.querySelector('.layout-container');
         if (preloader && !preloader.classList.contains('fade-out')) {
+            document.documentElement.classList.add('app-loaded');
             preloader.classList.add('fade-out');
             if (container) {
                 container.style.opacity = '1';
@@ -269,7 +270,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const rootHtml = document.getElementById('html-root');
 
     function setLanguage(lang) {
-        document.documentElement.className = 'lang-' + lang;
+        Array.from(document.documentElement.classList).forEach(c => {
+            if (c.startsWith('lang-')) {
+                document.documentElement.classList.remove(c);
+            }
+        });
+        document.documentElement.classList.add('lang-' + lang);
         if(rootHtml) rootHtml.setAttribute('lang', lang);
         
         if(lang === 'en') {
