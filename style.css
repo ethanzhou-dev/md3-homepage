@@ -500,6 +500,52 @@ body, nav, main, header, .md-card, .md-nav-item, h1, h2, h3, p, a, md-divider, m
   transform: translateY(0);
 }
 
+/* --- Web Components Loading Skeletons & Transitions --- */
+
+/* 1. Prevent layout shift of the sidebar drawer on desktop before JS loads */
+md-nav-drawer:not(:defined) {
+  display: block;
+  width: 300px;
+  height: 100vh;
+  background-color: var(--md-sys-color-surface-container-low);
+  border-right: 1px solid var(--md-sys-color-outline-variant);
+  box-sizing: border-box;
+}
+
+@media (max-width: 840px) {
+  md-nav-drawer:not(:defined) {
+    width: 0;
+    display: none;
+  }
+}
+
+/* 2. Hide other complex undefined elements to avoid rendering raw HTML/text fallback tags */
+md-list-item:not(:defined),
+md-primary-tab:not(:defined),
+md-checkbox:not(:defined),
+md-switch:not(:defined),
+md-icon:not(:defined),
+md-icon-button:not(:defined),
+md-linear-progress:not(:defined) {
+  opacity: 0;
+}
+
+/* 3. Smooth fade-in transition when custom components upgrade (become defined) */
+md-nav-drawer,
+md-list,
+md-list-item,
+md-tabs,
+md-primary-tab,
+md-checkbox,
+md-switch,
+md-icon,
+md-icon-button,
+md-linear-progress {
+  transition: opacity 300ms cubic-bezier(0.2, 0, 0, 1),
+              background-color 250ms ease,
+              color 250ms ease;
+}
+
 
 
 
