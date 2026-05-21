@@ -134,6 +134,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (e) {
             console.error("Failed to load theme from API", e);
+            themeReady = true;
+            fadeOutLoader();
             return;
         }
 
