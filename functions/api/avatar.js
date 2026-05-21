@@ -6,7 +6,6 @@ export async function onRequest(context) {
     return new Response("Missing url parameter", { status: 400 });
   }
 
-  // Normalize URL
   if (!/^https?:\/\//i.test(targetUrlParam)) {
     targetUrlParam = "https://" + targetUrlParam;
   }
@@ -21,7 +20,6 @@ export async function onRequest(context) {
   const cache = caches.default;
   const cacheKey = new Request(request.url, request);
   
-  // Try to return from cache
   let cachedResponse = await cache.match(cacheKey);
   if (cachedResponse) {
     return cachedResponse;
@@ -29,10 +27,9 @@ export async function onRequest(context) {
 
   let faviconUrl = null;
 
-  // Try parsing target homepage to extract favicon links
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 seconds timeout
+    const timeoutId = setTimeout(() => controller.abort(), 3000);
 
     const response = await fetch(targetUrl.origin, {
       headers: {
@@ -50,7 +47,6 @@ export async function onRequest(context) {
             const href = element.getAttribute("href");
             const rel = element.getAttribute("rel");
             if (href) {
-              // Prefer apple-touch-icon or shortcut icon if available
               if (!foundHref || rel.includes("apple-touch-icon") || rel.includes("shortcut")) {
                 foundHref = href;
               }
@@ -58,7 +54,7 @@ export async function onRequest(context) {
           }
         })
         .transform(response)
-        .text(); // Consume the body to execute HTMLRewriter
+        .text();
 
       if (foundHref) {
         if (foundHref.startsWith("//")) {
@@ -76,12 +72,10 @@ export async function onRequest(context) {
     console.error("Error parsing HTML for favicon:", e);
   }
 
-  // Fallback 1: Default path
   if (!faviconUrl) {
     faviconUrl = targetUrl.origin + "/favicon.ico";
   }
 
-  // Fetch the actual favicon image
   try {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 3000);
@@ -100,7 +94,7 @@ export async function onRequest(context) {
       const finalResponse = new Response(body, {
         headers: {
           "Content-Type": contentType || "image/x-icon",
-          "Cache-Control": "public, max-age=604800", // Cache for 7 days
+          "Cache-Control": "public, max-age=604800",
         }
       });
       context.waitUntil(cache.put(cacheKey, finalResponse.clone()));
@@ -110,7 +104,6 @@ export async function onRequest(context) {
     console.error("Error fetching favicon directly:", e);
   }
 
-  // Fallback 2: Google Favicon service
   try {
     const googleFaviconUrl = `https://www.google.com/s2/favicons?sz=64&domain=${targetUrl.hostname}`;
     const iconRes = await fetch(googleFaviconUrl);
@@ -121,7 +114,7 @@ export async function onRequest(context) {
       const finalResponse = new Response(body, {
         headers: {
           "Content-Type": contentType || "image/png",
-          "Cache-Control": "public, max-age=604800", // Cache for 7 days
+          "Cache-Control": "public, max-age=604800",
         }
       });
       context.waitUntil(cache.put(cacheKey, finalResponse.clone()));
@@ -131,7 +124,6 @@ export async function onRequest(context) {
     console.error("Error fetching fallback google favicon:", e);
   }
 
-  // Fallback 3: Dynamic SVG fallback with the domain's first letter
   const letter = targetUrl.hostname.replace("www.", "")[0].toUpperCase();
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
@@ -142,7 +134,7 @@ export async function onRequest(context) {
   const finalResponse = new Response(svg, {
     headers: {
       "Content-Type": "image/svg+xml",
-      "Cache-Control": "public, max-age=86400", // Cache dynamic SVG for 1 day
+      "Cache-Control": "public, max-age=86400",
     }
   });
   return finalResponse;

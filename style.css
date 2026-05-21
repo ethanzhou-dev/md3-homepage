@@ -546,7 +546,6 @@ md-linear-progress {
               color 250ms ease;
 }
 
-/* Friendly Links Module CSS */
 .friend-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
