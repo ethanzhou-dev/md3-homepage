@@ -548,96 +548,32 @@ md-linear-progress {
 
 .friend-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 16px;
   margin-top: 16px;
 }
 
-.friend-card {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 16px;
-  background-color: var(--md-sys-color-surface);
+.friend-grid md-list-item {
   border: 1px solid var(--md-sys-color-outline-variant);
   border-radius: 12px;
-  text-decoration: none;
-  color: var(--md-sys-color-on-surface);
-  transition: border-color 250ms cubic-bezier(0.2, 0, 0, 1), 
-              background-color 250ms cubic-bezier(0.2, 0, 0, 1), 
-              transform 250ms cubic-bezier(0.2, 0, 0, 1), 
-              box-shadow 250ms cubic-bezier(0.2, 0, 0, 1);
-  cursor: pointer;
-  outline: none;
+  overflow: hidden;
+  --md-list-item-container-color: var(--md-sys-color-surface);
 }
 
-.friend-card:hover {
-  border-color: var(--md-sys-color-primary);
-  background-color: var(--md-sys-color-surface-container);
-  transform: translateY(-2px);
-  box-shadow: var(--md-elevation-1);
+.friend-grid md-list-item::part(focus-ring) {
+  --md-focus-ring-shape: 12px;
 }
 
-.friend-card:focus-visible {
-  outline: 2px solid var(--md-sys-color-primary);
-  outline-offset: 2px;
-}
-
-.friend-avatar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.friend-avatar-img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: var(--md-sys-color-secondary-container);
-  color: var(--md-sys-color-on-secondary-container);
-  font-weight: 500;
-  font-size: 16px;
-  flex-shrink: 0;
-  overflow: hidden;
-  transition: background-color 250ms ease, color 250ms ease;
-}
-
-.friend-avatar img {
-  width: 100%;
-  height: 100%;
   object-fit: cover;
-}
-
-.friend-info {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  flex: 1;
-}
-
-.friend-name {
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 20px;
-  color: var(--md-sys-color-on-surface);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.friend-desc {
-  font-size: 12px;
-  line-height: 16px;
-  color: var(--md-sys-color-on-surface-variant);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  margin-top: 2px;
 }
 
 @media (max-width: 600px) {
   .friend-grid {
-    gap: 12px;
-  }
-  .friend-card {
-    padding: 12px;
+    grid-template-columns: 1fr;
     gap: 12px;
   }
 }
