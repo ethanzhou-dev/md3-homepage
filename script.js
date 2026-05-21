@@ -131,12 +131,11 @@ document.addEventListener('DOMContentLoaded', () => {
             vars['--md-sys-color-outline-variant'] = hex(nv.tone(80));
         }
 
-        let cssText = ':root {\n';
+        let cssText = '';
         for (const [key, val] of Object.entries(vars)) {
             document.documentElement.style.setProperty(key, val);
-            cssText += `  ${key}: ${val};\n`;
+            cssText += `${key}: ${val}; `;
         }
-        cssText += '}';
         localStorage.setItem('themeStyles', cssText);
 
         let foundPreset = false;

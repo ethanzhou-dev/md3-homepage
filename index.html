@@ -50,10 +50,14 @@
 
             var themeStyles = localStorage.getItem('themeStyles');
             if (themeStyles) {
-                var styleEl = document.createElement('style');
-                styleEl.id = 'injected-theme-styles';
-                styleEl.textContent = themeStyles;
-                document.head.appendChild(styleEl);
+                if (themeStyles.indexOf(':root') !== -1) {
+                    var match = themeStyles.match(/\{([\s\S]*)\}/);
+                    if (match && match[1]) {
+                        document.documentElement.style.cssText = match[1];
+                    }
+                } else {
+                    document.documentElement.style.cssText = themeStyles;
+                }
             }
         })();
     </script>
@@ -81,7 +85,7 @@
     <script type="module">
         import '@material/web/all.js';
     </script>
-    <link rel="stylesheet" href="style.css?v=20260521">
+    <link rel="stylesheet" href="style.css?v=20260521_1">
 </head>
 
 <body class="md-typescale-body-medium">
@@ -473,7 +477,7 @@
     <md-fab id="back-to-top-fab" aria-label="Back to top">
         <md-icon slot="icon">arrow_upward</md-icon>
     </md-fab>
-    <script src="script.js?v=20260521"></script>
+    <script src="script.js?v=20260521_1"></script>
 </body>
 
 </html>
