@@ -9,7 +9,7 @@ async function hashText(text) {
 export async function onRequest(context) {
   const { request, env } = context;
 
-  const launchDate = new Date(2026, 2, 26, 0, 0);
+  const launchDate = new Date("2026-03-26T00:00:00+08:00");
   const now = new Date();
   const diff = now - launchDate;
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));

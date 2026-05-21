@@ -394,13 +394,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (error) {
             console.error("Failed to fetch stats:", error);
-            const launchDate = new Date(2026, 2, 26, 0, 0);
-            const now = new Date();
-            const diff = now - launchDate;
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-            const uptimeText = `${days} days, ${hours} hrs`;
-            uptimeElements.forEach(el => el.innerText = uptimeText);
+            uptimeElements.forEach(el => el.innerText = "Unavailable");
             visitorElements.forEach(el => el.innerText = "--");
         }
     }
