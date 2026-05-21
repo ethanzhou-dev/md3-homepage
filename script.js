@@ -1,7 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('js-enabled');
 
+    let themeReady = !!localStorage.getItem('themeStyles');
+    let componentsReady = false;
+
     const fadeOutLoader = () => {
+        if (!themeReady || !componentsReady) return;
         const preloader = document.getElementById('app-preloader');
         const container = document.querySelector('.layout-container');
         if (preloader && !preloader.classList.contains('fade-out')) {
@@ -28,16 +32,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    const markComponentsReady = () => {
+        componentsReady = true;
+        fadeOutLoader();
+    };
+
     Promise.all([
         customElements.whenDefined('md-nav-drawer'),
         customElements.whenDefined('md-list'),
         customElements.whenDefined('md-list-item'),
         customElements.whenDefined('md-fab'),
         customElements.whenDefined('md-icon-button')
-    ]).then(fadeOutLoader);
+    ]).then(markComponentsReady);
 
-    window.addEventListener('load', fadeOutLoader);
-    setTimeout(fadeOutLoader, 1500);
+    window.addEventListener('load', markComponentsReady);
+    setTimeout(markComponentsReady, 1500);
 
     const menuBtn = document.getElementById('menu-btn');
     const drawerCloseBtn = document.getElementById('drawer-close-btn');
@@ -69,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     initThemeMode();
 
-    async function applyDynamicTheme(hexColor, isDark) {
+    async function applyDynamicTheme(hexColor, isDark, skipIfCached) {
         activeSeedColor = hexColor;
         localStorage.setItem('themeSeedColor', hexColor);
 
@@ -172,10 +181,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let cssText = '';
         for (const [key, val] of Object.entries(vars)) {
-            document.documentElement.style.setProperty(key, val);
             cssText += `${key}: ${val}; `;
         }
-        localStorage.setItem('themeStyles', cssText);
+
+        // If cached styles already match, skip DOM update to avoid flash
+        const cachedStyles = localStorage.getItem('themeStyles');
+        if (skipIfCached && cachedStyles === cssText) {
+            // Styles are already applied from the inline head script, no need to re-apply
+        } else {
+            // Apply all vars at once to prevent partial-update flash
+            document.documentElement.style.cssText = cssText;
+            localStorage.setItem('themeStyles', cssText);
+        }
+        themeReady = true;
+        fadeOutLoader();
 
         let foundPreset = false;
         presetBtns.forEach(btn => {
@@ -197,7 +216,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    applyDynamicTheme(activeSeedColor, isDarkMode);
+    // Pass skipIfCached=true on initial load to avoid re-applying styles
+    // that the inline head script already set from localStorage
+    applyDynamicTheme(activeSeedColor, isDarkMode, true);
 
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
         if (!localStorage.getItem('preferredTheme')) {
