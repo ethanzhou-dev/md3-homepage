@@ -11,18 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (preloader && !preloader.classList.contains('fade-out')) {
             document.documentElement.classList.add('app-loaded');
 
-            // Make container fully visible instantly (it's hidden behind the preloader)
-            // so when the preloader fades out, the content is already there — no brightness dip.
             if (container) {
                 container.style.transition = 'none';
                 container.style.opacity = '1';
             }
 
-            // Fade out the preloader overlay
             preloader.classList.add('fade-out');
 
-            // After the preloader is mostly transparent, trigger card entrance animations.
-            // This ensures the slide-up animations are visible to the user.
             setTimeout(() => {
                 document.querySelectorAll('.md-card').forEach((card, index) => {
                     const rect = card.getBoundingClientRect();
@@ -393,9 +388,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Delay the IntersectionObserver for scroll-triggered card animations until
-    // after the initial staggered entrance has completed, so it doesn't
-    // immediately add 'visible' to cards that are still waiting for their turn.
     setTimeout(() => {
         const cardObserverOptions = {
             root: null,
