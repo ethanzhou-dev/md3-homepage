@@ -11,19 +11,27 @@ document.addEventListener('DOMContentLoaded', () => {
         if (preloader && !preloader.classList.contains('fade-out')) {
             document.documentElement.classList.add('app-loaded');
 
-            document.querySelectorAll('.md-card').forEach(card => {
-                const rect = card.getBoundingClientRect();
-                if (rect.top < window.innerHeight && rect.bottom > 0) {
-                    card.classList.add('visible');
-                }
-            });
+            // Make container fully visible instantly (it's hidden behind the preloader)
+            // so when the preloader fades out, the content is already there — no brightness dip.
+            if (container) {
+                container.style.transition = 'none';
+                container.style.opacity = '1';
+            }
 
+            // Fade out the preloader overlay
             preloader.classList.add('fade-out');
 
+            // After the preloader is mostly transparent, trigger card entrance animations.
+            // This ensures the slide-up animations are visible to the user.
             setTimeout(() => {
-                if (container) {
-                    container.style.opacity = '1';
-                }
+                document.querySelectorAll('.md-card').forEach((card, index) => {
+                    const rect = card.getBoundingClientRect();
+                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                        setTimeout(() => {
+                            card.classList.add('visible');
+                        }, index * 80);
+                    }
+                });
             }, 200);
 
             setTimeout(() => {
@@ -385,22 +393,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const cardObserverOptions = {
-        root: null,
-        rootMargin: '0px 0px -8% 0px',
-        threshold: 0.05
-    };
+    // Delay the IntersectionObserver for scroll-triggered card animations until
+    // after the initial staggered entrance has completed, so it doesn't
+    // immediately add 'visible' to cards that are still waiting for their turn.
+    setTimeout(() => {
+        const cardObserverOptions = {
+            root: null,
+            rootMargin: '0px 0px -8% 0px',
+            threshold: 0.05
+        };
 
-    const cardObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
-            }
+        const cardObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, cardObserverOptions);
+
+        document.querySelectorAll('.md-card:not(.visible)').forEach(card => {
+            cardObserver.observe(card);
         });
-    }, cardObserverOptions);
-
-    document.querySelectorAll('.md-card').forEach(card => {
-        cardObserver.observe(card);
-    });
+    }, 1200);
 });
