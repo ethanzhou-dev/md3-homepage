@@ -1,0 +1,24 @@
+{
+  "name": "md3-homepage",
+  "version": "1.0.0",
+  "description": "Material Design 3风格的个人主页",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ethanzhou-dev/md3-homepage.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ethanzhou-dev/md3-homepage/issues"
+  },
+  "homepage": "https://github.com/ethanzhou-dev/md3-homepage#readme",
+  "dependencies": {
+    "@material/material-color-utilities": "^0.4.0"
+  }
+}

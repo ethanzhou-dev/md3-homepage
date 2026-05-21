@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrim = document.getElementById('scrim');
     const navItems = document.querySelectorAll('.md-nav-item[href^="#"]');
 
-    let colorUtils = null;
+
     let activeSeedColor = localStorage.getItem('themeSeedColor') || '#6750A4';
     let isDarkMode = localStorage.getItem('preferredTheme') === 'dark' || 
                      (!localStorage.getItem('preferredTheme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
@@ -120,106 +120,20 @@ document.addEventListener('DOMContentLoaded', () => {
         activeSeedColor = hexColor;
         localStorage.setItem('themeSeedColor', hexColor);
 
-        if (!colorUtils) {
-            try {
-                colorUtils = await import("https://esm.sh/@material/material-color-utilities");
-            } catch (e) {
-                console.error("Failed to load material-color-utilities CDN", e);
-                return;
-            }
-        }
-
-        const utils = colorUtils;
-        const argb = utils.argbFromHex(hexColor);
-        const theme = utils.themeFromSourceColor(argb);
-        const hex = utils.hexFromArgb;
-        const n = theme.palettes.neutral;
-        const nv = theme.palettes.neutralVariant;
-        const p = theme.palettes.primary;
-        const s = theme.palettes.secondary;
-        const t = theme.palettes.tertiary;
-        const err = theme.palettes.error;
-
-        const vars = {};
-        if (isDark) {
-            vars['--md-sys-color-primary'] = hex(p.tone(80));
-            vars['--md-sys-color-on-primary'] = hex(p.tone(20));
-            vars['--md-sys-color-primary-container'] = hex(p.tone(30));
-            vars['--md-sys-color-on-primary-container'] = hex(p.tone(90));
-            
-            vars['--md-sys-color-secondary'] = hex(s.tone(80));
-            vars['--md-sys-color-on-secondary'] = hex(s.tone(20));
-            vars['--md-sys-color-secondary-container'] = hex(s.tone(30));
-            vars['--md-sys-color-on-secondary-container'] = hex(s.tone(90));
-            
-            vars['--md-sys-color-tertiary'] = hex(t.tone(80));
-            vars['--md-sys-color-on-tertiary'] = hex(t.tone(20));
-            vars['--md-sys-color-tertiary-container'] = hex(t.tone(30));
-            vars['--md-sys-color-on-tertiary-container'] = hex(t.tone(90));
-
-            vars['--md-sys-color-error'] = hex(err.tone(80));
-            vars['--md-sys-color-on-error'] = hex(err.tone(20));
-            vars['--md-sys-color-error-container'] = hex(err.tone(30));
-            vars['--md-sys-color-on-error-container'] = hex(err.tone(90));
-
-            vars['--md-sys-color-background'] = hex(n.tone(6));
-            vars['--md-sys-color-on-background'] = hex(n.tone(90));
-            
-            vars['--md-sys-color-surface'] = hex(n.tone(6));
-            vars['--md-sys-color-on-surface'] = hex(n.tone(90));
-            vars['--md-sys-color-surface-variant'] = hex(nv.tone(30));
-            vars['--md-sys-color-on-surface-variant'] = hex(nv.tone(80));
-            
-            vars['--md-sys-color-surface-container-lowest'] = hex(n.tone(4));
-            vars['--md-sys-color-surface-container-low'] = hex(n.tone(10));
-            vars['--md-sys-color-surface-container'] = hex(n.tone(12));
-            vars['--md-sys-color-surface-container-high'] = hex(n.tone(17));
-            vars['--md-sys-color-surface-container-highest'] = hex(n.tone(22));
-            
-            vars['--md-sys-color-outline'] = hex(nv.tone(60));
-            vars['--md-sys-color-outline-variant'] = hex(nv.tone(30));
-        } else {
-            vars['--md-sys-color-primary'] = hex(p.tone(40));
-            vars['--md-sys-color-on-primary'] = hex(p.tone(100));
-            vars['--md-sys-color-primary-container'] = hex(p.tone(90));
-            vars['--md-sys-color-on-primary-container'] = hex(p.tone(10));
-            
-            vars['--md-sys-color-secondary'] = hex(s.tone(40));
-            vars['--md-sys-color-on-secondary'] = hex(s.tone(100));
-            vars['--md-sys-color-secondary-container'] = hex(s.tone(90));
-            vars['--md-sys-color-on-secondary-container'] = hex(s.tone(10));
-            
-            vars['--md-sys-color-tertiary'] = hex(t.tone(40));
-            vars['--md-sys-color-on-tertiary'] = hex(t.tone(100));
-            vars['--md-sys-color-tertiary-container'] = hex(t.tone(90));
-            vars['--md-sys-color-on-tertiary-container'] = hex(t.tone(10));
-
-            vars['--md-sys-color-error'] = hex(err.tone(40));
-            vars['--md-sys-color-on-error'] = hex(err.tone(100));
-            vars['--md-sys-color-error-container'] = hex(err.tone(90));
-            vars['--md-sys-color-on-error-container'] = hex(err.tone(10));
-
-            vars['--md-sys-color-background'] = hex(n.tone(98));
-            vars['--md-sys-color-on-background'] = hex(n.tone(10));
-            
-            vars['--md-sys-color-surface'] = hex(n.tone(98));
-            vars['--md-sys-color-on-surface'] = hex(n.tone(10));
-            vars['--md-sys-color-surface-variant'] = hex(nv.tone(90));
-            vars['--md-sys-color-on-surface-variant'] = hex(nv.tone(30));
-            
-            vars['--md-sys-color-surface-container-lowest'] = hex(n.tone(100));
-            vars['--md-sys-color-surface-container-low'] = hex(n.tone(96));
-            vars['--md-sys-color-surface-container'] = hex(n.tone(94));
-            vars['--md-sys-color-surface-container-high'] = hex(n.tone(92));
-            vars['--md-sys-color-surface-container-highest'] = hex(n.tone(90));
-            
-            vars['--md-sys-color-outline'] = hex(nv.tone(50));
-            vars['--md-sys-color-outline-variant'] = hex(nv.tone(80));
-        }
-
+        // Fetch pre-computed CSS variables from Edge API
         let cssText = '';
-        for (const [key, val] of Object.entries(vars)) {
-            cssText += `${key}: ${val}; `;
+        try {
+            const hexParam = hexColor.replace('#', '');
+            const response = await fetch(`/api/theme?color=${hexParam}&dark=${isDark}`);
+            if (response.ok) {
+                const data = await response.json();
+                cssText = data.css;
+            } else {
+                throw new Error("Theme API failed");
+            }
+        } catch (e) {
+            console.error("Failed to load theme from API", e);
+            return;
         }
 
         const cachedStyles = localStorage.getItem('themeStyles');
