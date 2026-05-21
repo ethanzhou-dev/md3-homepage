@@ -131,9 +131,13 @@ document.addEventListener('DOMContentLoaded', () => {
             vars['--md-sys-color-outline-variant'] = hex(nv.tone(80));
         }
 
+        let cssText = ':root {\n';
         for (const [key, val] of Object.entries(vars)) {
             document.documentElement.style.setProperty(key, val);
+            cssText += `  ${key}: ${val};\n`;
         }
+        cssText += '}';
+        localStorage.setItem('themeStyles', cssText);
 
         let foundPreset = false;
         presetBtns.forEach(btn => {

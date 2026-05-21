@@ -35,6 +35,27 @@
                 document.title = "Ekiz's Homepage";
             }
         })();
+
+        (function () {
+            var preferredTheme = localStorage.getItem('preferredTheme');
+            var isDark = preferredTheme === 'dark' || 
+                         (!preferredTheme && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            if (isDark) {
+                document.documentElement.classList.add('dark-theme');
+                document.documentElement.classList.remove('light-theme');
+            } else {
+                document.documentElement.classList.add('light-theme');
+                document.documentElement.classList.remove('dark-theme');
+            }
+
+            var themeStyles = localStorage.getItem('themeStyles');
+            if (themeStyles) {
+                var styleEl = document.createElement('style');
+                styleEl.id = 'injected-theme-styles';
+                styleEl.textContent = themeStyles;
+                document.head.appendChild(styleEl);
+            }
+        })();
     </script>
     <style>
         .lang-en [data-lang="zh"] {
@@ -60,7 +81,7 @@
     <script type="module">
         import '@material/web/all.js';
     </script>
-    <link rel="stylesheet" href="style.css?v=20260520">
+    <link rel="stylesheet" href="style.css?v=20260521">
 </head>
 
 <body class="md-typescale-body-medium">
@@ -452,7 +473,7 @@
     <md-fab id="back-to-top-fab" aria-label="Back to top">
         <md-icon slot="icon">arrow_upward</md-icon>
     </md-fab>
-    <script src="script.js?v=20260520"></script>
+    <script src="script.js?v=20260521"></script>
 </body>
 
 </html>
