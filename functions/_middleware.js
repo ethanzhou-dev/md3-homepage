@@ -8,7 +8,6 @@ class ElementHandler {
     if (this.lang) {
       element.setAttribute('lang', this.lang);
       const currentClass = element.getAttribute('class') || '';
-      // Remove any existing lang- or theme classes (unlikely to exist on raw html, but to be safe)
       let newClass = currentClass
           .replace(/lang-\w+/g, '')
           .replace(/(dark-theme|light-theme)/g, '')
@@ -24,20 +23,17 @@ export async function onRequest(context) {
   const { request, next } = context;
   const url = new URL(request.url);
 
-  // Do not intercept API requests
   if (url.pathname.startsWith('/api/')) {
     return next();
   }
 
   const response = await next();
   
-  // Only process HTML responses
   if (response.headers.get("content-type")?.includes("text/html")) {
     const cookies = request.headers.get("cookie") || "";
     let lang = 'en';
     let theme = 'light';
 
-    // 1. Language Detection
     if (cookies.includes('preferredLang=zh')) {
         lang = 'zh';
     } else if (cookies.includes('preferredLang=en')) {
@@ -49,7 +45,6 @@ export async function onRequest(context) {
         }
     }
 
-    // 2. Theme Detection
     if (cookies.includes('preferredTheme=dark')) {
         theme = 'dark';
     } else if (cookies.includes('preferredTheme=light')) {
