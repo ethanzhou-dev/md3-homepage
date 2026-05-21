@@ -119,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function applyDynamicTheme(hexColor, isDark, skipIfCached) {
         activeSeedColor = hexColor;
         localStorage.setItem('themeSeedColor', hexColor);
+        document.cookie = `themeSeedColor=${hexColor};path=/;max-age=31536000`;
 
         // Fetch pre-computed CSS variables from Edge API
         let cssText = '';
@@ -190,6 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
         themeToggleBtn.addEventListener('click', () => {
             isDarkMode = !isDarkMode;
             localStorage.setItem('preferredTheme', isDarkMode ? 'dark' : 'light');
+            document.cookie = `preferredTheme=${isDarkMode ? 'dark' : 'light'};path=/;max-age=31536000`;
             initThemeMode();
             applyDynamicTheme(activeSeedColor, isDarkMode);
         });
@@ -275,6 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         localStorage.setItem('preferredLang', lang);
+        document.cookie = `preferredLang=${lang};path=/;max-age=31536000`;
     }
 
     if (btnEn && btnZh) {
