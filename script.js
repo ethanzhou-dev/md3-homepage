@@ -19,12 +19,33 @@ document.addEventListener('DOMContentLoaded', () => {
             preloader.classList.add('fade-out');
 
             setTimeout(() => {
-                document.querySelectorAll('.md-card').forEach((card, index) => {
+                const cards = document.querySelectorAll('.md-card');
+                const cardObserverOptions = {
+                    root: null,
+                    rootMargin: '0px 0px -8% 0px',
+                    threshold: 0.05
+                };
+
+                const cardObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, cardObserverOptions);
+
+                let viewportCardCount = 0;
+                cards.forEach((card) => {
                     const rect = card.getBoundingClientRect();
-                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    const inViewport = rect.top < window.innerHeight && rect.bottom > 0;
+                    if (inViewport) {
                         setTimeout(() => {
                             card.classList.add('visible');
-                        }, index * 80);
+                        }, viewportCardCount * 80);
+                        viewportCardCount++;
+                    } else {
+                        cardObserver.observe(card);
                     }
                 });
             }, 200);
@@ -388,24 +409,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    setTimeout(() => {
-        const cardObserverOptions = {
-            root: null,
-            rootMargin: '0px 0px -8% 0px',
-            threshold: 0.05
-        };
 
-        const cardObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, cardObserverOptions);
-
-        document.querySelectorAll('.md-card:not(.visible)').forEach(card => {
-            cardObserver.observe(card);
-        });
-    }, 1200);
 });
