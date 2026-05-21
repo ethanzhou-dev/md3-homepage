@@ -42,7 +42,6 @@
         })();
 
         (function () {
-            document.documentElement.classList.add('theme-loading');
             var preferredTheme = localStorage.getItem('preferredTheme');
             var isDark = preferredTheme === 'dark' || 
                          (!preferredTheme && window.matchMedia('(prefers-color-scheme: dark)').matches);
@@ -91,13 +90,10 @@
     <script type="module">
         import '@material/web/all.js';
     </script>
-    <link rel="stylesheet" href="style.css?v=20260521_5">
+    <link rel="stylesheet" href="style.css?v=20260521_2">
 </head>
 
 <body class="md-typescale-body-medium">
-    <div id="app-preloader">
-        <div class="md-spinner"></div>
-    </div>
     <div class="layout-container">
         <nav class="md-nav-drawer" id="nav-drawer">
             <div class="md-mobile-header" id="nav-header">
@@ -486,7 +482,7 @@
     <md-fab id="back-to-top-fab" aria-label="Back to top">
         <md-icon slot="icon">arrow_upward</md-icon>
     </md-fab>
-    <script src="script.js?v=20260521_5"></script>
+    <script src="script.js?v=20260521_2"></script>
 </body>
 
 </html>
