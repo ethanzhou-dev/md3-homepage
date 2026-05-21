@@ -10,6 +10,9 @@
     <link rel="preconnect" href="https://esm.sh">
     <link rel="modulepreload" href="https://esm.run/@material/web/all.js">
     <script>
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
         (function () {
             const originalDefine = CustomElementRegistry.prototype.define;
             CustomElementRegistry.prototype.define = function (name, constructor, options) {
@@ -77,7 +80,7 @@
         }
 
         html.js-enabled:not(.app-loaded) {
-            overflow: hidden !important;
+            /* Keep overflow visible to allow native scroll restoration */
         }
 
         #app-preloader {

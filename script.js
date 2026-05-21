@@ -48,6 +48,20 @@ document.addEventListener('DOMContentLoaded', () => {
                         cardObserver.observe(card);
                     }
                 });
+
+                if (window.location.hash) {
+                    try {
+                        const targetId = decodeURIComponent(window.location.hash.substring(1));
+                        const targetEl = document.getElementById(targetId);
+                        if (targetEl) {
+                            setTimeout(() => {
+                                targetEl.scrollIntoView({ behavior: 'smooth' });
+                            }, viewportCardCount * 80 + 100);
+                        }
+                    } catch (e) {
+                        console.error("Failed to scroll to hash target:", e);
+                    }
+                }
             }, 200);
 
             setTimeout(() => {
