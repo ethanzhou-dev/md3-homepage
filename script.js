@@ -121,7 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('themeSeedColor', hexColor);
         document.cookie = `themeSeedColor=${hexColor};path=/;max-age=31536000`;
 
-        // Fetch pre-computed CSS variables from Edge API
         let cssText = '';
         try {
             const hexParam = hexColor.replace('#', '');
