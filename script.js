@@ -1,5 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('js-enabled');
+
+    // Preloader Fade-out & Page Fade-in Logic
+    const fadeOutLoader = () => {
+        const preloader = document.getElementById('app-preloader');
+        const container = document.querySelector('.layout-container');
+        if (preloader && !preloader.classList.contains('fade-out')) {
+            preloader.classList.add('fade-out');
+            if (container) {
+                container.style.opacity = '1';
+            }
+            setTimeout(() => {
+                preloader.remove();
+            }, 400);
+        }
+    };
+
+    Promise.all([
+        customElements.whenDefined('md-nav-drawer'),
+        customElements.whenDefined('md-list'),
+        customElements.whenDefined('md-list-item'),
+        customElements.whenDefined('md-fab'),
+        customElements.whenDefined('md-icon-button')
+    ]).then(fadeOutLoader);
+
+    window.addEventListener('load', fadeOutLoader);
+    setTimeout(fadeOutLoader, 1500); // 1.5s fallback to prevent loading hang
+
     const menuBtn = document.getElementById('menu-btn');
     const drawerCloseBtn = document.getElementById('drawer-close-btn');
     const navDrawer = document.getElementById('nav-drawer');
