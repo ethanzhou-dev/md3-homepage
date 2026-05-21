@@ -184,12 +184,9 @@ document.addEventListener('DOMContentLoaded', () => {
             cssText += `${key}: ${val}; `;
         }
 
-        // If cached styles already match, skip DOM update to avoid flash
         const cachedStyles = localStorage.getItem('themeStyles');
         if (skipIfCached && cachedStyles === cssText) {
-            // Styles are already applied from the inline head script, no need to re-apply
         } else {
-            // Apply all vars at once to prevent partial-update flash
             document.documentElement.style.cssText = cssText;
             localStorage.setItem('themeStyles', cssText);
         }
@@ -216,9 +213,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Freeze preloader colors before dynamic theme changes CSS variables.
-    // This prevents the preloader background/spinner from flashing when
-    // applyDynamicTheme updates CSS variables while the preloader is visible.
     const preloaderEl = document.getElementById('app-preloader');
     if (preloaderEl) {
         preloaderEl.style.backgroundColor = getComputedStyle(preloaderEl).backgroundColor;
@@ -230,8 +224,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Pass skipIfCached=true on initial load to avoid re-applying styles
-    // that the inline head script already set from localStorage
     applyDynamicTheme(activeSeedColor, isDarkMode, true);
 
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
