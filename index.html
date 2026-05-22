@@ -208,6 +208,8 @@
                     <md-divider class="drawer-divider" style="margin-bottom: 4px;"></md-divider>
                     <details class="md-nav-section-details">
                         <summary class="md-nav-title md-typescale-title-small">
+                            <md-ripple></md-ripple>
+                            <md-focus-ring></md-focus-ring>
                             <span class="summary-text-container">
                                 <span data-lang="en">PREFERENCES</span>
                                 <span data-lang="zh">偏好设置</span>
@@ -222,9 +224,17 @@
                                     <span data-lang="zh">界面语言</span>
                                 </span>
                                 <div class="lang-switch-buttons">
-                                    <button class="settings-text-btn" id="btn-lang-zh">中文</button>
+                                    <button class="settings-text-btn" id="btn-lang-zh">
+                                        <md-ripple></md-ripple>
+                                        <md-focus-ring></md-focus-ring>
+                                        中文
+                                    </button>
                                     <span class="divider-pipe">|</span>
-                                    <button class="settings-text-btn" id="btn-lang-en">English</button>
+                                    <button class="settings-text-btn" id="btn-lang-en">
+                                        <md-ripple></md-ripple>
+                                        <md-focus-ring></md-focus-ring>
+                                        English
+                                    </button>
                                 </div>
                             </div>
 
@@ -234,19 +244,38 @@
                                     <span data-lang="zh">主题配色</span>
                                 </span>
                                 <div class="color-presets">
-                                    <button class="preset-btn active" data-color="#6750A4"
-                                        style="background-color: #6750A4;" title="Purple"></button>
-                                    <button class="preset-btn" data-color="#0061A4" style="background-color: #0061A4;"
-                                        title="Blue"></button>
-                                    <button class="preset-btn" data-color="#006A60" style="background-color: #006A60;"
-                                        title="Teal"></button>
-                                    <button class="preset-btn" data-color="#984061" style="background-color: #984061;"
-                                        title="Rose"></button>
-                                    <button class="preset-btn" data-color="#686000" style="background-color: #686000;"
-                                        title="Olive"></button>
+                                    <button class="preset-btn active" data-color="#6750A4" title="Purple">
+                                        <md-ripple></md-ripple>
+                                        <md-focus-ring></md-focus-ring>
+                                        <span class="preset-color-dot" style="background-color: #6750A4;"></span>
+                                    </button>
+                                    <button class="preset-btn" data-color="#0061A4" title="Blue">
+                                        <md-ripple></md-ripple>
+                                        <md-focus-ring></md-focus-ring>
+                                        <span class="preset-color-dot" style="background-color: #0061A4;"></span>
+                                    </button>
+                                    <button class="preset-btn" data-color="#006A60" title="Teal">
+                                        <md-ripple></md-ripple>
+                                        <md-focus-ring></md-focus-ring>
+                                        <span class="preset-color-dot" style="background-color: #006A60;"></span>
+                                    </button>
+                                    <button class="preset-btn" data-color="#984061" title="Rose">
+                                        <md-ripple></md-ripple>
+                                        <md-focus-ring></md-focus-ring>
+                                        <span class="preset-color-dot" style="background-color: #984061;"></span>
+                                    </button>
+                                    <button class="preset-btn" data-color="#686000" title="Olive">
+                                        <md-ripple></md-ripple>
+                                        <md-focus-ring></md-focus-ring>
+                                        <span class="preset-color-dot" style="background-color: #686000;"></span>
+                                    </button>
                                     <div class="custom-color-wrapper" title="Custom Color">
+                                        <md-ripple></md-ripple>
+                                        <md-focus-ring></md-focus-ring>
                                         <input type="color" id="custom-color-picker" value="#6750A4">
-                                        <md-icon class="color-pick-icon">palette</md-icon>
+                                        <div class="custom-color-dot">
+                                            <md-icon class="color-pick-icon">palette</md-icon>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -608,12 +637,15 @@
                         <p class="md-typescale-body-large">Here are some blogs and sites of my friends.</p>
                         <md-divider></md-divider>
                         <div class="friend-grid">
-                            <md-list-item type="link" href="https://github.com" target="_blank">
-                                <img slot="start" src="/api/avatar?url=https://github.com" alt="GitHub"
-                                    class="friend-avatar-img">
-                                <span slot="headline">GitHub</span>
-                                <span slot="supporting-text">Where the code lives.</span>
-                            </md-list-item>
+                            <a class="friend-card" href="https://github.com" target="_blank">
+                                <md-ripple></md-ripple>
+                                <md-focus-ring></md-focus-ring>
+                                <img src="/api/avatar?url=https://github.com" alt="GitHub" class="friend-avatar-img">
+                                <div class="friend-card-content">
+                                    <span class="friend-card-headline md-typescale-label-large">GitHub</span>
+                                    <span class="friend-card-supporting md-typescale-body-small">Where the code lives.</span>
+                                </div>
+                            </a>
                         </div>
                     </div>
                     <div data-lang="zh">
@@ -621,12 +653,15 @@
                         <p class="md-typescale-body-large">与志同道合的朋友们互相交换的网站链接。</p>
                         <md-divider></md-divider>
                         <div class="friend-grid">
-                            <md-list-item type="link" href="https://github.com" target="_blank">
-                                <img slot="start" src="/api/avatar?url=https://github.com" alt="GitHub"
-                                    class="friend-avatar-img">
-                                <span slot="headline">GitHub</span>
-                                <span slot="supporting-text">代码存放与托管地。</span>
-                            </md-list-item>
+                            <a class="friend-card" href="https://github.com" target="_blank">
+                                <md-ripple></md-ripple>
+                                <md-focus-ring></md-focus-ring>
+                                <img src="/api/avatar?url=https://github.com" alt="GitHub" class="friend-avatar-img">
+                                <div class="friend-card-content">
+                                    <span class="friend-card-headline md-typescale-label-large">GitHub</span>
+                                    <span class="friend-card-supporting md-typescale-body-small">代码存放与托管地。</span>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>

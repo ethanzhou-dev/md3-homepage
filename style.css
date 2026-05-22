@@ -146,10 +146,6 @@ body.no-scroll {
 .drawer-divider {
   margin: 0 16px;
   --md-divider-color: var(--md-sys-color-outline-variant);
-  height: 0 !important;
-  border-top: 1px solid var(--md-divider-color) !important;
-  background-color: transparent !important;
-  width: calc(100% - 32px) !important;
 }
 
 .md-nav-section {
@@ -210,20 +206,27 @@ body.no-scroll {
 }
 
 .settings-text-btn {
+  position: relative;
+  overflow: hidden;
   background: none;
   border: none;
   font-family: inherit;
   font-size: 12px;
   color: var(--md-sys-color-outline);
   cursor: pointer;
-  padding: 4px 10px;
-  border-radius: 8px;
-  transition: color 0.15s, background-color 0.15s;
+  padding: 0 16px;
+  height: 48px;
+  border-radius: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  --md-focus-ring-shape: 24px;
+  transition: color 0.15s;
 }
 
 .settings-text-btn:hover {
   color: var(--md-sys-color-primary);
-  background-color: var(--md-sys-color-surface-container-high);
 }
 
 .divider-pipe {
@@ -241,9 +244,6 @@ body.no-scroll {
 md-divider {
   margin: 16px 0;
   --md-divider-color: var(--md-sys-color-outline-variant);
-  height: 0 !important;
-  border-top: 1px solid var(--md-divider-color) !important;
-  background-color: transparent !important;
 }
 
 .md-nav-footer {
@@ -450,27 +450,56 @@ body, nav, main, header, .md-card, .md-nav-item, h1, h2, h3, p, a, md-divider, m
 }
 
 .preset-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  outline: none;
+  --md-focus-ring-shape: 24px;
+}
+
+.preset-color-dot {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  border: 2px solid transparent;
-  cursor: pointer;
-  padding: 0;
-  transition: transform 0.15s ease, border-color 0.15s ease;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: transform 150ms cubic-bezier(0.2, 0, 0, 1), border-color 150ms cubic-bezier(0.2, 0, 0, 1);
+  border: 2px solid transparent;
 }
 
-.preset-btn:hover {
-  transform: scale(1.2);
+.preset-btn:hover .preset-color-dot {
+  transform: scale(1.15);
 }
 
-.preset-btn.active {
+.preset-btn.active .preset-color-dot {
   border-color: var(--md-sys-color-primary);
   transform: scale(1.15);
   box-shadow: 0 0 0 2px var(--md-sys-color-surface), 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 .custom-color-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  outline: none;
+  --md-focus-ring-shape: 24px;
+}
+
+.custom-color-dot {
   position: relative;
   width: 24px;
   height: 24px;
@@ -479,18 +508,18 @@ body, nav, main, header, .md-card, .md-nav-item, h1, h2, h3, p, a, md-divider, m
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  border: 2px solid transparent;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  transition: transform 0.15s ease, border-color 0.15s ease;
+  transition: transform 150ms cubic-bezier(0.2, 0, 0, 1), border-color 150ms cubic-bezier(0.2, 0, 0, 1);
+  border: 2px solid transparent;
 }
 
-.custom-color-wrapper:hover {
-  transform: scale(1.2);
+.custom-color-wrapper:hover .custom-color-dot {
+  transform: scale(1.15);
 }
 
-.custom-color-wrapper.active {
+.custom-color-wrapper.active .custom-color-dot {
   border-color: var(--md-sys-color-primary);
+  transform: scale(1.15);
   box-shadow: 0 0 0 2px var(--md-sys-color-surface), 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
@@ -504,6 +533,7 @@ body, nav, main, header, .md-card, .md-nav-item, h1, h2, h3, p, a, md-divider, m
   cursor: pointer;
   border: none;
   padding: 0;
+  z-index: 1;
 }
 
 .color-pick-icon {
@@ -519,6 +549,8 @@ body, nav, main, header, .md-card, .md-nav-item, h1, h2, h3, p, a, md-divider, m
 }
 
 .md-nav-section-details summary.md-nav-title {
+  position: relative;
+  overflow: hidden;
   list-style: none;
   outline: none;
   cursor: pointer;
@@ -529,16 +561,7 @@ body, nav, main, header, .md-card, .md-nav-item, h1, h2, h3, p, a, md-divider, m
   border-radius: 28px;
   padding: 14px 16px;
   margin: 4px 0;
-  transition: background-color 150ms ease;
-}
-
-.md-nav-section-details summary.md-nav-title:hover {
-  background-color: var(--md-sys-color-surface-container);
-}
-
-.md-nav-section-details summary.md-nav-title:focus-visible {
-  outline: 2px solid var(--md-sys-color-primary);
-  outline-offset: -2px;
+  --md-focus-ring-shape: 28px;
 }
 
 .md-nav-section-details summary::-webkit-details-marker {
@@ -652,15 +675,44 @@ md-linear-progress {
   margin-top: 16px;
 }
 
-.friend-grid md-list-item {
+.friend-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  background-color: var(--md-sys-color-surface);
   border: 1px solid var(--md-sys-color-outline-variant);
   border-radius: 12px;
-  overflow: hidden;
-  --md-list-item-container-color: var(--md-sys-color-surface);
+  text-decoration: none;
+  color: var(--md-sys-color-on-surface);
+  outline: none;
+  cursor: pointer;
+  --md-focus-ring-shape: 12px;
+  transition: background-color 250ms cubic-bezier(0.2, 0, 0, 1),
+              border-color 250ms cubic-bezier(0.2, 0, 0, 1);
 }
 
-.friend-grid md-list-item::part(focus-ring) {
-  --md-focus-ring-shape: 12px;
+.friend-card:hover {
+  border-color: var(--md-sys-color-outline);
+}
+
+.friend-card-content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.friend-card-headline {
+  color: var(--md-sys-color-on-surface);
+  font-weight: 500;
+}
+
+.friend-card-supporting {
+  color: var(--md-sys-color-on-surface-variant);
+  margin-top: 4px;
 }
 
 .friend-avatar-img {
