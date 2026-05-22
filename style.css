@@ -328,13 +328,17 @@ md-icon-button {
 .md-card {
   position: relative;
   background-color: var(--md-sys-color-surface-container-low);
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 24px;
   margin-bottom: 24px;
   scroll-margin-top: 72px;
   --md-elevation-level: 1;
   --md-elevation-duration: 250ms;
-  transition: background-color 250ms ease;
+  transition: background-color 250ms ease, border-radius 250ms ease;
+}
+
+.md-card:hover {
+  --md-elevation-level: 2;
 }
 
 
@@ -712,11 +716,13 @@ md-linear-progress {
   cursor: pointer;
   --md-focus-ring-shape: 12px;
   transition: background-color 250ms cubic-bezier(0.2, 0, 0, 1),
-              border-color 250ms cubic-bezier(0.2, 0, 0, 1);
+              border-color 250ms cubic-bezier(0.2, 0, 0, 1),
+              box-shadow 250ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 .friend-card:hover {
   border-color: var(--md-sys-color-outline);
+  box-shadow: var(--md-elevation-1);
 }
 
 .friend-card-content {
