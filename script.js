@@ -92,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navDrawer = document.getElementById('nav-drawer');
     const scrim = document.getElementById('scrim');
     const navItems = document.querySelectorAll('.md-nav-item[href^="#"]');
+    const topAppBar = document.querySelector('.md-top-app-bar');
 
 
     let activeSeedColor = localStorage.getItem('themeSeedColor') || '#6750A4';
@@ -338,14 +339,19 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchStats();
 
     const backToTopFab = document.getElementById('back-to-top-fab');
+    const updateScrollState = () => {
+        const scrolled = window.scrollY > 0;
+        if (topAppBar) {
+            topAppBar.classList.toggle('scrolled', scrolled);
+        }
+        if (backToTopFab) {
+            backToTopFab.classList.toggle('visible', window.scrollY > 300);
+        }
+    };
+    window.addEventListener('scroll', updateScrollState);
+    updateScrollState();
+
     if (backToTopFab) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTopFab.classList.add('visible');
-            } else {
-                backToTopFab.classList.remove('visible');
-            }
-        });
         backToTopFab.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
