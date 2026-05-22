@@ -55,10 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         const targetEl = document.getElementById(targetId);
                         if (targetEl) {
                             setTimeout(() => {
-                                const style = window.getComputedStyle(targetEl);
-                                const scrollMarginTop = parseInt(style.scrollMarginTop, 10) || 0;
-                                const top = targetEl.getBoundingClientRect().top + window.scrollY - scrollMarginTop;
-                                window.scrollTo({ top: top, behavior: 'smooth' });
+                                targetEl.scrollIntoView({ behavior: 'smooth' });
                             }, viewportCardCount * 80 + 100);
                         }
                     } catch (e) {
@@ -230,31 +227,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (scrim) scrim.addEventListener('click', toggleMenu);
     
     navItems.forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            const targetId = item.getAttribute('href').substring(1);
-            const targetEl = document.getElementById(targetId);
-            
-            // First close the mobile menu if open
+        item.addEventListener('click', () => {
             if (window.innerWidth <= 840 && navDrawer.classList.contains('open')) {
                 toggleMenu();
             }
-
-            if (targetEl) {
-                // Wait for the body overflow:hidden to be removed and layout to settle
-                setTimeout(() => {
-                    const style = window.getComputedStyle(targetEl);
-                    const scrollMarginTop = parseInt(style.scrollMarginTop, 10) || 64; // Fallback to 64px (header height)
-                    
-                    const top = targetEl.getBoundingClientRect().top + window.scrollY - scrollMarginTop;
-                    
-                    window.scrollTo({
-                        top: top,
-                        behavior: 'smooth'
-                    });
-                }, 50);
-            }
+            // Let the browser do the native scroll (which perfectly respects scroll-margin-top)
+            // Then silently remove the hash from the URL
+            setTimeout(() => {
+                history.replaceState(null, '', window.location.pathname + window.location.search);
+            }, 10);
         });
     });
 
