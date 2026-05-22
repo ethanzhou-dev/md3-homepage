@@ -55,6 +55,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         const targetEl = document.getElementById(targetId);
                         if (targetEl) {
                             setTimeout(() => {
+                                if (!targetEl.classList.contains('visible')) {
+                                    targetEl.style.transition = 'none';
+                                    targetEl.classList.add('visible');
+                                    void targetEl.offsetHeight;
+                                    targetEl.style.transition = '';
+                                }
                                 targetEl.scrollIntoView({ behavior: 'smooth' });
                             }, viewportCardCount * 80 + 100);
                         }
@@ -229,11 +235,20 @@ document.addEventListener('DOMContentLoaded', () => {
     navItems.forEach(item => {
         item.addEventListener('click', (e) => {
             e.preventDefault();
+
             const targetId = item.getAttribute('href').substring(1);
             const targetEl = document.getElementById(targetId);
+            
             if (targetEl) {
+                if (!targetEl.classList.contains('visible')) {
+                    targetEl.style.transition = 'none';
+                    targetEl.classList.add('visible');
+                    void targetEl.offsetHeight;
+                    targetEl.style.transition = '';
+                }
                 targetEl.scrollIntoView({ behavior: 'smooth' });
             }
+
             if (window.innerWidth <= 840 && navDrawer.classList.contains('open')) {
                 toggleMenu();
             }
