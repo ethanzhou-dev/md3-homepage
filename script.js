@@ -232,23 +232,28 @@ document.addEventListener('DOMContentLoaded', () => {
     navItems.forEach(item => {
         item.addEventListener('click', (e) => {
             e.preventDefault();
+            
             const targetId = item.getAttribute('href').substring(1);
             const targetEl = document.getElementById(targetId);
-            if (targetEl) {
-                // Get the CSS scroll-margin-top value
-                const style = window.getComputedStyle(targetEl);
-                const scrollMarginTop = parseInt(style.scrollMarginTop, 10) || 0;
-                
-                // Calculate precise offset to scroll to
-                const top = targetEl.getBoundingClientRect().top + window.scrollY - scrollMarginTop;
-                
-                window.scrollTo({
-                    top: top,
-                    behavior: 'smooth'
-                });
-            }
+            
+            // First close the mobile menu if open
             if (window.innerWidth <= 840 && navDrawer.classList.contains('open')) {
                 toggleMenu();
+            }
+
+            if (targetEl) {
+                // Wait for the body overflow:hidden to be removed and layout to settle
+                setTimeout(() => {
+                    const style = window.getComputedStyle(targetEl);
+                    const scrollMarginTop = parseInt(style.scrollMarginTop, 10) || 64; // Fallback to 64px (header height)
+                    
+                    const top = targetEl.getBoundingClientRect().top + window.scrollY - scrollMarginTop;
+                    
+                    window.scrollTo({
+                        top: top,
+                        behavior: 'smooth'
+                    });
+                }, 50);
             }
         });
     });
