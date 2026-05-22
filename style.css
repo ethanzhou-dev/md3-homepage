@@ -77,7 +77,7 @@ body.no-scroll {
 
 .md-typescale-headline-medium { font-size: 28px; font-weight: 400; line-height: 36px; margin: 0 0 16px 0; }
 .md-typescale-headline-small { font-size: 24px; font-weight: 400; line-height: 32px; margin: 0 0 16px 0; }
-.md-typescale-title-large { font-size: 22px; font-weight: 500; line-height: 28px; margin: 24px 0 12px 0; }
+.md-typescale-title-large { font-size: 22px; font-weight: 400; line-height: 28px; margin: 24px 0 12px 0; }
 .md-typescale-title-small { font-size: 14px; font-weight: 500; line-height: 20px; letter-spacing: 0.1px; }
 .md-typescale-body-large { font-size: 16px; font-weight: 400; line-height: 24px; letter-spacing: 0.5px; margin: 0 0 16px 0; }
 .md-typescale-body-medium { font-size: 14px; font-weight: 400; line-height: 20px; letter-spacing: 0.25px; }
@@ -252,11 +252,16 @@ body.no-scroll {
   font-size: 11px;
 }
 
+.lang-switch-buttons md-filled-tonal-button {
+  --md-filled-tonal-button-container-color: transparent;
+  --md-filled-tonal-button-label-text-color: var(--md-sys-color-outline);
+}
+
 .lang-en #btn-lang-en,
 .lang-zh #btn-lang-zh {
-  color: var(--md-sys-color-on-secondary-container);
-  background-color: var(--md-sys-color-secondary-container);
-  font-weight: bold;
+  --md-filled-tonal-button-container-color: var(--md-sys-color-secondary-container);
+  --md-filled-tonal-button-label-text-color: var(--md-sys-color-on-secondary-container);
+  --md-filled-tonal-button-label-text-weight: bold;
 }
 
 md-divider {
@@ -304,7 +309,7 @@ md-divider {
 .md-top-app-bar h1 {
   margin: 0;
   padding: 0;
-  line-height: 1;
+  line-height: 28px;
   display: flex;
   align-items: center;
 }

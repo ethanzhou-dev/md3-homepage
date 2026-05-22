@@ -80,7 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
         customElements.whenDefined('md-list'),
         customElements.whenDefined('md-list-item'),
         customElements.whenDefined('md-fab'),
-        customElements.whenDefined('md-icon-button')
+        customElements.whenDefined('md-icon-button'),
+        customElements.whenDefined('md-filled-tonal-button'),
+        customElements.whenDefined('md-circular-progress')
     ]).then(markComponentsReady);
 
     window.addEventListener('load', markComponentsReady);
@@ -171,12 +173,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const preloaderEl = document.getElementById('app-preloader');
     if (preloaderEl) {
         preloaderEl.style.backgroundColor = getComputedStyle(preloaderEl).backgroundColor;
-        const spinnerEl = preloaderEl.querySelector('.preloader-spinner');
-        if (spinnerEl) {
-            const spinnerStyles = getComputedStyle(spinnerEl);
-            spinnerEl.style.borderColor = spinnerStyles.borderColor;
-            spinnerEl.style.borderTopColor = spinnerStyles.borderTopColor;
-        }
     }
 
     applyDynamicTheme(activeSeedColor, isDarkMode, true);

@@ -114,20 +114,7 @@
             pointer-events: none;
         }
 
-        .preloader-spinner {
-            width: 48px;
-            height: 48px;
-            border: 4px solid var(--md-sys-color-surface-variant);
-            border-top-color: var(--md-sys-color-primary);
-            border-radius: 50%;
-            animation: spinner-rotate 800ms linear infinite;
-        }
 
-        @keyframes spinner-rotate {
-            to {
-                transform: rotate(360deg);
-            }
-        }
 
         html.js-enabled .layout-container {
             opacity: 0;
@@ -154,7 +141,7 @@
 
 <body class="md-typescale-body-medium">
     <div id="app-preloader">
-        <div class="preloader-spinner"></div>
+        <md-circular-progress indeterminate></md-circular-progress>
     </div>
     <div class="layout-container">
         <nav class="md-nav-drawer" id="nav-drawer">
@@ -224,16 +211,8 @@
                                     <span data-lang="zh">界面语言</span>
                                 </span>
                                 <div class="lang-switch-buttons">
-                                    <button class="settings-text-btn" id="btn-lang-zh">
-                                        <md-ripple></md-ripple>
-                                        <md-focus-ring></md-focus-ring>
-                                        中文
-                                    </button>
-                                    <button class="settings-text-btn" id="btn-lang-en">
-                                        <md-ripple></md-ripple>
-                                        <md-focus-ring></md-focus-ring>
-                                        English
-                                    </button>
+                                    <md-filled-tonal-button id="btn-lang-zh">中文</md-filled-tonal-button>
+                                    <md-filled-tonal-button id="btn-lang-en">English</md-filled-tonal-button>
                                 </div>
                             </div>
 
@@ -269,8 +248,8 @@
                                         <span class="preset-color-dot" style="background-color: #686000;"></span>
                                     </button>
                                     <div class="custom-color-wrapper" title="Custom Color">
-                                        <md-ripple></md-ripple>
-                                        <md-focus-ring></md-focus-ring>
+                                        <md-ripple for="custom-color-picker"></md-ripple>
+                                        <md-focus-ring for="custom-color-picker"></md-focus-ring>
                                         <input type="color" id="custom-color-picker" value="#6750A4">
                                         <div class="custom-color-dot">
                                             <md-icon class="color-pick-icon">palette</md-icon>
