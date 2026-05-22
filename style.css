@@ -643,7 +643,7 @@ body, nav, main, header, .md-card, .md-nav-item, h1, h2, h3, p, a, md-divider, m
   z-index: 100;
   opacity: 0;
   transform: scale(0);
-  transition: transform 250ms cubic-bezier(0.2, 0, 0, 1), opacity 250ms ease;
+  transition: transform 250ms cubic-bezier(0.2, 0, 0, 1), opacity 250ms cubic-bezier(0.2, 0, 0, 1);
   --md-fab-container-color: var(--md-sys-color-primary-container);
   --md-fab-icon-color: var(--md-sys-color-on-primary-container);
 }
