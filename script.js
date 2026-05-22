@@ -55,13 +55,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         const targetEl = document.getElementById(targetId);
                         if (targetEl) {
                             setTimeout(() => {
-                                if (!targetEl.classList.contains('visible')) {
-                                    targetEl.style.transition = 'none';
-                                    targetEl.classList.add('visible');
-                                    void targetEl.offsetHeight;
-                                    targetEl.style.transition = '';
-                                }
-                                targetEl.scrollIntoView({ behavior: 'smooth' });
+                                const style = window.getComputedStyle(targetEl);
+                                const scrollMarginTop = parseInt(style.scrollMarginTop, 10) || 0;
+                                const top = targetEl.getBoundingClientRect().top + window.scrollY - scrollMarginTop;
+                                window.scrollTo({ top: top, behavior: 'smooth' });
                             }, viewportCardCount * 80 + 100);
                         }
                     } catch (e) {
@@ -235,20 +232,21 @@ document.addEventListener('DOMContentLoaded', () => {
     navItems.forEach(item => {
         item.addEventListener('click', (e) => {
             e.preventDefault();
-
             const targetId = item.getAttribute('href').substring(1);
             const targetEl = document.getElementById(targetId);
-            
             if (targetEl) {
-                if (!targetEl.classList.contains('visible')) {
-                    targetEl.style.transition = 'none';
-                    targetEl.classList.add('visible');
-                    void targetEl.offsetHeight;
-                    targetEl.style.transition = '';
-                }
-                targetEl.scrollIntoView({ behavior: 'smooth' });
+                // Get the CSS scroll-margin-top value
+                const style = window.getComputedStyle(targetEl);
+                const scrollMarginTop = parseInt(style.scrollMarginTop, 10) || 0;
+                
+                // Calculate precise offset to scroll to
+                const top = targetEl.getBoundingClientRect().top + window.scrollY - scrollMarginTop;
+                
+                window.scrollTo({
+                    top: top,
+                    behavior: 'smooth'
+                });
             }
-
             if (window.innerWidth <= 840 && navDrawer.classList.contains('open')) {
                 toggleMenu();
             }
