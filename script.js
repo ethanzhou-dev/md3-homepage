@@ -242,8 +242,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (targetEl) {
                 targetEl.classList.add('visible', 'instant-visible');
                 if (isMobileMenuOpen) {
-                    // Wait for the drawer close transition (300ms) to finish completely
-                    // so that the overflow change and layout are stable, ensuring accurate scrolling.
                     setTimeout(() => {
                         targetEl.scrollIntoView();
                     }, 320);
