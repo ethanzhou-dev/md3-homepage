@@ -17,7 +17,7 @@
   --md-sys-color-outline-variant: #CAC4D0;
   --md-sys-color-background: #FEF7FF;
   --md-sys-color-on-background: #1D1B20;
-  --md-elevation-1: 0px 1px 2px 0px rgba(0,0,0,0.3), 0px 1px 3px 1px rgba(0,0,0,0.15);
+  --md-elevation-1: 0px 1px 2px 0px rgba(0,0,0,0.15), 0px 1px 3px 1px rgba(0,0,0,0.1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -100,7 +100,6 @@ body.no-scroll {
 .md-nav-drawer {
   width: 360px;
   background-color: var(--md-sys-color-surface-container-low);
-  border-right: 1px solid var(--md-sys-color-outline-variant);
   padding: 12px;
   display: flex;
   flex-direction: column;
@@ -342,7 +341,7 @@ md-icon-button {
   scroll-margin-top: 72px;
   --md-elevation-level: 1;
   --md-elevation-duration: 250ms;
-  transition: background-color 250ms ease, border-radius 250ms ease;
+  transition: background-color 250ms cubic-bezier(0.2, 0, 0, 1), border-radius 250ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 
@@ -368,7 +367,7 @@ md-icon-button {
   height: 6px;
   border-radius: 50%;
   background-color: var(--md-sys-color-primary);
-  transition: background-color 250ms ease;
+  transition: background-color 250ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 .md-link {
@@ -438,9 +437,8 @@ md-icon-button {
     bottom: 0;
     height: 100dvh;
     transform: translateX(-100%);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 300ms cubic-bezier(0.2, 0, 0, 1), box-shadow 300ms cubic-bezier(0.2, 0, 0, 1);
     max-width: calc(100vw - 56px);
-    border-right: none;
     border-radius: 0 16px 16px 0;
     box-shadow: var(--md-elevation-1);
   }
@@ -487,7 +485,7 @@ md-icon-button {
 }
 
 body, nav, main, header, .md-card, .md-nav-item, h1, h2, h3, p, a, md-divider, md-list-item, md-icon-button {
-  transition: background-color 250ms ease, color 250ms ease, border-color 250ms ease, box-shadow 250ms ease;
+  transition: background-color 250ms cubic-bezier(0.2, 0, 0, 1), color 250ms cubic-bezier(0.2, 0, 0, 1), border-color 250ms cubic-bezier(0.2, 0, 0, 1), box-shadow 250ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 .color-picker-container {
@@ -665,7 +663,7 @@ body, nav, main, header, .md-card, .md-nav-item, h1, h2, h3, p, a, md-divider, m
   transform: translateY(24px);
   transition: opacity 600ms cubic-bezier(0.2, 0, 0, 1), 
               transform 600ms cubic-bezier(0.2, 0, 0, 1),
-              background-color 250ms ease;
+              background-color 250ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 .js-enabled .md-card.visible {
@@ -685,7 +683,6 @@ md-nav-drawer:not(:defined) {
   width: 300px;
   height: 100vh;
   background-color: var(--md-sys-color-surface-container-low);
-  border-right: 1px solid var(--md-sys-color-outline-variant);
   box-sizing: border-box;
 }
 
@@ -717,8 +714,8 @@ md-icon,
 md-icon-button,
 md-linear-progress {
   transition: opacity 300ms cubic-bezier(0.2, 0, 0, 1),
-              background-color 250ms ease,
-              color 250ms ease;
+              background-color 250ms cubic-bezier(0.2, 0, 0, 1),
+              color 250ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 .friend-grid {
