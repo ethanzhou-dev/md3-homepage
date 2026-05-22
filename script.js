@@ -231,11 +231,22 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const targetId = item.getAttribute('href').substring(1);
             const targetEl = document.getElementById(targetId);
-            if (targetEl) {
-                targetEl.scrollIntoView({ behavior: 'smooth' });
-            }
-            if (window.innerWidth <= 840 && navDrawer.classList.contains('open')) {
+            
+            const isMobileMenuOpen = window.innerWidth <= 840 && navDrawer.classList.contains('open');
+            if (isMobileMenuOpen) {
                 toggleMenu();
+            }
+            
+            if (targetEl) {
+                if (isMobileMenuOpen) {
+                    // Wait a short moment for the body overflow hidden to be removed
+                    // so the browser can calculate and perform the smooth scroll correctly.
+                    setTimeout(() => {
+                        targetEl.scrollIntoView({ behavior: 'smooth' });
+                    }, 80);
+                } else {
+                    targetEl.scrollIntoView({ behavior: 'smooth' });
+                }
             }
         });
     });
