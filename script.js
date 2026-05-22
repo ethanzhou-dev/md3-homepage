@@ -227,15 +227,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (scrim) scrim.addEventListener('click', toggleMenu);
     
     navItems.forEach(item => {
-        item.addEventListener('click', () => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = item.getAttribute('href').substring(1);
+            const targetEl = document.getElementById(targetId);
+            if (targetEl) {
+                targetEl.scrollIntoView({ behavior: 'smooth' });
+            }
             if (window.innerWidth <= 840 && navDrawer.classList.contains('open')) {
                 toggleMenu();
             }
-            // Let the browser do the native scroll (which perfectly respects scroll-margin-top)
-            // Then silently remove the hash from the URL
-            setTimeout(() => {
-                history.replaceState(null, '', window.location.pathname + window.location.search);
-            }, 10);
         });
     });
 
