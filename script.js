@@ -77,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     Promise.all([
-        customElements.whenDefined('md-nav-drawer'),
         customElements.whenDefined('md-list'),
         customElements.whenDefined('md-list-item'),
         customElements.whenDefined('md-fab'),

@@ -235,6 +235,8 @@ md-icon-button {
   transition: background-color 250ms ease;
 }
 
+
+
 .md-list {
   padding-left: 24px;
 }
@@ -299,10 +301,8 @@ md-icon-button {
   .md-nav-drawer {
     position: fixed;
     transform: translateX(-100%);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease;
     max-width: calc(100vw - 56px);
-    box-shadow: var(--md-elevation-1);
-    border-radius: 0 16px 16px 0;
   }
   .md-nav-drawer.open {
     transform: translateX(0);
