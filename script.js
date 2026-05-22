@@ -227,7 +227,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (scrim) scrim.addEventListener('click', toggleMenu);
     
     navItems.forEach(item => {
-        item.addEventListener('click', () => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = item.getAttribute('href').substring(1);
+            const targetEl = document.getElementById(targetId);
+            if (targetEl) {
+                targetEl.scrollIntoView({ behavior: 'smooth' });
+            }
             if (window.innerWidth <= 840 && navDrawer.classList.contains('open')) {
                 toggleMenu();
             }
