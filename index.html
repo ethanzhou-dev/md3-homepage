@@ -72,6 +72,19 @@
         })();
     </script>
     <style>
+        :root {
+            --md-sys-color-background: #FEF7FF;
+            --md-sys-color-surface-variant: #E7E0EC;
+            --md-sys-color-primary: #6750A4;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root:not(.light-theme) {
+                --md-sys-color-background: #141218;
+                --md-sys-color-surface-variant: #49454F;
+                --md-sys-color-primary: #D0BCFF;
+            }
+        }
+
         .lang-en [data-lang="zh"] {
             display: none !important;
         }
