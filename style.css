@@ -97,6 +97,7 @@ body.no-scroll {
 .md-nav-drawer {
   width: 360px;
   background-color: var(--md-sys-color-surface-container-low);
+  border-right: 1px solid var(--md-sys-color-outline-variant);
   padding: 12px;
   display: flex;
   flex-direction: column;
@@ -405,8 +406,11 @@ md-icon-button {
     bottom: 0;
     height: 100dvh;
     transform: translateX(-100%);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     max-width: calc(100vw - 56px);
+    border-right: none;
+    border-radius: 0 16px 16px 0;
+    box-shadow: var(--md-elevation-1);
   }
   .md-nav-drawer.open {
     transform: translateX(0);
