@@ -344,11 +344,27 @@ md-icon-button {
 
 
 .md-list {
-  padding-left: 24px;
+  list-style: none;
+  padding-left: 0;
+  margin: 8px 0;
 }
 
 .md-list li {
+  position: relative;
+  padding-left: 16px;
   margin-bottom: 8px;
+}
+
+.md-list li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--md-sys-color-primary);
+  transition: background-color 250ms ease;
 }
 
 .md-link {
