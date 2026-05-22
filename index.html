@@ -164,57 +164,14 @@
                 <h2 class="md-typescale-title-large" data-lang="zh" style="margin:0">菜单</h2>
             </div>
             <div class="md-nav-content">
-                <details class="md-nav-section-details">
-                    <summary class="md-nav-title md-typescale-title-small">
-                        <span class="summary-text-container">
-                            <span data-lang="en">LANGUAGE</span>
-                            <span data-lang="zh">语言切换</span>
-                        </span>
-                        <md-icon class="expand-more-icon">expand_more</md-icon>
-                    </summary>
-                    <md-list class="md-nav-section" style="margin-top: 4px;">
-                        <md-list-item type="button" class="md-nav-item" id="btn-lang-en">
-                            <span slot="headline">English</span>
-                        </md-list-item>
-                        <md-list-item type="button" class="md-nav-item" id="btn-lang-zh">
-                            <span slot="headline">中文</span>
-                        </md-list-item>
-                    </md-list>
-                </details>
-                <md-divider></md-divider>
-                <details class="md-nav-section-details">
-                    <summary class="md-nav-title md-typescale-title-small">
-                        <span class="summary-text-container">
-                            <span data-lang="en">THEME COLOR</span>
-                            <span data-lang="zh">主题配色</span>
-                        </span>
-                        <md-icon class="expand-more-icon">expand_more</md-icon>
-                    </summary>
-                    <md-list class="md-nav-section" style="margin-top: 4px;">
-                        <div class="color-picker-container">
-                            <div class="color-presets">
-                                <button class="preset-btn active" data-color="#6750A4"
-                                    style="background-color: #6750A4;" title="Purple"></button>
-                                <button class="preset-btn" data-color="#0061A4" style="background-color: #0061A4;"
-                                    title="Blue"></button>
-                                <button class="preset-btn" data-color="#006A60" style="background-color: #006A60;"
-                                    title="Teal"></button>
-                                <button class="preset-btn" data-color="#984061" style="background-color: #984061;"
-                                    title="Rose"></button>
-                                <button class="preset-btn" data-color="#686000" style="background-color: #686000;"
-                                    title="Olive"></button>
-                                <div class="custom-color-wrapper" title="Custom Color">
-                                    <input type="color" id="custom-color-picker" value="#6750A4">
-                                    <md-icon class="color-pick-icon">palette</md-icon>
-                                </div>
-                            </div>
-                        </div>
-                    </md-list>
-                </details>
-                <md-divider></md-divider>
+                <div class="md-nav-title-container">
+                    <md-icon class="md-nav-title-icon">dashboard</md-icon>
+                    <span class="md-nav-title md-typescale-title-small" data-lang="en">DIRECTORY</span>
+                    <span class="md-nav-title md-typescale-title-small" data-lang="zh">目录</span>
+                </div>
+                <md-divider class="drawer-divider" style="margin-bottom: 12px;"></md-divider>
+
                 <md-list class="md-nav-section">
-                    <span class="md-nav-title md-typescale-title-small" data-lang="en">MAIN MENU</span>
-                    <span class="md-nav-title md-typescale-title-small" data-lang="zh">主菜单</span>
                     <md-list-item type="link" href="#whoami" class="md-nav-item">
                         <md-icon slot="start">person</md-icon>
                         <span slot="headline" data-lang="en">Whoami</span>
@@ -246,6 +203,56 @@
                         <span slot="headline" data-lang="zh">联系我</span>
                     </md-list-item>
                 </md-list>
+
+                <div class="md-nav-settings">
+                    <md-divider class="drawer-divider" style="margin-bottom: 4px;"></md-divider>
+                    <details class="md-nav-section-details">
+                        <summary class="md-nav-title md-typescale-title-small">
+                            <span class="summary-text-container">
+                                <span data-lang="en">PREFERENCES</span>
+                                <span data-lang="zh">偏好设置</span>
+                            </span>
+                            <md-icon class="expand-more-icon">expand_more</md-icon>
+                        </summary>
+
+                        <div class="settings-expanded-content">
+                            <div class="settings-sub-row">
+                                <span class="settings-sub-label md-typescale-label-large">
+                                    <span data-lang="en">Language</span>
+                                    <span data-lang="zh">界面语言</span>
+                                </span>
+                                <div class="lang-switch-buttons">
+                                    <button class="settings-text-btn" id="btn-lang-zh">中文</button>
+                                    <span class="divider-pipe">|</span>
+                                    <button class="settings-text-btn" id="btn-lang-en">English</button>
+                                </div>
+                            </div>
+
+                            <div class="settings-sub-row" style="margin-top: 16px;">
+                                <span class="settings-sub-label md-typescale-label-large">
+                                    <span data-lang="en">Theme Color</span>
+                                    <span data-lang="zh">主题配色</span>
+                                </span>
+                                <div class="color-presets">
+                                    <button class="preset-btn active" data-color="#6750A4"
+                                        style="background-color: #6750A4;" title="Purple"></button>
+                                    <button class="preset-btn" data-color="#0061A4" style="background-color: #0061A4;"
+                                        title="Blue"></button>
+                                    <button class="preset-btn" data-color="#006A60" style="background-color: #006A60;"
+                                        title="Teal"></button>
+                                    <button class="preset-btn" data-color="#984061" style="background-color: #984061;"
+                                        title="Rose"></button>
+                                    <button class="preset-btn" data-color="#686000" style="background-color: #686000;"
+                                        title="Olive"></button>
+                                    <div class="custom-color-wrapper" title="Custom Color">
+                                        <input type="color" id="custom-color-picker" value="#6750A4">
+                                        <md-icon class="color-pick-icon">palette</md-icon>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+                </div>
             </div>
         </nav>
 

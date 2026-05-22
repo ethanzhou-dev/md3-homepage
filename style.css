@@ -104,6 +104,7 @@ body.no-scroll {
   top: 0;
   height: 100vh;
   overflow-y: auto;
+  overflow-x: hidden;
   z-index: 100;
 }
 
@@ -115,6 +116,40 @@ body.no-scroll {
   display: flex;
   flex-direction: column;
   flex: 1;
+}
+
+.md-nav-settings {
+  margin-top: auto;
+  padding-bottom: 8px;
+}
+
+.md-nav-title-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  margin: 4px 0;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.md-nav-title-icon {
+  font-size: 20px;
+  --md-icon-size: 20px;
+  color: var(--md-sys-color-primary);
+}
+
+.md-nav-title-container .md-nav-title {
+  padding: 0;
+  margin: 0;
+}
+
+.drawer-divider {
+  margin: 0 16px;
+  --md-divider-color: var(--md-sys-color-outline-variant);
+  height: 0 !important;
+  border-top: 1px solid var(--md-divider-color) !important;
+  background-color: transparent !important;
+  width: calc(100% - 32px) !important;
 }
 
 .md-nav-section {
@@ -134,13 +169,11 @@ body.no-scroll {
 .md-nav-item {
   border-radius: 28px;
   overflow: hidden;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
   text-decoration: none;
 }
 
-.md-nav-item.active,
-.lang-en #btn-lang-en,
-.lang-zh #btn-lang-zh {
+.md-nav-item.active {
   --md-list-item-container-color: var(--md-sys-color-secondary-container);
   --md-list-item-label-text-color: var(--md-sys-color-on-secondary-container);
   --md-list-item-leading-icon-color: var(--md-sys-color-on-secondary-container);
@@ -152,6 +185,57 @@ body.no-scroll {
 
 .md-nav-item.active md-icon {
   color: var(--md-sys-color-on-secondary-container);
+}
+
+.settings-expanded-content {
+  padding: 8px 16px 16px 16px;
+}
+
+.settings-sub-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.settings-sub-label {
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.lang-switch-buttons {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.settings-text-btn {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 12px;
+  color: var(--md-sys-color-outline);
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 8px;
+  transition: color 0.15s, background-color 0.15s;
+}
+
+.settings-text-btn:hover {
+  color: var(--md-sys-color-primary);
+  background-color: var(--md-sys-color-surface-container-high);
+}
+
+.divider-pipe {
+  color: var(--md-sys-color-outline-variant);
+  font-size: 11px;
+}
+
+.lang-en #btn-lang-en,
+.lang-zh #btn-lang-zh {
+  color: var(--md-sys-color-on-secondary-container);
+  background-color: var(--md-sys-color-secondary-container);
+  font-weight: bold;
 }
 
 md-divider {
