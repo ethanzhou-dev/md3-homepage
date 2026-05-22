@@ -54,8 +54,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         const targetId = decodeURIComponent(window.location.hash.substring(1));
                         const targetEl = document.getElementById(targetId);
                         if (targetEl) {
+                            targetEl.classList.add('visible', 'instant-visible');
                             setTimeout(() => {
-                                targetEl.scrollIntoView({ behavior: 'smooth' });
+                                targetEl.scrollIntoView();
                             }, viewportCardCount * 80 + 100);
                         }
                     } catch (e) {
@@ -238,14 +239,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             if (targetEl) {
+                targetEl.classList.add('visible', 'instant-visible');
                 if (isMobileMenuOpen) {
-                    // Wait a short moment for the body overflow hidden to be removed
-                    // so the browser can calculate and perform the smooth scroll correctly.
+                    // Wait for the drawer close transition (300ms) to finish completely
+                    // so that the overflow change and layout are stable, ensuring accurate scrolling.
                     setTimeout(() => {
-                        targetEl.scrollIntoView({ behavior: 'smooth' });
-                    }, 80);
+                        targetEl.scrollIntoView();
+                    }, 320);
                 } else {
-                    targetEl.scrollIntoView({ behavior: 'smooth' });
+                    targetEl.scrollIntoView();
                 }
             }
         });

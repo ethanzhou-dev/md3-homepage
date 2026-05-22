@@ -504,6 +504,12 @@ body, nav, main, header, .md-card, .md-nav-item, h1, h2, h3, p, a, md-divider, m
   transform: translateY(0);
 }
 
+.js-enabled .md-card.instant-visible {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
 
 md-nav-drawer:not(:defined) {
   display: block;
