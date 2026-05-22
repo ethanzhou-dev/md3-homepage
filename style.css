@@ -384,6 +384,9 @@ md-icon-button {
 @media (max-width: 840px) {
   .md-nav-drawer {
     position: fixed;
+    top: 0;
+    bottom: 0;
+    height: 100dvh;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
     max-width: calc(100vw - 56px);
@@ -398,6 +401,9 @@ md-icon-button {
     padding: 0 4px;
     margin-bottom: 8px;
     margin-top: -4px;
+  }
+  .md-nav-title-container {
+    display: none;
   }
   #menu-btn {
     display: flex;
