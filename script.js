@@ -276,22 +276,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const rootHtml = document.getElementById('html-root');
 
     function setLanguage(lang) {
-        Array.from(document.documentElement.classList).forEach(c => {
-            if (c.startsWith('lang-')) {
-                document.documentElement.classList.remove(c);
-            }
-        });
-        document.documentElement.classList.add('lang-' + lang);
-        if(rootHtml) rootHtml.setAttribute('lang', lang);
-        
-        if(lang === 'en') {
-            document.title = "Ekiz's Homepage";
-        } else {
-            document.title = "Ekiz 的主页";
-        }
+        const currentLang = localStorage.getItem('preferredLang') || document.documentElement.lang;
+        if (currentLang === lang) return;
         
         localStorage.setItem('preferredLang', lang);
         document.cookie = `preferredLang=${lang};path=/;max-age=31536000`;
+        
+        // Refresh page to allow Edge server to prune DOM based on new language
+        window.location.reload();
     }
 
     if (btnEn && btnZh) {
@@ -299,15 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btnZh.addEventListener('click', (e) => { e.preventDefault(); setLanguage('zh'); });
     }
 
-    const savedLang = localStorage.getItem('preferredLang');
-    if (savedLang) {
-        setLanguage(savedLang);
-    } else {
-        const userLang = navigator.language || navigator.userLanguage;
-        if (userLang && userLang.toLowerCase().startsWith('zh')) {
-            setLanguage('zh');
-        }
-    }
+    // Language initialization is now handled by the server (middleware) and index.html inline script.
 
     async function fetchStats() {
         const uptimeElements = document.querySelectorAll(".stat-uptime");

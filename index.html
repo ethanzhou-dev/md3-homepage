@@ -27,19 +27,22 @@
         })();
 
         (function () {
-            var savedLang = localStorage.getItem('preferredLang');
-            var lang = 'en';
-            if (savedLang) {
-                lang = savedLang;
-            } else {
-                var userLang = navigator.language || navigator.userLanguage;
-                if (userLang && userLang.toLowerCase().startsWith('zh')) {
-                    lang = 'zh';
+            var hasServerLang = document.documentElement.className.indexOf('lang-') !== -1;
+            if (!hasServerLang) {
+                var savedLang = localStorage.getItem('preferredLang');
+                var lang = 'en';
+                if (savedLang) {
+                    lang = savedLang;
+                } else {
+                    var userLang = navigator.language || navigator.userLanguage;
+                    if (userLang && userLang.toLowerCase().startsWith('zh')) {
+                        lang = 'zh';
+                    }
                 }
+                document.documentElement.lang = lang;
+                document.documentElement.classList.add('lang-' + lang);
             }
-            document.documentElement.lang = lang;
-            document.documentElement.classList.add('lang-' + lang);
-            if (lang === 'zh') {
+            if (document.documentElement.lang === 'zh') {
                 document.title = "Ekiz 的主页";
             } else {
                 document.title = "Ekiz's Homepage";

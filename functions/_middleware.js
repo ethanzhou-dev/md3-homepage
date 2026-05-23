@@ -19,6 +19,20 @@ class ElementHandler {
   }
 }
 
+class LangPrunerHandler {
+  constructor(activeLang) {
+    this.activeLang = activeLang;
+  }
+
+  element(element) {
+    const nodeLang = element.getAttribute('data-lang');
+    // If the node has a data-lang attribute and it does not match the active language, remove it
+    if (nodeLang && nodeLang !== this.activeLang) {
+      element.remove();
+    }
+  }
+}
+
 export async function onRequest(context) {
   const { request, next } = context;
   const url = new URL(request.url);
@@ -58,6 +72,7 @@ export async function onRequest(context) {
 
     return new HTMLRewriter()
       .on('html', new ElementHandler(lang, theme))
+      .on('[data-lang]', new LangPrunerHandler(lang))
       .transform(response);
   }
 
