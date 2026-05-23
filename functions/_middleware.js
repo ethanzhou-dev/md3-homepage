@@ -25,6 +25,19 @@ class ElementHandler {
   }
 }
 
+class MetaDescriptionHandler {
+  constructor(lang) {
+    this.lang = lang;
+  }
+
+  element(element) {
+    const desc = this.lang === 'zh' 
+      ? "Ekiz的个人主页与数字足迹记录，包含技术博客、项目归档与电子设备折腾日常。" 
+      : "Ekiz's personal homepage and digital footprint, featuring tech blogs, project archives, and daily tinkering.";
+    element.append(`<meta name="description" content="${desc}">`, { html: true });
+  }
+}
+
 
 class ThemeStyleHandler {
   constructor(cssText) {
@@ -95,6 +108,7 @@ export async function onRequest(context) {
     return new HTMLRewriter()
       .on('html', new ElementHandler(lang, theme))
       .on('head', new ThemeStyleHandler(combinedCss))
+      .on('head', new MetaDescriptionHandler(lang))
       .on('.stat-uptime', new ElementContentHandler(uptimeText))
       .on('.stat-visitor', new ElementContentHandler(visitorsText))
       .transform(response);

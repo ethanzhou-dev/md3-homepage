@@ -5,7 +5,14 @@ export function generateThemeCss(hexColor, isDark) {
     hexColor = '#' + hexColor;
   }
 
-  const argb = argbFromHex(hexColor);
+  let argb;
+  try {
+    argb = argbFromHex(hexColor);
+  } catch (e) {
+    // Fallback to default purple if hex is invalid (tampered cookie or bad API request)
+    argb = argbFromHex('#6750A4');
+  }
+
   const theme = themeFromSourceColor(argb);
   const n = theme.palettes.neutral;
   const nv = theme.palettes.neutralVariant;

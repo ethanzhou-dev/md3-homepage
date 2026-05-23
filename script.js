@@ -179,6 +179,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(res => res.text())
                 .then(css => {
                     doUpdate(css);
+                })
+                .catch(err => {
+                    console.warn("Failed to fetch dynamic theme CSS:", err);
+                    // Revert UI active color to previous if fetch fails (optional, but good practice)
+                    // At minimum, don't break the UI
                 });
         } else {
             doUpdate(null);
