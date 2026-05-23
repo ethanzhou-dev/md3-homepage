@@ -1,5 +1,5 @@
-
 :root {
+  color-scheme: light;
   --md-sys-color-primary: #6750A4;
   --md-sys-color-on-primary: #FFFFFF;
   --md-sys-color-secondary-container: #E8DEF8;
@@ -36,6 +36,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not(.light-theme) {
+    color-scheme: dark;
     --md-sys-color-primary: #D0BCFF;
     --md-sys-color-on-primary: #381E72;
     --md-sys-color-secondary-container: #4A4458;
@@ -71,6 +72,7 @@
 }
 
 :root.dark-theme {
+  color-scheme: dark;
   --md-sys-color-primary: #D0BCFF;
   --md-sys-color-on-primary: #381E72;
   --md-sys-color-secondary-container: #4A4458;

@@ -168,6 +168,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (customColorPicker) customColorPicker.value = hexColor;
             }
         }
+        
+        setTimeout(() => {
+            const metaThemeColor = document.getElementById('meta-theme-color');
+            if (metaThemeColor) {
+                const surfaceColor = getComputedStyle(document.documentElement).getPropertyValue('--md-sys-color-surface').trim();
+                if (surfaceColor) metaThemeColor.setAttribute('content', surfaceColor);
+            }
+        }, 50);
     }
 
     const preloaderEl = document.getElementById('app-preloader');
