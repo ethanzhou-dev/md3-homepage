@@ -860,9 +860,9 @@ summary.md-nav-title:active::after,
 }
 
 .skill-groups {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
   margin-top: 0;
   margin-bottom: 16px;
 }
@@ -892,4 +892,58 @@ summary.md-nav-title:active::after,
   border-radius: var(--md-sys-shape-corner-full);
   object-fit: cover;
   box-shadow: var(--md-sys-elevation-level-1);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border-radius: var(--md-sys-shape-corner-medium);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  background-color: transparent;
+  text-decoration: none;
+  color: var(--md-sys-color-on-surface);
+  transition: box-shadow 250ms cubic-bezier(0.2, 0, 0, 1), background-color 250ms cubic-bezier(0.2, 0, 0, 1), border-color 250ms cubic-bezier(0.2, 0, 0, 1);
+  --md-focus-ring-shape: var(--md-sys-shape-corner-medium);
+  position: relative;
+  outline: none;
+  overflow: hidden;
+}
+
+.project-card:hover {
+  background-color: color-mix(in srgb, var(--md-sys-color-on-surface) 4%, transparent);
+  border-color: var(--md-sys-color-outline);
+}
+
+.project-card:focus-visible {
+  outline: 2px solid var(--md-sys-color-primary);
+  outline-offset: 2px;
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.project-title {
+  font-weight: 500;
+  color: var(--md-sys-color-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.project-desc {
+  margin: 0;
+  color: var(--md-sys-color-on-surface-variant);
 }
