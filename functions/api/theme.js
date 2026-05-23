@@ -58,6 +58,13 @@ export async function onRequest(context) {
     
     vars['--md-sys-color-outline'] = hexFromArgb(nv.tone(60));
     vars['--md-sys-color-outline-variant'] = hexFromArgb(nv.tone(30));
+    
+    vars['--md-sys-color-inverse-surface'] = hexFromArgb(n.tone(90));
+    vars['--md-sys-color-inverse-on-surface'] = hexFromArgb(n.tone(20));
+    vars['--md-sys-color-inverse-primary'] = hexFromArgb(p.tone(40));
+    vars['--md-sys-color-shadow'] = hexFromArgb(n.tone(0));
+    vars['--md-sys-color-scrim'] = hexFromArgb(n.tone(0));
+    vars['--md-sys-color-surface-tint'] = vars['--md-sys-color-primary'];
   } else {
     vars['--md-sys-color-primary'] = hexFromArgb(p.tone(40));
     vars['--md-sys-color-on-primary'] = hexFromArgb(p.tone(100));
@@ -95,6 +102,13 @@ export async function onRequest(context) {
     
     vars['--md-sys-color-outline'] = hexFromArgb(nv.tone(50));
     vars['--md-sys-color-outline-variant'] = hexFromArgb(nv.tone(80));
+    
+    vars['--md-sys-color-inverse-surface'] = hexFromArgb(n.tone(20));
+    vars['--md-sys-color-inverse-on-surface'] = hexFromArgb(n.tone(95));
+    vars['--md-sys-color-inverse-primary'] = hexFromArgb(p.tone(80));
+    vars['--md-sys-color-shadow'] = hexFromArgb(n.tone(0));
+    vars['--md-sys-color-scrim'] = hexFromArgb(n.tone(0));
+    vars['--md-sys-color-surface-tint'] = vars['--md-sys-color-primary'];
   }
 
   let cssText = '';
