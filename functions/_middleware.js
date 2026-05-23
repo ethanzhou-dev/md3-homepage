@@ -16,7 +16,10 @@ class ElementHandler {
           .replace(/(dark-theme|light-theme)/g, '')
           .trim();
       
-      newClass += ` lang-${this.lang} ${this.theme}-theme`;
+      newClass += ` lang-${this.lang}`;
+      if (this.theme) {
+        newClass += ` ${this.theme}-theme`;
+      }
       element.setAttribute('class', newClass.trim());
     }
   }
@@ -41,7 +44,7 @@ class ThemeStyleHandler {
   }
 
   element(element) {
-    element.append(`<style id="dynamic-theme">:root{${this.cssText}}</style>`, { html: true });
+    element.append(`<style id="dynamic-theme">${this.cssText}</style>`, { html: true });
   }
 }
 
@@ -68,7 +71,7 @@ export async function onRequest(context) {
   if (response.headers.get("content-type")?.includes("text/html")) {
     const cookies = request.headers.get("cookie") || "";
     let lang = 'en';
-    let theme = 'light';
+    let theme = null;
     let seedColor = '6750A4';
 
     if (cookies.includes('preferredLang=zh')) {
@@ -86,11 +89,6 @@ export async function onRequest(context) {
         theme = 'dark';
     } else if (cookies.includes('preferredTheme=light')) {
         theme = 'light';
-    } else {
-        const prefersDark = request.headers.get('sec-ch-prefers-color-scheme') === 'dark';
-        if (prefersDark) {
-            theme = 'dark';
-        }
     }
 
     const colorMatch = cookies.match(/themeSeedColor=([^;]+)/);
@@ -98,7 +96,9 @@ export async function onRequest(context) {
         seedColor = decodeURIComponent(colorMatch[1]);
     }
 
-    const themeCss = generateThemeCss(seedColor, theme === 'dark');
+    const lightCss = generateThemeCss(seedColor, false);
+    const darkCss = generateThemeCss(seedColor, true);
+    const combinedCss = `:root { ${lightCss} } @media (prefers-color-scheme: dark) { :root:not(.light-theme) { ${darkCss} } } :root.dark-theme { ${darkCss} }`;
     
     // Fetch stats server-side
     const stats = await getStatsData(request, env, context);
@@ -107,7 +107,7 @@ export async function onRequest(context) {
 
     return new HTMLRewriter()
       .on('html', new ElementHandler(lang, theme))
-      .on('head', new ThemeStyleHandler(themeCss))
+      .on('head', new ThemeStyleHandler(combinedCss))
       .on('[data-lang]', new LangPrunerHandler(lang))
       .on('.stat-uptime', new ElementContentHandler(uptimeText))
       .on('.stat-visitor', new ElementContentHandler(visitorsText))
