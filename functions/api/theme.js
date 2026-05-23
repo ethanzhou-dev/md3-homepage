@@ -46,6 +46,8 @@ export async function onRequest(context) {
     vars['--md-sys-color-on-background'] = hexFromArgb(n.tone(90));
     
     vars['--md-sys-color-surface'] = hexFromArgb(n.tone(6));
+    vars['--md-sys-color-surface-dim'] = hexFromArgb(n.tone(6));
+    vars['--md-sys-color-surface-bright'] = hexFromArgb(n.tone(24));
     vars['--md-sys-color-on-surface'] = hexFromArgb(n.tone(90));
     vars['--md-sys-color-surface-variant'] = hexFromArgb(nv.tone(30));
     vars['--md-sys-color-on-surface-variant'] = hexFromArgb(nv.tone(80));
@@ -90,6 +92,8 @@ export async function onRequest(context) {
     vars['--md-sys-color-on-background'] = hexFromArgb(n.tone(10));
     
     vars['--md-sys-color-surface'] = hexFromArgb(n.tone(98));
+    vars['--md-sys-color-surface-dim'] = hexFromArgb(n.tone(87));
+    vars['--md-sys-color-surface-bright'] = hexFromArgb(n.tone(98));
     vars['--md-sys-color-on-surface'] = hexFromArgb(n.tone(10));
     vars['--md-sys-color-surface-variant'] = hexFromArgb(nv.tone(90));
     vars['--md-sys-color-on-surface-variant'] = hexFromArgb(nv.tone(30));
