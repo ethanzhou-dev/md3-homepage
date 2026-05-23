@@ -19,49 +19,49 @@
   --md-sys-state-pressed: 0.10;
   --md-sys-state-dragged: 0.16;
 
-  --md-sys-typescale-headline-medium-font: 'Roboto', "Microsoft YaHei", sans-serif;
+  --md-sys-typescale-headline-medium-font: 'Roboto', 'Noto Sans SC', "PingFang SC", "Microsoft YaHei", sans-serif;
   --md-sys-typescale-headline-medium-size: 28px;
   --md-sys-typescale-headline-medium-weight: 400;
   --md-sys-typescale-headline-medium-line-height: 36px;
   --md-sys-typescale-headline-medium-tracking: 0px;
 
-  --md-sys-typescale-headline-small-font: 'Roboto', "Microsoft YaHei", sans-serif;
+  --md-sys-typescale-headline-small-font: 'Roboto', 'Noto Sans SC', "PingFang SC", "Microsoft YaHei", sans-serif;
   --md-sys-typescale-headline-small-size: 24px;
   --md-sys-typescale-headline-small-weight: 400;
   --md-sys-typescale-headline-small-line-height: 32px;
   --md-sys-typescale-headline-small-tracking: 0px;
 
-  --md-sys-typescale-title-large-font: 'Roboto', "Microsoft YaHei", sans-serif;
+  --md-sys-typescale-title-large-font: 'Roboto', 'Noto Sans SC', "PingFang SC", "Microsoft YaHei", sans-serif;
   --md-sys-typescale-title-large-size: 22px;
   --md-sys-typescale-title-large-weight: 400;
   --md-sys-typescale-title-large-line-height: 28px;
   --md-sys-typescale-title-large-tracking: 0px;
 
-  --md-sys-typescale-title-small-font: 'Roboto', "Microsoft YaHei", sans-serif;
+  --md-sys-typescale-title-small-font: 'Roboto', 'Noto Sans SC', "PingFang SC", "Microsoft YaHei", sans-serif;
   --md-sys-typescale-title-small-size: 14px;
   --md-sys-typescale-title-small-weight: 500;
   --md-sys-typescale-title-small-line-height: 20px;
   --md-sys-typescale-title-small-tracking: 0.1px;
 
-  --md-sys-typescale-body-large-font: 'Roboto', "Microsoft YaHei", sans-serif;
+  --md-sys-typescale-body-large-font: 'Roboto', 'Noto Sans SC', "PingFang SC", "Microsoft YaHei", sans-serif;
   --md-sys-typescale-body-large-size: 16px;
   --md-sys-typescale-body-large-weight: 400;
   --md-sys-typescale-body-large-line-height: 24px;
   --md-sys-typescale-body-large-tracking: 0.5px;
 
-  --md-sys-typescale-body-medium-font: 'Roboto', "Microsoft YaHei", sans-serif;
+  --md-sys-typescale-body-medium-font: 'Roboto', 'Noto Sans SC', "PingFang SC", "Microsoft YaHei", sans-serif;
   --md-sys-typescale-body-medium-size: 14px;
   --md-sys-typescale-body-medium-weight: 400;
   --md-sys-typescale-body-medium-line-height: 20px;
   --md-sys-typescale-body-medium-tracking: 0.25px;
 
-  --md-sys-typescale-body-small-font: 'Roboto', "Microsoft YaHei", sans-serif;
+  --md-sys-typescale-body-small-font: 'Roboto', 'Noto Sans SC', "PingFang SC", "Microsoft YaHei", sans-serif;
   --md-sys-typescale-body-small-size: 12px;
   --md-sys-typescale-body-small-weight: 400;
   --md-sys-typescale-body-small-line-height: 16px;
   --md-sys-typescale-body-small-tracking: 0.4px;
 
-  --md-sys-typescale-label-large-font: 'Roboto', "Microsoft YaHei", sans-serif;
+  --md-sys-typescale-label-large-font: 'Roboto', 'Noto Sans SC', "PingFang SC", "Microsoft YaHei", sans-serif;
   --md-sys-typescale-label-large-size: 14px;
   --md-sys-typescale-label-large-weight: 500;
   --md-sys-typescale-label-large-line-height: 20px;
@@ -83,7 +83,7 @@ html { scroll-behavior: smooth; overflow-anchor: none; }
 body {
   overflow-anchor: none;
   margin: 0;
-  font-family: 'Roboto', "Microsoft YaHei", sans-serif;
+  font-family: 'Roboto', 'Noto Sans SC', "PingFang SC", "Microsoft YaHei", sans-serif;
   background-color: var(--md-sys-color-background);
   color: var(--md-sys-color-on-background);
   display: flex;
