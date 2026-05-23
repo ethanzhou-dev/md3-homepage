@@ -115,6 +115,21 @@ export async function onRequest(context) {
     vars['--md-sys-color-surface-tint'] = vars['--md-sys-color-primary'];
   }
 
+  vars['--md-sys-color-primary-fixed'] = hexFromArgb(p.tone(90));
+  vars['--md-sys-color-primary-fixed-dim'] = hexFromArgb(p.tone(80));
+  vars['--md-sys-color-on-primary-fixed'] = hexFromArgb(p.tone(10));
+  vars['--md-sys-color-on-primary-fixed-variant'] = hexFromArgb(p.tone(30));
+
+  vars['--md-sys-color-secondary-fixed'] = hexFromArgb(s.tone(90));
+  vars['--md-sys-color-secondary-fixed-dim'] = hexFromArgb(s.tone(80));
+  vars['--md-sys-color-on-secondary-fixed'] = hexFromArgb(s.tone(10));
+  vars['--md-sys-color-on-secondary-fixed-variant'] = hexFromArgb(s.tone(30));
+
+  vars['--md-sys-color-tertiary-fixed'] = hexFromArgb(t.tone(90));
+  vars['--md-sys-color-tertiary-fixed-dim'] = hexFromArgb(t.tone(80));
+  vars['--md-sys-color-on-tertiary-fixed'] = hexFromArgb(t.tone(10));
+  vars['--md-sys-color-on-tertiary-fixed-variant'] = hexFromArgb(t.tone(30));
+
   let cssText = '';
   for (const [key, val] of Object.entries(vars)) {
       cssText += `${key}: ${val}; `;
