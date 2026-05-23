@@ -872,3 +872,22 @@ summary.md-nav-title:active::after,
 .skill-label {
   margin-left: 4px;
 }
+
+.whoami-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.whoami-header h2 {
+  margin: 0;
+}
+
+.whoami-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--md-sys-shape-corner-full);
+  object-fit: cover;
+  box-shadow: var(--md-sys-elevation-level-1);
+}
