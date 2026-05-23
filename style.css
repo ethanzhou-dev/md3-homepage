@@ -861,8 +861,8 @@ summary.md-nav-title:active::after,
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-top: 12px;
-  margin-bottom: 8px;
+  margin-top: 0;
+  margin-bottom: 16px;
 }
 .skill-group {
   display: flex;
