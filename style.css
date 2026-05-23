@@ -184,6 +184,7 @@ body.no-scroll {
 }
 
 .md-nav-item {
+  --md-list-item-container-shape: var(--md-sys-shape-corner-full);
   border-radius: var(--md-sys-shape-corner-full);
   overflow: hidden;
   margin-bottom: 8px;
@@ -805,6 +806,7 @@ summary.md-nav-title::after,
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: inherit;
   background-color: var(--md-state-layer-color);
   opacity: 0;
   pointer-events: none;
