@@ -5,13 +5,14 @@ export async function onRequest(context) {
   const url = new URL(request.url);
   
   const hexColor = url.searchParams.get('color') || '6750A4';
-  const isDark = url.searchParams.get('dark') === 'true';
 
-  const cssText = generateThemeCss(hexColor, isDark);
+  const lightCss = generateThemeCss(hexColor, false);
+  const darkCss = generateThemeCss(hexColor, true);
+  const combinedCss = `:root { ${lightCss} } @media (prefers-color-scheme: dark) { :root:not(.light-theme) { ${darkCss} } } :root.dark-theme { ${darkCss} }`;
 
-  return new Response(JSON.stringify({ css: cssText }), {
+  return new Response(combinedCss, {
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "text/css; charset=utf-8",
       "Cache-Control": "public, max-age=31536000",
     }
   });

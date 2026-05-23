@@ -130,15 +130,41 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function applyDynamicTheme(hexColor, isDark) {
-        const targetTheme = isDark ? 'dark' : 'light';
-        localStorage.setItem('themeSeedColor', hexColor);
-        document.cookie = `themeSeedColor=${encodeURIComponent(hexColor)};path=/;max-age=31536000`;
-        
-        localStorage.setItem('preferredTheme', targetTheme);
-        document.cookie = `preferredTheme=${targetTheme};path=/;max-age=31536000`;
+    function applyDynamicTheme(hexColor, isDark, savePreference = true) {
+        if (savePreference) {
+            const targetTheme = isDark ? 'dark' : 'light';
+            localStorage.setItem('themeSeedColor', hexColor);
+            document.cookie = `themeSeedColor=${encodeURIComponent(hexColor)};path=/;max-age=31536000`;
+            
+            localStorage.setItem('preferredTheme', targetTheme);
+            document.cookie = `preferredTheme=${targetTheme};path=/;max-age=31536000`;
+        }
 
-        window.location.reload();
+        if (isDark) {
+            document.documentElement.classList.add('dark-theme');
+            document.documentElement.classList.remove('light-theme');
+        } else {
+            document.documentElement.classList.add('light-theme');
+            document.documentElement.classList.remove('dark-theme');
+        }
+
+        const dynamicStyle = document.getElementById('dynamic-theme');
+        if (dynamicStyle && activeSeedColor !== hexColor) {
+            const cleanHex = hexColor.startsWith('#') ? hexColor.substring(1) : hexColor;
+            fetch(`/api/theme?color=${cleanHex}`)
+                .then(res => res.text())
+                .then(css => {
+                    dynamicStyle.innerHTML = css;
+                });
+        }
+
+        activeSeedColor = hexColor;
+        isDarkMode = isDark;
+
+        if (themeToggleIcon) {
+            themeToggleIcon.textContent = isDarkMode ? 'light_mode' : 'dark_mode';
+        }
+        updateThemeUI(hexColor);
     }
 
     const preloaderEl = document.getElementById('app-preloader');
@@ -152,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
         if (!localStorage.getItem('preferredTheme')) {
-            applyDynamicTheme(activeSeedColor, e.matches);
+            applyDynamicTheme(activeSeedColor, e.matches, false);
         }
     });
 
@@ -246,8 +272,11 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('preferredLang', lang);
         document.cookie = `preferredLang=${lang};path=/;max-age=31536000`;
         
-        // Refresh page to allow Edge server to prune DOM based on new language
-        window.location.reload();
+        document.documentElement.lang = lang;
+        document.documentElement.classList.remove('lang-en', 'lang-zh');
+        document.documentElement.classList.add('lang-' + lang);
+        
+        document.title = lang === 'zh' ? "Ekiz 的主页" : "Ekiz's Homepage";
     }
 
     if (btnEn && btnZh) {

@@ -25,18 +25,6 @@ class ElementHandler {
   }
 }
 
-class LangPrunerHandler {
-  constructor(activeLang) {
-    this.activeLang = activeLang;
-  }
-
-  element(element) {
-    const nodeLang = element.getAttribute('data-lang');
-    if (nodeLang && nodeLang !== this.activeLang) {
-      element.remove();
-    }
-  }
-}
 
 class ThemeStyleHandler {
   constructor(cssText) {
@@ -108,7 +96,6 @@ export async function onRequest(context) {
     return new HTMLRewriter()
       .on('html', new ElementHandler(lang, theme))
       .on('head', new ThemeStyleHandler(combinedCss))
-      .on('[data-lang]', new LangPrunerHandler(lang))
       .on('.stat-uptime', new ElementContentHandler(uptimeText))
       .on('.stat-visitor', new ElementContentHandler(visitorsText))
       .transform(response);
