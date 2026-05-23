@@ -249,34 +249,6 @@ body.no-scroll {
   gap: 12px;
 }
 
-.settings-text-btn {
-  position: relative;
-  overflow: hidden;
-  background: none;
-  border: none;
-  font-family: inherit;
-  font-size: 12px;
-  color: var(--md-sys-color-outline);
-  cursor: pointer;
-  padding: 0 16px;
-  height: 48px;
-  border-radius: var(--md-sys-shape-corner-full);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  outline: none;
-  --md-focus-ring-shape: var(--md-sys-shape-corner-full);
-  transition: color 0.15s;
-}
-
-.settings-text-btn:hover {
-  color: var(--md-sys-color-primary);
-}
-
-.divider-pipe {
-  color: var(--md-sys-color-outline-variant);
-  font-size: 11px;
-}
 
 .lang-switch-buttons md-filled-tonal-button {
   --md-filled-tonal-button-container-color: transparent;
@@ -404,43 +376,6 @@ md-icon-button {
   text-decoration: underline;
 }
 
-.md-table-container {
-  overflow-x: auto;
-  border-radius: var(--md-sys-shape-corner-medium);
-  border: 1px solid var(--md-sys-color-outline-variant);
-  margin-bottom: 16px;
-}
-
-.md-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-}
-
-.md-table th, .md-table td {
-  padding: 16px;
-  border-bottom: 1px solid var(--md-sys-color-outline-variant);
-}
-
-.md-table th {
-  background-color: var(--md-sys-color-surface-container);
-  color: var(--md-sys-color-on-surface);
-  font-weight: 500;
-}
-
-.md-table tbody tr {
-  transition: background-color 250ms cubic-bezier(0.2, 0, 0, 1);
-}
-
-.md-table tbody tr:hover {
-  background-color: color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent);
-}
-.md-table tbody tr:focus-within {
-  background-color: color-mix(in srgb, var(--md-sys-color-on-surface) 10%, transparent);
-}
-.md-table tbody tr:active {
-  background-color: color-mix(in srgb, var(--md-sys-color-on-surface) 10%, transparent);
-}
 
 .md-footer {
   padding: 24px;
@@ -518,9 +453,6 @@ body, nav, main, header, .md-card, .md-nav-item, h1, h2, h3, p, a, md-divider, m
   transition: background-color 250ms cubic-bezier(0.2, 0, 0, 1), color 250ms cubic-bezier(0.2, 0, 0, 1), border-color 250ms cubic-bezier(0.2, 0, 0, 1), box-shadow 250ms cubic-bezier(0.2, 0, 0, 1);
 }
 
-.color-picker-container {
-  padding: 8px 16px;
-}
 
 .color-presets {
   display: flex;
