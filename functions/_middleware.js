@@ -46,12 +46,12 @@ class ThemeStyleHandler {
 }
 
 class ElementContentHandler {
-  constructor(text) {
-    this.text = text;
+  constructor(content) {
+    this.content = content;
   }
   
   element(element) {
-    element.setInnerContent(this.text);
+    element.setInnerContent(this.content);
   }
 }
 
