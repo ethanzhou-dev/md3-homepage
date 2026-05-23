@@ -51,6 +51,11 @@
   --md-sys-shape-corner-extra-large: 28px;
   --md-sys-shape-corner-full: 9999px;
 
+  --md-sys-state-hover: 0.08;
+  --md-sys-state-focus: 0.10;
+  --md-sys-state-pressed: 0.10;
+  --md-sys-state-dragged: 0.16;
+
   --md-sys-typescale-headline-medium-font: 'Roboto', "Microsoft YaHei", sans-serif;
   --md-sys-typescale-headline-medium-size: 28px;
   --md-sys-typescale-headline-medium-weight: 400;
@@ -886,4 +891,71 @@ md-linear-progress {
 .bookmark-list {
   --md-list-container-color: transparent;
   padding: 0;
+}
+
+/* -----------------------------
+   MD3 State Layers (Overlays)
+----------------------------- */
+.md-nav-item,
+summary.md-nav-title,
+.friend-card,
+.preset-btn,
+.custom-color-wrapper,
+.settings-text-btn {
+  position: relative;
+  overflow: hidden;
+  --md-state-layer-color: var(--md-sys-color-on-surface);
+}
+
+.md-nav-item.active {
+  --md-state-layer-color: var(--md-sys-color-on-secondary-container);
+}
+
+.md-nav-item::after,
+summary.md-nav-title::after,
+.friend-card::after,
+.preset-btn::after,
+.custom-color-wrapper::after,
+.settings-text-btn::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: var(--md-state-layer-color);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms linear;
+  z-index: 1;
+}
+
+.md-nav-item:hover::after,
+summary.md-nav-title:hover::after,
+.friend-card:hover::after,
+.preset-btn:hover::after,
+.custom-color-wrapper:hover::after,
+.settings-text-btn:hover::after {
+  opacity: var(--md-sys-state-hover);
+}
+
+.md-nav-item:focus-within::after,
+.md-nav-item:focus::after,
+summary.md-nav-title:focus-within::after,
+summary.md-nav-title:focus::after,
+.friend-card:focus-within::after,
+.friend-card:focus::after,
+.preset-btn:focus-within::after,
+.preset-btn:focus::after,
+.custom-color-wrapper:focus-within::after,
+.custom-color-wrapper:focus::after,
+.settings-text-btn:focus-within::after,
+.settings-text-btn:focus::after {
+  opacity: var(--md-sys-state-focus);
+}
+
+.md-nav-item:active::after,
+summary.md-nav-title:active::after,
+.friend-card:active::after,
+.preset-btn:active::after,
+.custom-color-wrapper:active::after,
+.settings-text-btn:active::after {
+  opacity: var(--md-sys-state-pressed);
 }
