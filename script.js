@@ -82,7 +82,9 @@ document.addEventListener('DOMContentLoaded', () => {
         customElements.whenDefined('md-fab'),
         customElements.whenDefined('md-icon-button'),
         customElements.whenDefined('md-filled-tonal-button'),
-        customElements.whenDefined('md-circular-progress')
+        customElements.whenDefined('md-circular-progress'),
+        customElements.whenDefined('md-chip-set'),
+        customElements.whenDefined('md-suggestion-chip')
     ]).then(markComponentsReady);
 
     window.addEventListener('load', markComponentsReady);
