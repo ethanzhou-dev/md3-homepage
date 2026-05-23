@@ -845,7 +845,6 @@ summary.md-nav-title:active::after,
   opacity: var(--md-sys-state-pressed);
 }
 
-/* MD3 View Transitions */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation-duration: 400ms;

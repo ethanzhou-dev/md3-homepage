@@ -302,9 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btnZh.addEventListener('click', (e) => { e.preventDefault(); setLanguage('zh'); });
     }
 
-    // Language initialization is now handled by the server (middleware) and index.html inline script.
 
-    // Uptime and visitor stats are now pre-rendered by Cloudflare Pages Middleware
 
     const backToTopFab = document.getElementById('back-to-top-fab');
     const updateScrollState = () => {

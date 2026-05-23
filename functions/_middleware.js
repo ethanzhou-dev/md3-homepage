@@ -88,7 +88,6 @@ export async function onRequest(context) {
     const darkCss = generateThemeCss(seedColor, true);
     const combinedCss = `:root { ${lightCss} } @media (prefers-color-scheme: dark) { :root:not(.light-theme) { ${darkCss} } } :root.dark-theme { ${darkCss} }`;
     
-    // Fetch stats server-side
     const stats = await getStatsData(request, env, context);
     const uptimeText = `${stats.uptime.days} days, ${stats.uptime.hours} hrs`;
     const visitorsText = `${stats.visitors}`;
