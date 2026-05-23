@@ -764,11 +764,6 @@ md-suggestion-chip {
   border-radius: var(--md-sys-shape-corner-medium);
   --md-list-item-container-shape: var(--md-sys-shape-corner-medium);
   --md-list-item-container-color: var(--md-sys-color-surface);
-  transition: box-shadow 250ms cubic-bezier(0.2, 0, 0, 1);
-}
-
-.friend-card:hover {
-  box-shadow: var(--md-sys-elevation-level-2);
 }
 
 
@@ -853,17 +848,10 @@ md-suggestion-chip {
   background-color: transparent;
   text-decoration: none;
   color: var(--md-sys-color-on-surface);
-  transition: box-shadow 250ms cubic-bezier(0.2, 0, 0, 1), background-color 250ms cubic-bezier(0.2, 0, 0, 1), border-color 250ms cubic-bezier(0.2, 0, 0, 1);
   --md-focus-ring-shape: var(--md-sys-shape-corner-medium);
   position: relative;
   outline: none;
   overflow: hidden;
-}
-
-.project-card:hover {
-  background-color: color-mix(in srgb, var(--md-sys-color-on-surface) 4%, transparent);
-  border-color: var(--md-sys-color-outline);
-  box-shadow: var(--md-sys-elevation-level-2);
 }
 
 
