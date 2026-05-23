@@ -140,31 +140,49 @@ document.addEventListener('DOMContentLoaded', () => {
             document.cookie = `preferredTheme=${targetTheme};path=/;max-age=31536000`;
         }
 
-        if (isDark) {
-            document.documentElement.classList.add('dark-theme');
-            document.documentElement.classList.remove('light-theme');
-        } else {
-            document.documentElement.classList.add('light-theme');
-            document.documentElement.classList.remove('dark-theme');
-        }
+        const updateDOM = (newCss) => {
+            if (isDark) {
+                document.documentElement.classList.add('dark-theme');
+                document.documentElement.classList.remove('light-theme');
+            } else {
+                document.documentElement.classList.add('light-theme');
+                document.documentElement.classList.remove('dark-theme');
+            }
 
-        const dynamicStyle = document.getElementById('dynamic-theme');
-        if (dynamicStyle && activeSeedColor !== hexColor) {
+            if (newCss) {
+                const dynamicStyle = document.getElementById('dynamic-theme');
+                if (dynamicStyle) {
+                    dynamicStyle.innerHTML = newCss;
+                }
+            }
+
+            activeSeedColor = hexColor;
+            isDarkMode = isDark;
+
+            if (themeToggleIcon) {
+                themeToggleIcon.textContent = isDarkMode ? 'light_mode' : 'dark_mode';
+            }
+            updateThemeUI(hexColor);
+        };
+
+        const doUpdate = (newCss) => {
+            if (document.startViewTransition) {
+                document.startViewTransition(() => updateDOM(newCss));
+            } else {
+                updateDOM(newCss);
+            }
+        };
+
+        if (activeSeedColor !== hexColor) {
             const cleanHex = hexColor.startsWith('#') ? hexColor.substring(1) : hexColor;
             fetch(`/api/theme?color=${cleanHex}`)
                 .then(res => res.text())
                 .then(css => {
-                    dynamicStyle.innerHTML = css;
+                    doUpdate(css);
                 });
+        } else {
+            doUpdate(null);
         }
-
-        activeSeedColor = hexColor;
-        isDarkMode = isDark;
-
-        if (themeToggleIcon) {
-            themeToggleIcon.textContent = isDarkMode ? 'light_mode' : 'dark_mode';
-        }
-        updateThemeUI(hexColor);
     }
 
     const preloaderEl = document.getElementById('app-preloader');

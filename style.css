@@ -844,3 +844,10 @@ summary.md-nav-title:active::after,
 .settings-text-btn:active::after {
   opacity: var(--md-sys-state-pressed);
 }
+
+/* MD3 View Transitions */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
