@@ -257,27 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Language initialization is now handled by the server (middleware) and index.html inline script.
 
-    async function fetchStats() {
-        const uptimeElements = document.querySelectorAll(".stat-uptime");
-        const visitorElements = document.querySelectorAll(".stat-visitor");
-        
-        try {
-            const response = await fetch('/api/stats');
-            if (response.ok) {
-                const data = await response.json();
-                const uptimeText = `${data.uptime.days} days, ${data.uptime.hours} hrs`;
-                uptimeElements.forEach(el => el.innerText = uptimeText);
-                visitorElements.forEach(el => el.innerText = data.visitors);
-            } else {
-                throw new Error('API fetch failed');
-            }
-        } catch (error) {
-            console.error("Failed to fetch stats:", error);
-            uptimeElements.forEach(el => el.innerText = "Unavailable");
-            visitorElements.forEach(el => el.innerText = "--");
-        }
-    }
-    fetchStats();
+    // Uptime and visitor stats are now pre-rendered by Cloudflare Pages Middleware
 
     const backToTopFab = document.getElementById('back-to-top-fab');
     const updateScrollState = () => {

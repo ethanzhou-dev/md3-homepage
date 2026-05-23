@@ -1,4 +1,5 @@
 import { generateThemeCss } from "./theme-generator.js";
+import { getStatsData } from "./stats-core.js";
 
 class ElementHandler {
   constructor(lang, theme) {
@@ -44,8 +45,18 @@ class ThemeStyleHandler {
   }
 }
 
+class ElementContentHandler {
+  constructor(text) {
+    this.text = text;
+  }
+  
+  element(element) {
+    element.setInnerContent(this.text);
+  }
+}
+
 export async function onRequest(context) {
-  const { request, next } = context;
+  const { request, next, env } = context;
   const url = new URL(request.url);
 
   if (url.pathname.startsWith('/api/')) {
@@ -88,11 +99,18 @@ export async function onRequest(context) {
     }
 
     const themeCss = generateThemeCss(seedColor, theme === 'dark');
+    
+    // Fetch stats server-side
+    const stats = await getStatsData(request, env, context);
+    const uptimeText = `${stats.uptime.days} days, ${stats.uptime.hours} hrs`;
+    const visitorsText = `${stats.visitors}`;
 
     return new HTMLRewriter()
       .on('html', new ElementHandler(lang, theme))
       .on('head', new ThemeStyleHandler(themeCss))
       .on('[data-lang]', new LangPrunerHandler(lang))
+      .on('.stat-uptime', new ElementContentHandler(uptimeText))
+      .on('.stat-visitor', new ElementContentHandler(visitorsText))
       .transform(response);
   }
 
