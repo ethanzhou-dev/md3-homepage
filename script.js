@@ -114,11 +114,15 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateThemeUI(hexColor) {
         let foundPreset = false;
         presetBtns.forEach(btn => {
-            if (btn.getAttribute('data-color').toLowerCase() === hexColor.toLowerCase()) {
-                btn.classList.add('active');
-                foundPreset = true;
-            } else {
-                btn.classList.remove('active');
+            const themeName = btn.getAttribute('data-theme');
+            if (themeName) {
+                const presetColor = getComputedStyle(document.documentElement).getPropertyValue('--md-custom-seed-' + themeName).trim();
+                if (presetColor.toLowerCase() === hexColor.toLowerCase()) {
+                    btn.classList.add('active');
+                    foundPreset = true;
+                } else {
+                    btn.classList.remove('active');
+                }
             }
         });
 
@@ -215,8 +219,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     presetBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            const color = btn.getAttribute('data-color');
-            applyDynamicTheme(color, isDarkMode);
+            const themeName = btn.getAttribute('data-theme');
+            if (themeName) {
+                const color = getComputedStyle(document.documentElement).getPropertyValue('--md-custom-seed-' + themeName).trim();
+                applyDynamicTheme(color, isDarkMode);
+            }
         });
     });
 
