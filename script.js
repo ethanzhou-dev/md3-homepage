@@ -97,8 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     let activeSeedColor = localStorage.getItem('themeSeedColor') || '#6750A4';
-    let isDarkMode = localStorage.getItem('preferredTheme') === 'dark' || 
-                     (!localStorage.getItem('preferredTheme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    let isDarkMode = document.documentElement.classList.contains('dark-theme');
 
     const themeToggleBtn = document.getElementById('theme-toggle-btn');
     const themeToggleIcon = document.getElementById('theme-toggle-icon');
@@ -106,50 +105,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const customColorPicker = document.getElementById('custom-color-picker');
     const customColorWrapper = document.querySelector('.custom-color-wrapper');
 
-    function initThemeMode() {
-        if (isDarkMode) {
-            document.documentElement.classList.add('dark-theme');
-            document.documentElement.classList.remove('light-theme');
-            if (themeToggleIcon) themeToggleIcon.textContent = 'light_mode';
-        } else {
-            document.documentElement.classList.add('light-theme');
-            document.documentElement.classList.remove('dark-theme');
-            if (themeToggleIcon) themeToggleIcon.textContent = 'dark_mode';
-        }
+    if (themeToggleIcon) {
+        themeToggleIcon.textContent = isDarkMode ? 'light_mode' : 'dark_mode';
     }
-    initThemeMode();
 
-    async function applyDynamicTheme(hexColor, isDark, skipIfCached) {
-        activeSeedColor = hexColor;
-        localStorage.setItem('themeSeedColor', hexColor);
-        document.cookie = `themeSeedColor=${hexColor};path=/;max-age=31536000`;
-
-        let cssText = '';
-        try {
-            const hexParam = hexColor.replace('#', '');
-            const response = await fetch(`/api/theme?color=${hexParam}&dark=${isDark}`);
-            if (response.ok) {
-                const data = await response.json();
-                cssText = data.css;
-            } else {
-                throw new Error("Theme API failed");
-            }
-        } catch (e) {
-            console.error("Failed to load theme from API", e);
-            themeReady = true;
-            fadeOutLoader();
-            return;
-        }
-
-        const cachedStyles = localStorage.getItem('themeStyles');
-        if (skipIfCached && cachedStyles === cssText) {
-        } else {
-            document.documentElement.style.cssText = cssText;
-            localStorage.setItem('themeStyles', cssText);
-        }
-        themeReady = true;
-        fadeOutLoader();
-
+    function updateThemeUI(hexColor) {
         let foundPreset = false;
         presetBtns.forEach(btn => {
             if (btn.getAttribute('data-color').toLowerCase() === hexColor.toLowerCase()) {
@@ -170,28 +130,35 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function applyDynamicTheme(hexColor, isDark) {
+        const targetTheme = isDark ? 'dark' : 'light';
+        localStorage.setItem('themeSeedColor', hexColor);
+        document.cookie = `themeSeedColor=${encodeURIComponent(hexColor)};path=/;max-age=31536000`;
+        
+        localStorage.setItem('preferredTheme', targetTheme);
+        document.cookie = `preferredTheme=${targetTheme};path=/;max-age=31536000`;
+
+        window.location.reload();
+    }
+
     const preloaderEl = document.getElementById('app-preloader');
     if (preloaderEl) {
         preloaderEl.style.backgroundColor = getComputedStyle(preloaderEl).backgroundColor;
     }
 
-    applyDynamicTheme(activeSeedColor, isDarkMode, true);
+    updateThemeUI(activeSeedColor);
+    themeReady = true;
+    fadeOutLoader();
 
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
         if (!localStorage.getItem('preferredTheme')) {
-            isDarkMode = e.matches;
-            initThemeMode();
-            applyDynamicTheme(activeSeedColor, isDarkMode);
+            applyDynamicTheme(activeSeedColor, e.matches);
         }
     });
 
     if (themeToggleBtn) {
         themeToggleBtn.addEventListener('click', () => {
-            isDarkMode = !isDarkMode;
-            localStorage.setItem('preferredTheme', isDarkMode ? 'dark' : 'light');
-            document.cookie = `preferredTheme=${isDarkMode ? 'dark' : 'light'};path=/;max-age=31536000`;
-            initThemeMode();
-            applyDynamicTheme(activeSeedColor, isDarkMode);
+            applyDynamicTheme(activeSeedColor, !isDarkMode);
         });
     }
 
@@ -203,12 +170,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (customColorPicker) {
-        const handleCustomColor = (e) => {
-            const color = e.target.value;
-            applyDynamicTheme(color, isDarkMode);
-        };
-        customColorPicker.addEventListener('input', handleCustomColor);
-        customColorPicker.addEventListener('change', handleCustomColor);
+        customColorPicker.addEventListener('change', (e) => {
+            applyDynamicTheme(e.target.value, isDarkMode);
+        });
     }
 
     function toggleMenu() {

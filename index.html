@@ -50,29 +50,20 @@
         })();
 
         (function () {
-            var preferredTheme = localStorage.getItem('preferredTheme');
-            var isDark = preferredTheme === 'dark' ||
-                (!preferredTheme && window.matchMedia('(prefers-color-scheme: dark)').matches);
-            if (isDark) {
-                document.documentElement.classList.add('dark-theme');
-                document.documentElement.classList.remove('light-theme');
-            } else {
-                document.documentElement.classList.add('light-theme');
-                document.documentElement.classList.remove('dark-theme');
-            }
-            document.documentElement.classList.add('js-enabled');
-
-            var themeStyles = localStorage.getItem('themeStyles');
-            if (themeStyles) {
-                if (themeStyles.indexOf(':root') !== -1) {
-                    var match = themeStyles.match(/\{([\s\S]*)\}/);
-                    if (match && match[1]) {
-                        document.documentElement.style.cssText = match[1];
-                    }
+            var hasServerTheme = document.documentElement.className.indexOf('-theme') !== -1;
+            if (!hasServerTheme) {
+                var preferredTheme = localStorage.getItem('preferredTheme');
+                var isDark = preferredTheme === 'dark' ||
+                    (!preferredTheme && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                if (isDark) {
+                    document.documentElement.classList.add('dark-theme');
+                    document.documentElement.classList.remove('light-theme');
                 } else {
-                    document.documentElement.style.cssText = themeStyles;
+                    document.documentElement.classList.add('light-theme');
+                    document.documentElement.classList.remove('dark-theme');
                 }
             }
+            document.documentElement.classList.add('js-enabled');
         })();
     </script>
     <style>

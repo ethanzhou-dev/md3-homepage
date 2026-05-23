@@ -1,3 +1,5 @@
+import { generateThemeCss } from "./theme-generator.js";
+
 class ElementHandler {
   constructor(lang, theme) {
     this.lang = lang;
@@ -26,10 +28,19 @@ class LangPrunerHandler {
 
   element(element) {
     const nodeLang = element.getAttribute('data-lang');
-    // If the node has a data-lang attribute and it does not match the active language, remove it
     if (nodeLang && nodeLang !== this.activeLang) {
       element.remove();
     }
+  }
+}
+
+class ThemeStyleHandler {
+  constructor(cssText) {
+    this.cssText = cssText;
+  }
+
+  element(element) {
+    element.append(`<style id="dynamic-theme">:root{${this.cssText}}</style>`, { html: true });
   }
 }
 
@@ -47,6 +58,7 @@ export async function onRequest(context) {
     const cookies = request.headers.get("cookie") || "";
     let lang = 'en';
     let theme = 'light';
+    let seedColor = '6750A4';
 
     if (cookies.includes('preferredLang=zh')) {
         lang = 'zh';
@@ -70,11 +82,20 @@ export async function onRequest(context) {
         }
     }
 
+    const colorMatch = cookies.match(/themeSeedColor=([^;]+)/);
+    if (colorMatch) {
+        seedColor = decodeURIComponent(colorMatch[1]);
+    }
+
+    const themeCss = generateThemeCss(seedColor, theme === 'dark');
+
     return new HTMLRewriter()
       .on('html', new ElementHandler(lang, theme))
+      .on('head', new ThemeStyleHandler(themeCss))
       .on('[data-lang]', new LangPrunerHandler(lang))
       .transform(response);
   }
 
   return response;
 }
+
