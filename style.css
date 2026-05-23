@@ -724,7 +724,7 @@ md-icon:not(:defined),
 md-icon-button:not(:defined),
 md-linear-progress:not(:defined),
 md-chip-set:not(:defined),
-md-assist-chip:not(:defined) {
+md-suggestion-chip:not(:defined) {
   opacity: 0;
 }
 
@@ -739,7 +739,7 @@ md-icon,
 md-icon-button,
 md-linear-progress,
 md-chip-set,
-md-assist-chip {
+md-suggestion-chip {
   transition: opacity 300ms cubic-bezier(0.2, 0, 0, 1),
               background-color 250ms cubic-bezier(0.2, 0, 0, 1),
               color 250ms cubic-bezier(0.2, 0, 0, 1);
@@ -871,10 +871,6 @@ summary.md-nav-title:active::after,
 }
 .skill-label {
   margin-left: 4px;
-}
-
-.skill-group md-assist-chip {
-  pointer-events: none;
 }
 
 .whoami-header {
