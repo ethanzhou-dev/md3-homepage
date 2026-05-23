@@ -768,45 +768,18 @@ md-linear-progress {
 }
 
 .friend-card {
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 12px 16px;
-  background-color: var(--md-sys-color-surface);
   border: 1px solid var(--md-sys-color-outline-variant);
   border-radius: 12px;
-  text-decoration: none;
-  color: var(--md-sys-color-on-surface);
-  outline: none;
-  cursor: pointer;
-  --md-focus-ring-shape: 12px;
-  transition: background-color 250ms cubic-bezier(0.2, 0, 0, 1),
-              border-color 250ms cubic-bezier(0.2, 0, 0, 1),
-              box-shadow 250ms cubic-bezier(0.2, 0, 0, 1);
+  --md-list-item-container-shape: 12px;
+  --md-list-item-container-color: var(--md-sys-color-surface);
+  transition: box-shadow 250ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 .friend-card:hover {
   box-shadow: var(--md-elevation-1);
 }
 
-.friend-card-content {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  flex: 1;
-}
 
-.friend-card-headline {
-  color: var(--md-sys-color-on-surface);
-  font-weight: 500;
-}
-
-.friend-card-supporting {
-  color: var(--md-sys-color-on-surface-variant);
-  margin-top: 4px;
-}
 
 .friend-avatar-img {
   width: 40px;
@@ -822,3 +795,8 @@ md-linear-progress {
   }
 }
 
+
+.bookmark-list {
+  --md-list-container-color: transparent;
+  padding: 0;
+}
