@@ -100,7 +100,6 @@ body.no-scroll {
 }
 
 .md-typescale-headline-medium { font-family: var(--md-sys-typescale-headline-medium-font); font-size: var(--md-sys-typescale-headline-medium-size); font-weight: var(--md-sys-typescale-headline-medium-weight); line-height: var(--md-sys-typescale-headline-medium-line-height); letter-spacing: var(--md-sys-typescale-headline-medium-tracking); margin: 0 0 16px 0; }
-.md-typescale-headline-small { font-family: var(--md-sys-typescale-headline-small-font); font-size: var(--md-sys-typescale-headline-small-size); font-weight: var(--md-sys-typescale-headline-small-weight); line-height: var(--md-sys-typescale-headline-small-line-height); letter-spacing: var(--md-sys-typescale-headline-small-tracking); margin: 0 0 16px 0; }
 .md-typescale-title-large { font-family: var(--md-sys-typescale-title-large-font); font-size: var(--md-sys-typescale-title-large-size); font-weight: var(--md-sys-typescale-title-large-weight); line-height: var(--md-sys-typescale-title-large-line-height); letter-spacing: var(--md-sys-typescale-title-large-tracking); margin: 24px 0 12px 0; }
 .section-title { display: flex; align-items: center; gap: 8px; }
 .section-title md-icon { font-size: 24px; }
@@ -112,8 +111,6 @@ body.no-scroll {
 
 .text-primary { color: var(--md-sys-color-primary); }
 .text-outline { color: var(--md-sys-color-outline); }
-.text-right { text-align: right; }
-.text-center { text-align: center; }
 
 .layout-container {
   display: flex;
@@ -267,12 +264,6 @@ md-divider {
   --md-divider-color: var(--md-sys-color-outline-variant);
 }
 
-.md-nav-footer {
-  margin-top: auto;
-  padding: 16px;
-  color: var(--md-sys-color-on-surface-variant);
-}
-
 .md-main-content {
   flex: 1;
   display: flex;
@@ -366,16 +357,6 @@ md-icon-button {
   transition: background-color 250ms cubic-bezier(0.2, 0, 0, 1);
 }
 
-.md-link {
-  color: var(--md-sys-color-primary);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.md-link:hover {
-  text-decoration: underline;
-}
-
 
 .md-footer {
   padding: 24px;
@@ -427,9 +408,6 @@ md-icon-button {
   .md-scrim.open {
     display: block;
   }
-  .md-nav-footer {
-    display: none;
-  }
 }
 
 @media (max-width: 600px) {
@@ -443,9 +421,6 @@ md-icon-button {
   .md-typescale-headline-medium {
     font-size: 24px;
     line-height: 32px;
-  }
-  .md-table th, .md-table td {
-    padding: 12px 8px;
   }
 }
 
