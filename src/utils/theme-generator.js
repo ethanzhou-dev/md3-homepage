@@ -9,7 +9,6 @@ export function generateThemeCss(hexColor, isDark) {
   try {
     argb = argbFromHex(hexColor);
   } catch (e) {
-    // Fallback to default purple if hex is invalid (tampered cookie or bad API request)
     argb = argbFromHex('#6750A4');
   }
 
