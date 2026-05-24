@@ -1,5 +1,5 @@
-export async function onRequest(context) {
-  const { request } = context;
+export async function GET({ request, locals }) {
+  const context = locals.runtime.ctx;
   const urlObj = new URL(request.url);
   let targetUrlParam = urlObj.searchParams.get("url");
   if (!targetUrlParam) {
@@ -17,12 +17,14 @@ export async function onRequest(context) {
     return new Response("Invalid url", { status: 400 });
   }
 
-  const cache = caches.default;
+  const cache = typeof caches !== 'undefined' ? caches.default : null;
   const cacheKey = new Request(request.url, request);
   
-  let cachedResponse = await cache.match(cacheKey);
-  if (cachedResponse) {
-    return cachedResponse;
+  if (cache) {
+    let cachedResponse = await cache.match(cacheKey);
+    if (cachedResponse) {
+      return cachedResponse;
+    }
   }
 
   let faviconUrl = null;
@@ -97,7 +99,9 @@ export async function onRequest(context) {
           "Cache-Control": "public, max-age=604800",
         }
       });
-      context.waitUntil(cache.put(cacheKey, finalResponse.clone()));
+      if (cache) {
+        context.waitUntil(cache.put(cacheKey, finalResponse.clone()));
+      }
       return finalResponse;
     }
   } catch (e) {
@@ -117,7 +121,9 @@ export async function onRequest(context) {
           "Cache-Control": "public, max-age=604800",
         }
       });
-      context.waitUntil(cache.put(cacheKey, finalResponse.clone()));
+      if (cache) {
+        context.waitUntil(cache.put(cacheKey, finalResponse.clone()));
+      }
       return finalResponse;
     }
   } catch (e) {

@@ -1,154 +1,26 @@
-<!DOCTYPE html>
-<html lang="en" id="html-root">
+---
+import Layout from '../layouts/Layout.astro';
+import { getStatsData } from '../utils/stats-core.js';
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="light dark">
-    <link rel="stylesheet" href="style.css?v=20260522_12">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://esm.run">
-    <link rel="preconnect" href="https://esm.sh">
-    <link rel="modulepreload" href="https://esm.run/@material/web/all.js">
-    <script>
-        if ('scrollRestoration' in history) {
-            history.scrollRestoration = 'manual';
-        }
-        (function () {
-            const originalDefine = CustomElementRegistry.prototype.define;
-            CustomElementRegistry.prototype.define = function (name, constructor, options) {
-                if (this.get(name)) {
-                    console.warn(`Custom element "${name}" is already registered.`);
-                    return;
-                }
-                originalDefine.call(this, name, constructor, options);
-            };
-        })();
+const env = Astro.locals.runtime.env;
+const context = Astro.locals.runtime.ctx;
+const stats = await getStatsData(Astro.request, env, context);
 
-        (function () {
-            var hasServerLang = document.documentElement.className.indexOf('lang-') !== -1;
-            if (!hasServerLang) {
-                var savedLang = localStorage.getItem('preferredLang');
-                var lang = 'en';
-                if (savedLang) {
-                    lang = savedLang;
-                } else {
-                    var userLang = navigator.language || navigator.userLanguage;
-                    if (userLang && userLang.toLowerCase().startsWith('zh')) {
-                        lang = 'zh';
-                    }
-                }
-                document.documentElement.lang = lang;
-                document.documentElement.classList.add('lang-' + lang);
-            }
-            if (document.documentElement.lang === 'zh') {
-                document.title = "Ekiz 的主页";
-            } else {
-                document.title = "Ekiz's Homepage";
-            }
-        })();
+const uptimeText = `${stats.uptime.days} days, ${stats.uptime.hours} hrs`;
+const visitorsText = `${stats.visitors}`;
+---
 
-        (function () {
-            var hasServerTheme = document.documentElement.className.indexOf('-theme') !== -1;
-            if (!hasServerTheme) {
-                var preferredTheme = localStorage.getItem('preferredTheme');
-                var isDark = preferredTheme === 'dark' ||
-                    (!preferredTheme && window.matchMedia('(prefers-color-scheme: dark)').matches);
-                if (isDark) {
-                    document.documentElement.classList.add('dark-theme');
-                    document.documentElement.classList.remove('light-theme');
-                } else {
-                    document.documentElement.classList.add('light-theme');
-                    document.documentElement.classList.remove('dark-theme');
-                }
-            }
-            document.documentElement.classList.add('js-enabled');
-        })();
-    </script>
-    <style>
-        .lang-en [data-lang="zh"] {
-            display: none !important;
-        }
-
-        .lang-zh [data-lang="en"] {
-            display: none !important;
-        }
-
-        html.js-enabled:not(.app-loaded) {
-            overflow: hidden;
-        }
-
-        html {
-            background-color: var(--md-sys-color-background);
-        }
-
-        #app-preloader {
-            display: none;
-        }
-
-        html.js-enabled #app-preloader {
-            display: flex;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: var(--md-sys-color-background);
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            opacity: 1;
-            transition: opacity 200ms cubic-bezier(0.3, 0, 0.8, 0.15), visibility 200ms;
-        }
-
-        #app-preloader.fade-out {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-
-
-        html.js-enabled .layout-container {
-            opacity: 0;
-            transition: opacity 500ms cubic-bezier(0.05, 0.7, 0.1, 1);
-        }
-    </style>
-    <title>Ekiz's Homepage</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap"
-        rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block"
-        rel="stylesheet">
-    <script type="importmap">
-        {
-            "imports": {
-                "@material/web/": "https://esm.run/@material/web/"
-            }
-        }
-    </script>
-    <script type="module">
-        import '@material/web/all.js';
-    </script>
-</head>
-
-<body class="md-typescale-body-medium">
-    <div id="app-preloader">
-        <md-circular-progress indeterminate></md-circular-progress>
-    </div>
+<Layout>
     <div class="layout-container">
         <nav class="md-nav-drawer" id="nav-drawer">
             <div class="md-mobile-header" id="nav-header">
-                <md-icon-button id="drawer-close-btn"><md-icon>menu_open</md-icon></md-icon-button>
+                <md-icon-button id="drawer-close-btn"><md-icon translate="no">menu_open</md-icon></md-icon-button>
                 <h2 class="md-typescale-title-large" data-lang="en" style="margin:0">Menu</h2>
                 <h2 class="md-typescale-title-large" data-lang="zh" style="margin:0">菜单</h2>
             </div>
             <div class="md-nav-content">
                 <div class="md-nav-title-container">
-                    <md-icon class="md-nav-title-icon">dashboard</md-icon>
+                    <md-icon translate="no" class="md-nav-title-icon">dashboard</md-icon>
                     <span class="md-nav-title md-typescale-title-small" data-lang="en">DIRECTORY</span>
                     <span class="md-nav-title md-typescale-title-small" data-lang="zh">目录</span>
                 </div>
@@ -156,32 +28,32 @@
 
                 <md-list class="md-nav-section">
                     <md-list-item type="link" href="#whoami" class="md-nav-item">
-                        <md-icon slot="start">person</md-icon>
+                        <md-icon translate="no" slot="start">person</md-icon>
                         <span slot="headline" data-lang="en">Whoami</span>
                         <span slot="headline" data-lang="zh">自我介绍</span>
                     </md-list-item>
                     <md-list-item type="link" href="#projects" class="md-nav-item">
-                        <md-icon slot="start">folder</md-icon>
+                        <md-icon translate="no" slot="start">folder</md-icon>
                         <span slot="headline" data-lang="en">Projects</span>
                         <span slot="headline" data-lang="zh">项目归档</span>
                     </md-list-item>
                     <md-list-item type="link" href="#logs" class="md-nav-item">
-                        <md-icon slot="start">article</md-icon>
+                        <md-icon translate="no" slot="start">article</md-icon>
                         <span slot="headline" data-lang="en">Dev Logs</span>
                         <span slot="headline" data-lang="zh">开发日志</span>
                     </md-list-item>
                     <md-list-item type="link" href="#bookmarks" class="md-nav-item">
-                        <md-icon slot="start">bookmarks</md-icon>
+                        <md-icon translate="no" slot="start">bookmarks</md-icon>
                         <span slot="headline" data-lang="en">Bookmarks</span>
                         <span slot="headline" data-lang="zh">书签收藏</span>
                     </md-list-item>
                     <md-list-item type="link" href="#status" class="md-nav-item">
-                        <md-icon slot="start">bar_chart</md-icon>
+                        <md-icon translate="no" slot="start">bar_chart</md-icon>
                         <span slot="headline" data-lang="en">Status</span>
                         <span slot="headline" data-lang="zh">运行状态</span>
                     </md-list-item>
                     <md-list-item type="link" href="mailto:zhouyireitik@gmail.com" class="md-nav-item">
-                        <md-icon slot="start">mail</md-icon>
+                        <md-icon translate="no" slot="start">mail</md-icon>
                         <span slot="headline" data-lang="en">Ping Me</span>
                         <span slot="headline" data-lang="zh">联系我</span>
                     </md-list-item>
@@ -197,7 +69,7 @@
                                 <span data-lang="en">PREFERENCES</span>
                                 <span data-lang="zh">偏好设置</span>
                             </span>
-                            <md-icon class="expand-more-icon">expand_more</md-icon>
+                            <md-icon translate="no" class="expand-more-icon">expand_more</md-icon>
                         </summary>
 
                         <div class="settings-expanded-content">
@@ -248,7 +120,7 @@
                                         <md-focus-ring for="custom-color-picker"></md-focus-ring>
                                         <input type="color" id="custom-color-picker" value="#6750A4">
                                         <div class="custom-color-dot">
-                                            <md-icon class="color-pick-icon">palette</md-icon>
+                                            <md-icon translate="no" class="color-pick-icon">palette</md-icon>
                                         </div>
                                     </div>
                                 </div>
@@ -261,11 +133,11 @@
 
         <main class="md-main-content">
             <header class="md-top-app-bar">
-                <md-icon-button id="menu-btn"><md-icon>menu</md-icon></md-icon-button>
+                <md-icon-button id="menu-btn"><md-icon translate="no">menu</md-icon></md-icon-button>
                 <h1 class="md-typescale-title-large" data-lang="en">Ekiz's Homepage</h1>
                 <h1 class="md-typescale-title-large" data-lang="zh">Ekiz 的主页</h1>
                 <md-icon-button id="theme-toggle-btn" style="margin-left: auto;">
-                    <md-icon id="theme-toggle-icon">dark_mode</md-icon>
+                    <md-icon translate="no" id="theme-toggle-icon">dark_mode</md-icon>
                 </md-icon-button>
             </header>
             <div class="md-content-body">
@@ -282,7 +154,7 @@
                             tinkering with electronic devices, creating visual media, and spending my free time on them.
                             This page exists as a record of myself on the internet.</p>
                         <md-divider></md-divider>
-                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon>account_tree</md-icon>Skill Tree</h3>
+                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon translate="no">account_tree</md-icon>Skill Tree</h3>
                         <div class="skill-groups">
                             <div class="skill-group">
                                 <span class="md-typescale-label-large text-outline skill-label">OS</span>
@@ -327,7 +199,7 @@
                         <p class="md-typescale-body-large">
                             欢迎来到我的主页。我是一个业余科技爱好者，喜欢折腾电子设备，创作视觉媒体，消耗自己的空余时间。这个页面是我对自己在互联网中的一个记录。</p>
                         <md-divider></md-divider>
-                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon>account_tree</md-icon>技能树</h3>
+                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon translate="no">account_tree</md-icon>技能树</h3>
                         <div class="skill-groups">
                             <div class="skill-group">
                                 <span class="md-typescale-label-large text-outline skill-label">操作系统</span>
@@ -437,7 +309,7 @@
                                 <p class="project-desc md-typescale-body-medium">A webpage showing the passage of time</p>
                             </a>
                         </div>
-                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon>lightbulb</md-icon>Upcoming Ideas</h3>
+                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon translate="no">lightbulb</md-icon>Upcoming Ideas</h3>
                         <ul class="md-list md-typescale-body-large">
                             <li>Improve and refine my personal projects</li>
                             <li>Continue creating and fixing bugs during the process of Vibe Coding to keep learning
@@ -514,7 +386,7 @@
                                 <p class="project-desc md-typescale-body-medium">一个网页用于展示时间的流逝</p>
                             </a>
                         </div>
-                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon>lightbulb</md-icon>待做构想</h3>
+                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon translate="no">lightbulb</md-icon>待做构想</h3>
                         <ul class="md-list md-typescale-body-large">
                             <li>完善自己的各类项目</li>
                             <li>在Vibe Coding的过程中继续制造bug和修复，不断学习</li>
@@ -531,40 +403,40 @@
                         <p class="md-typescale-body-large">System logs, update notes, and random development thoughts.
                             Documenting the process step by step.</p>
                         <md-divider></md-divider>
-                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon>update</md-icon>[2026.05.21] Content Update & Sync</h3>
+                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon translate="no">update</md-icon>[2026.05.21] Content Update & Sync</h3>
                         <p class="md-typescale-body-large">
                             - Updated bio and skill tree.<br>
                             - Reorganized the project archive list.<br>
                             - Synchronized and updated upcoming ideas in both English and Chinese.
                         </p>
                         <md-divider></md-divider>
-                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon>update</md-icon>[2026.03.26] System Update</h3>
+                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon translate="no">update</md-icon>[2026.03.26] System Update</h3>
                         <p class="md-typescale-body-large">
                             - <b>Neural-Lite:</b> Improved website backend.<br>
                             - Re-wrote the layout of the page.
                         </p>
                         <md-divider></md-divider>
-                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon>update</md-icon>[2026.03.20] Initialize Homepage</h3>
+                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon translate="no">update</md-icon>[2026.03.20] Initialize Homepage</h3>
                         <p class="md-typescale-body-large">Started building the personal homepage and launched it.</p>
                     </div>
                     <div data-lang="zh">
                         <h2 class="md-typescale-headline-medium text-primary">开发日志</h2>
                         <p class="md-typescale-body-large">系统日志、更新说明和随意的开发想法。逐步记录过程。</p>
                         <md-divider></md-divider>
-                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon>update</md-icon>[2026.05.21] 内容更新与同步</h3>
+                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon translate="no">update</md-icon>[2026.05.21] 内容更新与同步</h3>
                         <p class="md-typescale-body-large">
                             - 更新了自我介绍与技能树。<br>
                             - 重新整理了项目归档列表。<br>
                             - 同步并更新了中英文的待做构想。
                         </p>
                         <md-divider></md-divider>
-                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon>update</md-icon>[2026.03.26] 系统更新</h3>
+                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon translate="no">update</md-icon>[2026.03.26] 系统更新</h3>
                         <p class="md-typescale-body-large">
                             - <b>Neural-Lite:</b> 改进了网站后端<br>
                             - 重写了页面的布局。
                         </p>
                         <md-divider></md-divider>
-                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon>update</md-icon>[2026.03.20] 初始化主页</h3>
+                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon translate="no">update</md-icon>[2026.03.20] 初始化主页</h3>
                         <p class="md-typescale-body-large">开始制作个人主页，上线</p>
                     </div>
                 </div>
@@ -576,7 +448,7 @@
                         <p class="md-typescale-body-large">A curated list of links, tools, and digital resources I
                             frequently use or find interesting.</p>
                         <md-divider></md-divider>
-                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon>terminal</md-icon>Tech & Dev</h3>
+                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon translate="no">terminal</md-icon>Tech & Dev</h3>
                         <md-list class="bookmark-list">
                             <md-list-item type="link" href="https://github.com" target="_blank">
                                 <div slot="headline">GitHub</div>
@@ -595,7 +467,7 @@
                                 <div slot="supporting-text">Cloud hosting platform for developers.</div>
                             </md-list-item>
                         </md-list>
-                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon>palette</md-icon>Design & Vibe</h3>
+                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon translate="no">palette</md-icon>Design & Vibe</h3>
                         <md-list class="bookmark-list">
                             <md-list-item type="link" href="https://tsukiweb.holofield.fr/" target="_blank">
                                 <div slot="headline">Tsuki Web</div>
@@ -618,7 +490,7 @@
                                 <div slot="supporting-text">Open source classic Mac emulator in browser.</div>
                             </md-list-item>
                         </md-list>
-                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon>build_circle</md-icon>Useful Tools</h3>
+                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon translate="no">build_circle</md-icon>Useful Tools</h3>
                         <md-list class="bookmark-list">
                             <md-list-item type="link" href="https://ip.net.coffee/" target="_blank">
                                 <div slot="headline">Net.Coffee</div>
@@ -638,7 +510,7 @@
                         <h2 class="md-typescale-headline-medium text-primary">书签收藏</h2>
                         <p class="md-typescale-body-large">我经常使用或感兴趣的链接、工具和资源的列表。</p>
                         <md-divider></md-divider>
-                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon>terminal</md-icon>技术与开发</h3>
+                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon translate="no">terminal</md-icon>技术与开发</h3>
                         <md-list class="bookmark-list">
                             <md-list-item type="link" href="https://github.com" target="_blank">
                                 <div slot="headline">GitHub</div>
@@ -657,7 +529,7 @@
                                 <div slot="supporting-text">开发者云托管平台。</div>
                             </md-list-item>
                         </md-list>
-                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon>palette</md-icon>设计与氛围</h3>
+                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon translate="no">palette</md-icon>设计与氛围</h3>
                         <md-list class="bookmark-list">
                             <md-list-item type="link" href="https://tsukiweb.holofield.fr/" target="_blank">
                                 <div slot="headline">Tsuki Web</div>
@@ -680,7 +552,7 @@
                                 <div slot="supporting-text">开源的浏览器端复古 Mac 模拟器。</div>
                             </md-list-item>
                         </md-list>
-                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon>build_circle</md-icon>常用工具</h3>
+                        <h3 class="md-typescale-title-large text-primary section-title"><md-icon translate="no">build_circle</md-icon>常用工具</h3>
                         <md-list class="bookmark-list">
                             <md-list-item type="link" href="https://ip.net.coffee/" target="_blank">
                                 <div slot="headline">Net.Coffee</div>
@@ -706,13 +578,13 @@
                         <md-divider></md-divider>
                         <md-list style="background: transparent; padding: 0; margin-top: 16px;">
                             <md-list-item>
-                                <md-icon slot="start" class="text-primary">schedule</md-icon>
-                                <span slot="headline" class="stat-uptime">Loading...</span>
+                                <md-icon translate="no" slot="start" class="text-primary">schedule</md-icon>
+                                <span slot="headline" class="stat-uptime">{uptimeText}</span>
                                 <span slot="supporting-text">System Uptime</span>
                             </md-list-item>
                             <md-list-item>
-                                <md-icon slot="start" class="text-primary">visibility</md-icon>
-                                <span slot="headline" class="stat-visitor">Loading...</span>
+                                <md-icon translate="no" slot="start" class="text-primary">visibility</md-icon>
+                                <span slot="headline" class="stat-visitor">{visitorsText}</span>
                                 <span slot="supporting-text">Total Visitors</span>
                             </md-list-item>
                         </md-list>
@@ -723,13 +595,13 @@
                         <md-divider></md-divider>
                         <md-list style="background: transparent; padding: 0; margin-top: 16px;">
                             <md-list-item>
-                                <md-icon slot="start" class="text-primary">schedule</md-icon>
-                                <span slot="headline" class="stat-uptime">加载中...</span>
+                                <md-icon translate="no" slot="start" class="text-primary">schedule</md-icon>
+                                <span slot="headline" class="stat-uptime">{uptimeText}</span>
                                 <span slot="supporting-text">系统运行时间</span>
                             </md-list-item>
                             <md-list-item>
-                                <md-icon slot="start" class="text-primary">visibility</md-icon>
-                                <span slot="headline" class="stat-visitor">加载中...</span>
+                                <md-icon translate="no" slot="start" class="text-primary">visibility</md-icon>
+                                <span slot="headline" class="stat-visitor">{visitorsText}</span>
                                 <span slot="supporting-text">访客总数</span>
                             </md-list-item>
                         </md-list>
@@ -772,11 +644,4 @@
             </footer>
         </main>
     </div>
-    <div class="md-scrim" id="scrim"></div>
-    <md-fab id="back-to-top-fab" aria-label="Back to top">
-        <md-icon slot="icon">arrow_upward</md-icon>
-    </md-fab>
-    <script src="script.js?v=20260522_12"></script>
-</body>
-
-</html>
+</Layout>

@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const btnEn = document.getElementById('btn-lang-en');
     const btnZh = document.getElementById('btn-lang-zh');
-    const rootHtml = document.getElementById('html-root');
+
 
     function setLanguage(lang) {
         const currentLang = localStorage.getItem('preferredLang') || document.documentElement.lang;

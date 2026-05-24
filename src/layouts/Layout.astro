@@ -1,0 +1,95 @@
+﻿---
+import '../styles/global.css';
+import { generateThemeCss } from '../utils/theme-generator.js';
+
+let lang = 'en';
+let theme = null;
+let seedColor = '6750A4';
+
+const cookies = Astro.request.headers.get("cookie") || "";
+
+if (cookies.includes('preferredLang=zh')) {
+    lang = 'zh';
+} else if (cookies.includes('preferredLang=en')) {
+    lang = 'en';
+} else {
+    const acceptLang = Astro.request.headers.get('accept-language') || "";
+    if (acceptLang.toLowerCase().includes('zh')) {
+        lang = 'zh';
+    }
+}
+
+if (cookies.includes('preferredTheme=dark')) {
+    theme = 'dark';
+} else if (cookies.includes('preferredTheme=light')) {
+    theme = 'light';
+}
+
+const colorMatch = cookies.match(/themeSeedColor=([^;]+)/);
+if (colorMatch) {
+    seedColor = decodeURIComponent(colorMatch[1]);
+}
+
+const lightCss = generateThemeCss(seedColor, false);
+const darkCss = generateThemeCss(seedColor, true);
+const combinedCss = `:root { ${lightCss} } @media (prefers-color-scheme: dark) { :root:not(.light-theme) { ${darkCss} } } :root.dark-theme { ${darkCss} }`;
+
+const title = lang === 'zh' ? "Ekiz 的主页" : "Ekiz's Homepage";
+const desc = lang === 'zh' 
+    ? "Ekiz的个人主页与数字足迹记录，包含技术博客、项目归档与电子设备折腾日常。"
+    : "Ekiz's personal homepage and digital footprint, featuring tech blogs, project archives, and daily tinkering.";
+
+let htmlClass = `lang-${lang}`;
+if (theme) {
+    htmlClass += ` ${theme}-theme`;
+}
+htmlClass += ' js-enabled'; // We can safely assume JS since it's required for M3
+---
+
+<!DOCTYPE html>
+<html lang={lang} id="html-root" class={htmlClass}>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <meta name="description" content={desc}>
+    <title>{title}</title>
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet">
+    
+    <style id="dynamic-theme" set:html={combinedCss}></style>
+    
+    <script>
+        import '@material/web/all.js';
+
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        (function () {
+            const originalDefine = CustomElementRegistry.prototype.define;
+            CustomElementRegistry.prototype.define = function (name, constructor, options) {
+                if (this.get(name)) {
+                    console.warn(`Custom element "${name}" is already registered.`);
+                    return;
+                }
+                originalDefine.call(this, name, constructor, options);
+            };
+        })();
+    </script>
+    <script src="../scripts/main.js"></script>
+</head>
+<body class="md-typescale-body-medium">
+    <div id="app-preloader">
+        <md-circular-progress indeterminate></md-circular-progress>
+    </div>
+    <div class="layout-container">
+        <slot />
+    </div>
+</body>
+</html>
+
+

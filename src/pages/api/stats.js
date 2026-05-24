@@ -1,7 +1,8 @@
-import { getStatsData } from "../stats-core.js";
+import { getStatsData } from "../../utils/stats-core.js";
 
-export async function onRequest(context) {
-  const { request, env } = context;
+export async function GET({ request, locals }) {
+  const env = locals.runtime.env;
+  const context = locals.runtime.ctx;
 
   const responseData = await getStatsData(request, env, context);
 

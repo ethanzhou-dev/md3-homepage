@@ -1,7 +1,6 @@
-import { generateThemeCss } from "../theme-generator.js";
+import { generateThemeCss } from "../../utils/theme-generator.js";
 
-export async function onRequest(context) {
-  const { request } = context;
+export async function GET({ request }) {
   const url = new URL(request.url);
   
   const hexColor = url.searchParams.get('color') || '6750A4';

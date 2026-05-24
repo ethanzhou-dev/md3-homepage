@@ -813,3 +813,43 @@ md-suggestion-chip {
 .preset-color-dot.teal { background-color: var(--md-custom-seed-teal); }
 .preset-color-dot.rose { background-color: var(--md-custom-seed-rose); }
 .preset-color-dot.olive { background-color: var(--md-custom-seed-olive); }
+
+/* Language Switch */
+.lang-en [data-lang="zh"] { display: none !important; }
+.lang-zh [data-lang="en"] { display: none !important; }
+
+/* Preloader & Layout Transitions */
+html {
+    background-color: var(--md-sys-color-background);
+}
+
+#app-preloader {
+    display: none;
+}
+
+html.js-enabled #app-preloader {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--md-sys-color-background);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 200ms cubic-bezier(0.3, 0, 0.8, 0.15), visibility 200ms;
+}
+
+#app-preloader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+html.js-enabled .layout-container {
+    opacity: 0;
+    transition: opacity 500ms cubic-bezier(0.05, 0.7, 0.1, 1);
+}
+html.app-loaded .layout-container { opacity: 1; }
