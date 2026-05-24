@@ -655,8 +655,7 @@ md-linear-progress,
 md-chip-set,
 md-suggestion-chip {
   transition: opacity 300ms cubic-bezier(0.2, 0, 0, 1),
-              background-color 250ms cubic-bezier(0.2, 0, 0, 1),
-              color 250ms cubic-bezier(0.2, 0, 0, 1);
+              background-color 250ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 .friend-grid {
@@ -701,6 +700,7 @@ md-suggestion-chip {
 ::view-transition-new(root) {
   animation-duration: 400ms;
   animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+  mix-blend-mode: normal;
 }
 
 .skill-groups {
