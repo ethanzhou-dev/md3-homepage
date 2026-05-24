@@ -282,6 +282,7 @@ md-divider {
   top: 0;
   z-index: 10;
   transition: background-color 200ms cubic-bezier(0.2, 0, 0, 1);
+  view-transition-name: top-app-bar;
 }
 
 .md-top-app-bar.scrolled {
