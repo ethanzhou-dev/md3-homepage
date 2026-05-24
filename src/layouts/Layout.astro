@@ -1,4 +1,4 @@
-﻿---
+---
 import '../styles/global.css';
 import { generateThemeCss } from '../utils/theme-generator.js';
 
@@ -64,6 +64,7 @@ htmlClass += ' js-enabled'; // We can safely assume JS since it's required for M
     <style id="dynamic-theme" set:html={combinedCss}></style>
     
     <script>
+        // @ts-ignore
         import '@material/web/all.js';
 
         if ('scrollRestoration' in history) {
