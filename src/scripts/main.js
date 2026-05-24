@@ -77,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     Promise.all([
+        document.fonts.ready, 
         customElements.whenDefined('md-list'),
         customElements.whenDefined('md-list-item'),
         customElements.whenDefined('md-fab'),
@@ -88,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ]).then(markComponentsReady);
 
     window.addEventListener('load', markComponentsReady);
-    setTimeout(markComponentsReady, 1500);
+    setTimeout(markComponentsReady, 5000);
 
     const menuBtn = document.getElementById('menu-btn');
     const drawerCloseBtn = document.getElementById('drawer-close-btn');
