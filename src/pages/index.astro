@@ -15,7 +15,7 @@ const visitorsText = `${stats.visitors}`;
         <div class="md-scrim" id="scrim"></div>
         <nav class="md-nav-drawer" id="nav-drawer">
             <div class="md-mobile-header" id="nav-header">
-                <md-icon-button id="drawer-close-btn"><md-icon translate="no">menu_open</md-icon></md-icon-button>
+                <md-icon-button id="drawer-close-btn" aria-label="Close menu"><md-icon translate="no">menu_open</md-icon></md-icon-button>
                 <h2 class="md-typescale-title-large" data-lang="en" style="margin:0">Menu</h2>
                 <h2 class="md-typescale-title-large" data-lang="zh" style="margin:0">菜单</h2>
             </div>
@@ -27,7 +27,7 @@ const visitorsText = `${stats.visitors}`;
                 </div>
                 <md-divider class="drawer-divider" style="margin-bottom: 12px;"></md-divider>
 
-                <md-list class="md-nav-section">
+                <md-list class="md-nav-section" role="list">
                     <md-list-item type="link" href="#whoami" class="md-nav-item">
                         <md-icon translate="no" slot="start">person</md-icon>
                         <span slot="headline" data-lang="en">Whoami</span>
@@ -134,10 +134,10 @@ const visitorsText = `${stats.visitors}`;
 
         <main class="md-main-content">
             <header class="md-top-app-bar">
-                <md-icon-button id="menu-btn"><md-icon translate="no">menu</md-icon></md-icon-button>
+                <md-icon-button id="menu-btn" aria-label="Open menu"><md-icon translate="no">menu</md-icon></md-icon-button>
                 <h1 class="md-typescale-title-large" data-lang="en">Ekiz's Homepage</h1>
                 <h1 class="md-typescale-title-large" data-lang="zh">Ekiz 的主页</h1>
-                <md-icon-button id="theme-toggle-btn" style="margin-left: auto;">
+                <md-icon-button id="theme-toggle-btn" style="margin-left: auto;" aria-label="Toggle theme">
                     <md-icon translate="no" id="theme-toggle-icon">dark_mode</md-icon>
                 </md-icon-button>
             </header>
@@ -147,7 +147,7 @@ const visitorsText = `${stats.visitors}`;
                     <md-elevation></md-elevation>
                     <div data-lang="en">
                         <div class="whoami-header">
-                            <img src="https://github.com/ethanzhou-dev.png" alt="Ekiz" class="whoami-avatar">
+                            <img src="https://github.com/ethanzhou-dev.png" alt="Ekiz" class="whoami-avatar" fetchpriority="high">
                             <h2 class="md-typescale-headline-medium text-primary">Hello, World.</h2>
                         </div>
                         <p class="md-typescale-body-large">Welcome to my digital footprint. I am a tech hobbyist who
@@ -194,7 +194,7 @@ const visitorsText = `${stats.visitors}`;
                     </div>
                     <div data-lang="zh">
                         <div class="whoami-header">
-                            <img src="https://github.com/ethanzhou-dev.png" alt="Ekiz" class="whoami-avatar">
+                            <img src="https://github.com/ethanzhou-dev.png" alt="Ekiz" class="whoami-avatar" fetchpriority="high">
                             <h2 class="md-typescale-headline-medium text-primary">你好，世界。</h2>
                         </div>
                         <p class="md-typescale-body-large">
@@ -450,7 +450,7 @@ const visitorsText = `${stats.visitors}`;
                             frequently use or find interesting.</p>
                         <md-divider></md-divider>
                         <h3 class="md-typescale-title-large text-primary section-title"><md-icon translate="no">terminal</md-icon>Tech & Dev</h3>
-                        <md-list class="bookmark-list">
+                        <md-list class="bookmark-list" role="list">
                             <md-list-item type="link" href="https://github.com" target="_blank">
                                 <div slot="headline">GitHub</div>
                                 <div slot="supporting-text">Where the code lives.</div>
@@ -469,7 +469,7 @@ const visitorsText = `${stats.visitors}`;
                             </md-list-item>
                         </md-list>
                         <h3 class="md-typescale-title-large text-primary section-title"><md-icon translate="no">palette</md-icon>Design & Vibe</h3>
-                        <md-list class="bookmark-list">
+                        <md-list class="bookmark-list" role="list">
                             <md-list-item type="link" href="https://tsukiweb.holofield.fr/" target="_blank">
                                 <div slot="headline">Tsuki Web</div>
                                 <div slot="supporting-text">Tsukihime web version.</div>
@@ -492,7 +492,7 @@ const visitorsText = `${stats.visitors}`;
                             </md-list-item>
                         </md-list>
                         <h3 class="md-typescale-title-large text-primary section-title"><md-icon translate="no">build_circle</md-icon>Useful Tools</h3>
-                        <md-list class="bookmark-list">
+                        <md-list class="bookmark-list" role="list">
                             <md-list-item type="link" href="https://ip.net.coffee/" target="_blank">
                                 <div slot="headline">Net.Coffee</div>
                                 <div slot="supporting-text">IP & network utility.</div>
@@ -512,7 +512,7 @@ const visitorsText = `${stats.visitors}`;
                         <p class="md-typescale-body-large">我经常使用或感兴趣的链接、工具和资源的列表。</p>
                         <md-divider></md-divider>
                         <h3 class="md-typescale-title-large text-primary section-title"><md-icon translate="no">terminal</md-icon>技术与开发</h3>
-                        <md-list class="bookmark-list">
+                        <md-list class="bookmark-list" role="list">
                             <md-list-item type="link" href="https://github.com" target="_blank">
                                 <div slot="headline">GitHub</div>
                                 <div slot="supporting-text">代码存放地。</div>
@@ -531,7 +531,7 @@ const visitorsText = `${stats.visitors}`;
                             </md-list-item>
                         </md-list>
                         <h3 class="md-typescale-title-large text-primary section-title"><md-icon translate="no">palette</md-icon>设计与氛围</h3>
-                        <md-list class="bookmark-list">
+                        <md-list class="bookmark-list" role="list">
                             <md-list-item type="link" href="https://tsukiweb.holofield.fr/" target="_blank">
                                 <div slot="headline">Tsuki Web</div>
                                 <div slot="supporting-text">网页版月姬。</div>
@@ -554,7 +554,7 @@ const visitorsText = `${stats.visitors}`;
                             </md-list-item>
                         </md-list>
                         <h3 class="md-typescale-title-large text-primary section-title"><md-icon translate="no">build_circle</md-icon>常用工具</h3>
-                        <md-list class="bookmark-list">
+                        <md-list class="bookmark-list" role="list">
                             <md-list-item type="link" href="https://ip.net.coffee/" target="_blank">
                                 <div slot="headline">Net.Coffee</div>
                                 <div slot="supporting-text">IP与网络工具。</div>
@@ -577,7 +577,7 @@ const visitorsText = `${stats.visitors}`;
                         <h2 class="md-typescale-headline-medium text-primary">System Status</h2>
                         <p class="md-typescale-body-large">Diagnostics and traffic statistics of this node.</p>
                         <md-divider></md-divider>
-                        <md-list style="background: transparent; padding: 0; margin-top: 16px;">
+                        <md-list style="background: transparent; padding: 0; margin-top: 16px;" role="list">
                             <md-list-item>
                                 <md-icon translate="no" slot="start" class="text-primary">schedule</md-icon>
                                 <span slot="headline" class="stat-uptime">{uptimeText}</span>
@@ -594,7 +594,7 @@ const visitorsText = `${stats.visitors}`;
                         <h2 class="md-typescale-headline-medium text-primary">系统状态</h2>
                         <p class="md-typescale-body-large">本站点的实时运行诊断与访问统计数据。</p>
                         <md-divider></md-divider>
-                        <md-list style="background: transparent; padding: 0; margin-top: 16px;">
+                        <md-list style="background: transparent; padding: 0; margin-top: 16px;" role="list">
                             <md-list-item>
                                 <md-icon translate="no" slot="start" class="text-primary">schedule</md-icon>
                                 <span slot="headline" class="stat-uptime">{uptimeText}</span>
