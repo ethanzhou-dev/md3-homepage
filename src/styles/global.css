@@ -730,12 +730,24 @@ md-suggestion-chip {
   margin: 0;
 }
 
-.whoami-avatar {
+.whoami-avatar-link {
+  display: block;
   width: 64px;
   height: 64px;
   border-radius: var(--md-sys-shape-corner-full);
-  object-fit: cover;
+  --md-focus-ring-shape: var(--md-sys-shape-corner-full);
+  position: relative;
+  outline: none;
+  overflow: hidden;
   box-shadow: var(--md-sys-elevation-level-1);
+  flex-shrink: 0;
+}
+
+.whoami-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .projects-grid {
