@@ -176,11 +176,8 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const doUpdate = (newCss) => {
-            if (document.startViewTransition) {
-                document.startViewTransition(() => updateDOM(newCss));
-            } else {
-                updateDOM(newCss);
-            }
+            // Pure MD3 standard control: directly update variables/DOM
+            updateDOM(newCss);
         };
 
         if (activeSeedColor !== hexColor) {
