@@ -176,9 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const doUpdate = (newCss) => {
-            const isMobile = window.innerWidth <= 840;
-            const isScrolled = window.scrollY > 10;
-            if (document.startViewTransition && !(isMobile && isScrolled)) {
+            if (document.startViewTransition) {
                 document.startViewTransition(() => updateDOM(newCss));
             } else {
                 updateDOM(newCss);
