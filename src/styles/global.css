@@ -801,11 +801,9 @@ md-suggestion-chip {
 .preset-color-dot.rose { background-color: var(--md-custom-seed-rose); }
 .preset-color-dot.olive { background-color: var(--md-custom-seed-olive); }
 
-/* Language Switch */
 .lang-en [data-lang="zh"] { display: none !important; }
 .lang-zh [data-lang="en"] { display: none !important; }
 
-/* Preloader & Layout Transitions */
 html {
     background-color: var(--md-sys-color-background);
 }

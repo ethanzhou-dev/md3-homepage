@@ -176,7 +176,6 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const doUpdate = (newCss) => {
-            // Pure MD3 standard control: directly update variables/DOM
             updateDOM(newCss);
         };
 
@@ -189,8 +188,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
                 .catch(err => {
                     console.warn("Failed to fetch dynamic theme CSS:", err);
-                    // Revert UI active color to previous if fetch fails (optional, but good practice)
-                    // At minimum, don't break the UI
                 });
         } else {
             doUpdate(null);
