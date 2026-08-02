@@ -121,7 +121,7 @@ body.no-scroll {
   min-width: 344px;
   max-width: 600px;
   min-height: 48px;
-  padding: 0 16px;
+  padding: 0 8px 0 16px; /* MD3 spec: 16px left, 8px right when there are actions */
   background-color: var(--md-sys-color-inverse-surface);
   color: var(--md-sys-color-inverse-on-surface);
   border-radius: 4px; /* Extra small shape */
@@ -148,13 +148,14 @@ body.no-scroll {
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 0.25px; /* Body medium */
-  padding: 14px 0;
+  padding: 14px 0 14px 0;
 }
 
 .md3-snackbar-actions {
   display: flex;
   align-items: center;
-  margin-left: 16px;
+  margin-left: auto;
+  padding-left: 16px;
 }
 
 .md3-snackbar-action-btn {
