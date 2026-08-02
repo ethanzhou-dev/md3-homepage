@@ -215,14 +215,22 @@ body.no-scroll {
 
 .settings-sub-row {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.settings-sub-row.theme-row {
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
+  margin-bottom: 16px;
+}
+
+.settings-sub-row:last-child {
+  margin-bottom: 0;
+}
+
+#lang-segmented-button-set {
+  width: 100%;
+}
+
+#lang-segmented-button-set md-outlined-segmented-button {
+  flex: 1;
 }
 
 .settings-sub-row.theme-row .color-presets {
