@@ -221,10 +221,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (themeName) {
                 const color = getComputedStyle(document.documentElement).getPropertyValue('--md-custom-seed-' + themeName).trim();
                 applyDynamicTheme(color, isDarkMode, true, false);
-                if (window.showSnackbar) {
-                    const lang = document.documentElement.lang;
-                    window.showSnackbar(lang === 'zh' ? '主题颜色已更新' : 'Theme color updated');
-                }
             }
         });
     });
@@ -344,44 +340,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 });
-
-// MD3 Snackbar Global Function
-window.showSnackbar = function(message, duration = 3000, actionLabel = null, actionCallback = null) {
-    const snackbar = document.getElementById('md3-snackbar');
-    const textEl = document.getElementById('md3-snackbar-text');
-    const actionBtn = document.getElementById('md3-snackbar-action');
-    const closeBtn = document.getElementById('md3-snackbar-close');
-    
-    if (!snackbar || !textEl) return;
-    
-    // reset
-    clearTimeout(window._snackbarTimeout);
-    snackbar.classList.remove('show');
-    
-    // allow transition reset
-    setTimeout(() => {
-        textEl.textContent = message;
-        
-        if (actionLabel && actionBtn) {
-            actionBtn.textContent = actionLabel;
-            actionBtn.removeAttribute('hidden');
-            actionBtn.onclick = (e) => {
-                if (actionCallback) actionCallback(e);
-                snackbar.classList.remove('show');
-            };
-        } else if (actionBtn) {
-            actionBtn.setAttribute('hidden', '');
-        }
-        
-        if (closeBtn) {
-            closeBtn.removeAttribute('hidden');
-            closeBtn.onclick = () => snackbar.classList.remove('show');
-        }
-        
-        snackbar.classList.add('show');
-        
-        window._snackbarTimeout = setTimeout(() => {
-            snackbar.classList.remove('show');
-        }, duration);
-    }, 50);
-};
