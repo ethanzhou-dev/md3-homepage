@@ -253,124 +253,173 @@ const visitorsText = `${stats.visitors}`;
                         <h2 class="md-typescale-headline-medium text-primary">Project Archive</h2>
                         <p class="md-typescale-body-large">Here is a list of projects I am currently working on or have
                             completed.</p>
-                        <md-list class="projects-list">
-                            <md-list-item type="link" href="https://github.com/ethanzhou-dev/x-comment-blocker" target="_blank">
-                                <div slot="headline">x-comment-blocker</div>
-                                <div slot="supporting-text">Browser extension to block specific comments and usernames on X (Twitter)</div>
-                                <md-icon slot="end">open_in_new</md-icon>
-                            </md-list-item>
-                            <md-list-item type="link" href="https://github.com/ethanzhou-dev/neural-lite" target="_blank">
-                                <div slot="headline">neural-lite</div>
-                                <div slot="supporting-text">AI chat website mimicking classic Mac OS X interface</div>
-                                <md-icon slot="end">open_in_new</md-icon>
-                            </md-list-item>
-                            <md-list-item type="link" href="https://github.com/ethanzhou-dev/wapchat-qq" target="_blank">
-                                <div slot="headline">wapchat-qq</div>
-                                <div slot="supporting-text">WAP version QQ gateway/proxy for legacy mobile phones</div>
-                                <md-icon slot="end">open_in_new</md-icon>
-                            </md-list-item>
-                            <md-list-item type="link" href="https://github.com/ethanzhou-dev/wapchat-verify" target="_blank">
-                                <div slot="headline">wapchat-verify</div>
-                                <div slot="supporting-text">Account verification portal for WapChat-QQ</div>
-                                <md-icon slot="end">open_in_new</md-icon>
-                            </md-list-item>
-                            <md-list-item type="link" href="https://github.com/ethanzhou-dev/cf-legacy-proxy" target="_blank">
-                                <div slot="headline">cf-legacy-proxy</div>
-                                <div slot="supporting-text">Cloudflare Worker reverse proxy script that downgrades HTTP and strips HSTS to let legacy mobile phones access modern HTTPS websites</div>
-                                <md-icon slot="end">open_in_new</md-icon>
-                            </md-list-item>
-                            <md-list-item type="link" href="https://github.com/ethanzhou-dev/gomoku" target="_blank">
-                                <div slot="headline">gomoku</div>
-                                <div slot="supporting-text">Five in a row mini-game website</div>
-                                <md-icon slot="end">open_in_new</md-icon>
-                            </md-list-item>
-                            <md-list-item type="link" href="https://github.com/ethanzhou-dev/time-gauge" target="_blank">
-                                <div slot="headline">time-gauge</div>
-                                <div slot="supporting-text">A webpage showing the passage of time</div>
-                                <md-icon slot="end">open_in_new</md-icon>
-                            </md-list-item>
-                            <md-list-item type="link" href="https://github.com/ethanzhou-dev/white-noise" target="_blank">
-                                <div slot="headline">white-noise</div>
-                                <div slot="supporting-text">An Android white noise app</div>
-                                <md-icon slot="end">open_in_new</md-icon>
-                            </md-list-item>
-                        </md-list>
+                        <div class="projects-grid">
+                            <a href="https://github.com/ethanzhou-dev/x-comment-blocker" target="_blank" class="project-card">
+                                <md-ripple></md-ripple>
+                                <md-focus-ring></md-focus-ring>
+                                <div class="project-header">
+                                    <span class="project-title md-typescale-title-medium text-primary">x-comment-blocker</span>
+                                    <md-icon translate="no" class="project-version text-outline">open_in_new</md-icon>
+                                </div>
+                                <p class="project-desc md-typescale-body-medium">Browser extension to block specific comments and usernames on X (Twitter)</p>
+                            </a>
+                            <a href="https://github.com/ethanzhou-dev/neural-lite" target="_blank" class="project-card">
+                                <md-ripple></md-ripple>
+                                <md-focus-ring></md-focus-ring>
+                                <div class="project-header">
+                                    <span class="project-title md-typescale-title-medium text-primary">neural-lite</span>
+                                    <md-icon translate="no" class="project-version text-outline">open_in_new</md-icon>
+                                </div>
+                                <p class="project-desc md-typescale-body-medium">AI chat website mimicking classic Mac OS X interface</p>
+                            </a>
+                            <a href="https://github.com/ethanzhou-dev/wapchat-qq" target="_blank" class="project-card">
+                                <md-ripple></md-ripple>
+                                <md-focus-ring></md-focus-ring>
+                                <div class="project-header">
+                                    <span class="project-title md-typescale-title-medium text-primary">wapchat-qq</span>
+                                    <md-icon translate="no" class="project-version text-outline">open_in_new</md-icon>
+                                </div>
+                                <p class="project-desc md-typescale-body-medium">WAP version QQ gateway/proxy for legacy mobile phones</p>
+                            </a>
+                            <a href="https://github.com/ethanzhou-dev/wapchat-verify" target="_blank" class="project-card">
+                                <md-ripple></md-ripple>
+                                <md-focus-ring></md-focus-ring>
+                                <div class="project-header">
+                                    <span class="project-title md-typescale-title-medium text-primary">wapchat-verify</span>
+                                    <md-icon translate="no" class="project-version text-outline">open_in_new</md-icon>
+                                </div>
+                                <p class="project-desc md-typescale-body-medium">Account verification portal for WapChat-QQ</p>
+                            </a>
+                            <a href="https://github.com/ethanzhou-dev/cf-legacy-proxy" target="_blank" class="project-card">
+                                <md-ripple></md-ripple>
+                                <md-focus-ring></md-focus-ring>
+                                <div class="project-header">
+                                    <span class="project-title md-typescale-title-medium text-primary">cf-legacy-proxy</span>
+                                    <md-icon translate="no" class="project-version text-outline">open_in_new</md-icon>
+                                </div>
+                                <p class="project-desc md-typescale-body-medium">Cloudflare Worker reverse proxy script that downgrades HTTP and strips HSTS to let legacy mobile phones access modern HTTPS websites</p>
+                            </a>
+                            <a href="https://github.com/ethanzhou-dev/gomoku" target="_blank" class="project-card">
+                                <md-ripple></md-ripple>
+                                <md-focus-ring></md-focus-ring>
+                                <div class="project-header">
+                                    <span class="project-title md-typescale-title-medium text-primary">gomoku</span>
+                                    <md-icon translate="no" class="project-version text-outline">open_in_new</md-icon>
+                                </div>
+                                <p class="project-desc md-typescale-body-medium">Five in a row mini-game website</p>
+                            </a>
+                            <a href="https://github.com/ethanzhou-dev/time-gauge" target="_blank" class="project-card">
+                                <md-ripple></md-ripple>
+                                <md-focus-ring></md-focus-ring>
+                                <div class="project-header">
+                                    <span class="project-title md-typescale-title-medium text-primary">time-gauge</span>
+                                    <md-icon translate="no" class="project-version text-outline">open_in_new</md-icon>
+                                </div>
+                                <p class="project-desc md-typescale-body-medium">A webpage showing the passage of time</p>
+                            </a>
+                            <a href="https://github.com/ethanzhou-dev/white-noise" target="_blank" class="project-card">
+                                <md-ripple></md-ripple>
+                                <md-focus-ring></md-focus-ring>
+                                <div class="project-header">
+                                    <span class="project-title md-typescale-title-medium text-primary">white-noise</span>
+                                    <md-icon translate="no" class="project-version text-outline">open_in_new</md-icon>
+                                </div>
+                                <p class="project-desc md-typescale-body-medium">An Android white noise app</p>
+                            </a>
+                        </div>
                         <h3 class="md-typescale-title-large text-primary section-title"><md-icon translate="no">lightbulb</md-icon>Upcoming Ideas</h3>
-                        <md-list class="ideas-list">
-                            <md-list-item>
-                                <div slot="headline">Improve and refine my personal projects</div>
-                            </md-list-item>
-                            <md-list-item>
-                                <div slot="headline">Continue creating and fixing bugs during the process of Vibe Coding to keep learning</div>
-                            </md-list-item>
-                            <md-list-item>
-                                <div slot="headline">Build websites and projects with more practical utility</div>
-                            </md-list-item>
-                            <md-list-item>
-                                <div slot="headline">Polish and complete my personal blog</div>
-                            </md-list-item>
-                        </md-list>
+                        <ul class="md-list md-typescale-body-large">
+                            <li>Improve and refine my personal projects</li>
+                            <li>Continue creating and fixing bugs during the process of Vibe Coding to keep learning
+                            </li>
+                            <li>Build websites and projects with more practical utility</li>
+                            <li>Polish and complete my personal blog</li>
+                        </ul>
                     </div>
                     <div data-lang="zh">
                         <h2 class="md-typescale-headline-medium text-primary">项目归档</h2>
                         <p class="md-typescale-body-large">以下是我目前正在开发或已完成的项目列表。</p>
-                        <md-list class="projects-list">
-                            <md-list-item type="link" href="https://github.com/ethanzhou-dev/x-comment-blocker" target="_blank">
-                                <div slot="headline">x-comment-blocker</div>
-                                <div slot="supporting-text">屏蔽X上的特定评论与用户名的浏览器插件</div>
-                                <md-icon slot="end">open_in_new</md-icon>
-                            </md-list-item>
-                            <md-list-item type="link" href="https://github.com/ethanzhou-dev/neural-lite" target="_blank">
-                                <div slot="headline">neural-lite</div>
-                                <div slot="supporting-text">模仿Mac OS X界面的AI对话聊天网站</div>
-                                <md-icon slot="end">open_in_new</md-icon>
-                            </md-list-item>
-                            <md-list-item type="link" href="https://github.com/ethanzhou-dev/wapchat-qq" target="_blank">
-                                <div slot="headline">wapchat-qq</div>
-                                <div slot="supporting-text">老手机 WAP 版 QQ 中转站</div>
-                                <md-icon slot="end">open_in_new</md-icon>
-                            </md-list-item>
-                            <md-list-item type="link" href="https://github.com/ethanzhou-dev/wapchat-verify" target="_blank">
-                                <div slot="headline">wapchat-verify</div>
-                                <div slot="supporting-text">WapChat-QQ的账号验证站</div>
-                                <md-icon slot="end">open_in_new</md-icon>
-                            </md-list-item>
-                            <md-list-item type="link" href="https://github.com/ethanzhou-dev/cf-legacy-proxy" target="_blank">
-                                <div slot="headline">cf-legacy-proxy</div>
-                                <div slot="supporting-text">一个 Cloudflare Worker 反代脚本，通过降级 HTTP 和剥离 HSTS，让老旧手机能够访问现代 HTTPS 网站</div>
-                                <md-icon slot="end">open_in_new</md-icon>
-                            </md-list-item>
-                            <md-list-item type="link" href="https://github.com/ethanzhou-dev/gomoku" target="_blank">
-                                <div slot="headline">gomoku</div>
-                                <div slot="supporting-text">五子棋小游戏网站</div>
-                                <md-icon slot="end">open_in_new</md-icon>
-                            </md-list-item>
-                            <md-list-item type="link" href="https://github.com/ethanzhou-dev/time-gauge" target="_blank">
-                                <div slot="headline">time-gauge</div>
-                                <div slot="supporting-text">一个网页用于展示时间的流逝</div>
-                                <md-icon slot="end">open_in_new</md-icon>
-                            </md-list-item>
-                            <md-list-item type="link" href="https://github.com/ethanzhou-dev/white-noise" target="_blank">
-                                <div slot="headline">white-noise</div>
-                                <div slot="supporting-text">安卓白噪音软件</div>
-                                <md-icon slot="end">open_in_new</md-icon>
-                            </md-list-item>
-                        </md-list>
+                        <div class="projects-grid">
+                            <a href="https://github.com/ethanzhou-dev/x-comment-blocker" target="_blank" class="project-card">
+                                <md-ripple></md-ripple>
+                                <md-focus-ring></md-focus-ring>
+                                <div class="project-header">
+                                    <span class="project-title md-typescale-title-medium text-primary">x-comment-blocker</span>
+                                    <md-icon translate="no" class="project-version text-outline">open_in_new</md-icon>
+                                </div>
+                                <p class="project-desc md-typescale-body-medium">屏蔽X上的特定评论与用户名的浏览器插件</p>
+                            </a>
+                            <a href="https://github.com/ethanzhou-dev/neural-lite" target="_blank" class="project-card">
+                                <md-ripple></md-ripple>
+                                <md-focus-ring></md-focus-ring>
+                                <div class="project-header">
+                                    <span class="project-title md-typescale-title-medium text-primary">neural-lite</span>
+                                    <md-icon translate="no" class="project-version text-outline">open_in_new</md-icon>
+                                </div>
+                                <p class="project-desc md-typescale-body-medium">模仿Mac OS X界面的AI对话聊天网站</p>
+                            </a>
+                            <a href="https://github.com/ethanzhou-dev/wapchat-qq" target="_blank" class="project-card">
+                                <md-ripple></md-ripple>
+                                <md-focus-ring></md-focus-ring>
+                                <div class="project-header">
+                                    <span class="project-title md-typescale-title-medium text-primary">wapchat-qq</span>
+                                    <md-icon translate="no" class="project-version text-outline">open_in_new</md-icon>
+                                </div>
+                                <p class="project-desc md-typescale-body-medium">老手机 WAP 版 QQ 中转站</p>
+                            </a>
+                            <a href="https://github.com/ethanzhou-dev/wapchat-verify" target="_blank" class="project-card">
+                                <md-ripple></md-ripple>
+                                <md-focus-ring></md-focus-ring>
+                                <div class="project-header">
+                                    <span class="project-title md-typescale-title-medium text-primary">wapchat-verify</span>
+                                    <md-icon translate="no" class="project-version text-outline">open_in_new</md-icon>
+                                </div>
+                                <p class="project-desc md-typescale-body-medium">WapChat-QQ的账号验证站</p>
+                            </a>
+                            <a href="https://github.com/ethanzhou-dev/cf-legacy-proxy" target="_blank" class="project-card">
+                                <md-ripple></md-ripple>
+                                <md-focus-ring></md-focus-ring>
+                                <div class="project-header">
+                                    <span class="project-title md-typescale-title-medium text-primary">cf-legacy-proxy</span>
+                                    <md-icon translate="no" class="project-version text-outline">open_in_new</md-icon>
+                                </div>
+                                <p class="project-desc md-typescale-body-medium">一个 Cloudflare Worker 反代脚本，通过降级 HTTP 和剥离 HSTS，让老旧手机能够访问现代 HTTPS 网站</p>
+                            </a>
+                            <a href="https://github.com/ethanzhou-dev/gomoku" target="_blank" class="project-card">
+                                <md-ripple></md-ripple>
+                                <md-focus-ring></md-focus-ring>
+                                <div class="project-header">
+                                    <span class="project-title md-typescale-title-medium text-primary">gomoku</span>
+                                    <md-icon translate="no" class="project-version text-outline">open_in_new</md-icon>
+                                </div>
+                                <p class="project-desc md-typescale-body-medium">五子棋小游戏网站</p>
+                            </a>
+                            <a href="https://github.com/ethanzhou-dev/time-gauge" target="_blank" class="project-card">
+                                <md-ripple></md-ripple>
+                                <md-focus-ring></md-focus-ring>
+                                <div class="project-header">
+                                    <span class="project-title md-typescale-title-medium text-primary">time-gauge</span>
+                                    <md-icon translate="no" class="project-version text-outline">open_in_new</md-icon>
+                                </div>
+                                <p class="project-desc md-typescale-body-medium">一个网页用于展示时间的流逝</p>
+                            </a>
+                            <a href="https://github.com/ethanzhou-dev/white-noise" target="_blank" class="project-card">
+                                <md-ripple></md-ripple>
+                                <md-focus-ring></md-focus-ring>
+                                <div class="project-header">
+                                    <span class="project-title md-typescale-title-medium text-primary">white-noise</span>
+                                    <md-icon translate="no" class="project-version text-outline">open_in_new</md-icon>
+                                </div>
+                                <p class="project-desc md-typescale-body-medium">安卓白噪音软件</p>
+                            </a>
+                        </div>
                         <h3 class="md-typescale-title-large text-primary section-title"><md-icon translate="no">lightbulb</md-icon>待做构想</h3>
-                        <md-list class="ideas-list">
-                            <md-list-item>
-                                <div slot="headline">完善自己的各类项目</div>
-                            </md-list-item>
-                            <md-list-item>
-                                <div slot="headline">在Vibe Coding的过程中继续制造bug和修复，不断学习</div>
-                            </md-list-item>
-                            <md-list-item>
-                                <div slot="headline">制造更具有实用性的网站或项目</div>
-                            </md-list-item>
-                            <md-list-item>
-                                <div slot="headline">完善个人博客</div>
-                            </md-list-item>
-                        </md-list>
+                        <ul class="md-list md-typescale-body-large">
+                            <li>完善自己的各类项目</li>
+                            <li>在Vibe Coding的过程中继续制造bug和修复，不断学习</li>
+                            <li>制造更具有实用性的网站或项目</li>
+                            <li>完善个人博客</li>
+                        </ul>
                     </div>
                 </div>
 
