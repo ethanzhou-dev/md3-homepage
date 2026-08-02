@@ -82,10 +82,11 @@ document.addEventListener('DOMContentLoaded', () => {
         customElements.whenDefined('md-list-item'),
         customElements.whenDefined('md-fab'),
         customElements.whenDefined('md-icon-button'),
-        customElements.whenDefined('md-filled-tonal-button'),
         customElements.whenDefined('md-circular-progress'),
         customElements.whenDefined('md-chip-set'),
-        customElements.whenDefined('md-suggestion-chip')
+        customElements.whenDefined('md-suggestion-chip'),
+        customElements.whenDefined('md-outlined-segmented-button-set'),
+        customElements.whenDefined('md-outlined-segmented-button')
     ]).then(markComponentsReady);
 
     window.addEventListener('load', markComponentsReady);
@@ -373,9 +374,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnEn = document.getElementById('btn-lang-en');
     const btnZh = document.getElementById('btn-lang-zh');
 
+    function updateLanguageUI(lang) {
+        if (btnEn && btnZh) {
+            btnEn.selected = (lang === 'en');
+            btnZh.selected = (lang === 'zh');
+        }
+    }
+
+    const currentLang = localStorage.getItem('preferredLang') || document.documentElement.lang || 'en';
+    updateLanguageUI(currentLang);
+
     function setLanguage(lang) {
-        const currentLang = localStorage.getItem('preferredLang') || document.documentElement.lang;
-        if (currentLang === lang) return;
+        const activeLang = localStorage.getItem('preferredLang') || document.documentElement.lang;
+        if (activeLang === lang) return;
         
         localStorage.setItem('preferredLang', lang);
         document.cookie = `preferredLang=${lang};path=/;max-age=31536000`;
@@ -384,6 +395,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.classList.remove('lang-en', 'lang-zh');
         document.documentElement.classList.add('lang-' + lang);
         
+        updateLanguageUI(lang);
+
         document.title = lang === 'zh' ? "Ekiz 的主页" : "Ekiz's Homepage";
         window.showSnackbar(lang === 'zh' ? '界面语言已切换为中文' : 'Language set to English');
     }

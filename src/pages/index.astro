@@ -16,8 +16,8 @@ const visitorsText = `${stats.visitors}`;
         <nav class="md-nav-drawer" id="nav-drawer">
             <div class="md-mobile-header" id="nav-header">
                 <md-icon-button id="drawer-close-btn" aria-label="Close menu"><md-icon translate="no">menu_open</md-icon></md-icon-button>
-                <h2 class="md-typescale-title-large" data-lang="en" style="margin:0">Menu</h2>
-                <h2 class="md-typescale-title-large" data-lang="zh" style="margin:0">菜单</h2>
+                <h2 class="md-typescale-title-large drawer-header-title" data-lang="en">Menu</h2>
+                <h2 class="md-typescale-title-large drawer-header-title" data-lang="zh">菜单</h2>
             </div>
             <div class="md-nav-content">
                 <div class="md-nav-title-container">
@@ -25,7 +25,7 @@ const visitorsText = `${stats.visitors}`;
                     <span class="md-nav-title md-typescale-title-small" data-lang="en">DIRECTORY</span>
                     <span class="md-nav-title md-typescale-title-small" data-lang="zh">目录</span>
                 </div>
-                <md-divider class="drawer-divider" style="margin-bottom: 12px;"></md-divider>
+                <md-divider class="drawer-divider drawer-divider-top"></md-divider>
 
                 <md-list class="md-nav-section">
                     <md-list-item type="link" href="#whoami" class="md-nav-item">
@@ -61,7 +61,7 @@ const visitorsText = `${stats.visitors}`;
                 </md-list>
 
                 <div class="md-nav-settings">
-                    <md-divider class="drawer-divider" style="margin-bottom: 4px;"></md-divider>
+                    <md-divider class="drawer-divider drawer-divider-bottom"></md-divider>
                     <details class="md-nav-section-details">
                         <summary class="md-nav-title md-typescale-title-small">
                             <md-ripple></md-ripple>
@@ -79,13 +79,13 @@ const visitorsText = `${stats.visitors}`;
                                     <span data-lang="en">Language</span>
                                     <span data-lang="zh">界面语言</span>
                                 </span>
-                                <div class="lang-switch-buttons">
-                                    <md-filled-tonal-button id="btn-lang-zh">中文</md-filled-tonal-button>
-                                    <md-filled-tonal-button id="btn-lang-en">English</md-filled-tonal-button>
-                                </div>
+                                <md-outlined-segmented-button-set id="lang-segmented-button-set">
+                                    <md-outlined-segmented-button id="btn-lang-zh" label="中文"></md-outlined-segmented-button>
+                                    <md-outlined-segmented-button id="btn-lang-en" label="English"></md-outlined-segmented-button>
+                                </md-outlined-segmented-button-set>
                             </div>
 
-                            <div class="settings-sub-row theme-row" style="margin-top: 16px;">
+                            <div class="settings-sub-row theme-row">
                                 <span class="settings-sub-label md-typescale-label-large">
                                     <span data-lang="en">Theme Color</span>
                                     <span data-lang="zh">主题配色</span>
@@ -137,7 +137,7 @@ const visitorsText = `${stats.visitors}`;
                 <md-icon-button id="menu-btn" aria-label="Open menu"><md-icon translate="no">menu</md-icon></md-icon-button>
                 <h1 class="md-typescale-title-large" data-lang="en">Ekiz's Homepage</h1>
                 <h1 class="md-typescale-title-large" data-lang="zh">Ekiz 的主页</h1>
-                <md-icon-button id="theme-toggle-btn" style="margin-left: auto;" aria-label="Toggle theme">
+                <md-icon-button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle theme">
                     <md-icon translate="no" id="theme-toggle-icon">dark_mode</md-icon>
                 </md-icon-button>
             </header>
@@ -603,7 +603,7 @@ const visitorsText = `${stats.visitors}`;
                         <h2 class="md-typescale-headline-medium text-primary">System Status</h2>
                         <p class="md-typescale-body-large">Diagnostics and traffic statistics of this node.</p>
                         <md-divider></md-divider>
-                        <md-list style="background: transparent; padding: 0; margin-top: 16px;">
+                        <md-list class="status-list">
                             <md-list-item>
                                 <md-icon translate="no" slot="start" class="text-primary">schedule</md-icon>
                                 <span slot="headline" class="stat-uptime">{uptimeText}</span>
@@ -620,7 +620,7 @@ const visitorsText = `${stats.visitors}`;
                         <h2 class="md-typescale-headline-medium text-primary">系统状态</h2>
                         <p class="md-typescale-body-large">本站点的实时运行诊断与访问统计数据。</p>
                         <md-divider></md-divider>
-                        <md-list style="background: transparent; padding: 0; margin-top: 16px;">
+                        <md-list class="status-list">
                             <md-list-item>
                                 <md-icon translate="no" slot="start" class="text-primary">schedule</md-icon>
                                 <span slot="headline" class="stat-uptime">{uptimeText}</span>

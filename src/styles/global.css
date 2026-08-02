@@ -240,23 +240,26 @@ body.no-scroll {
   font-weight: 500;
 }
 
-.lang-switch-buttons {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.drawer-header-title {
+  margin: 0;
 }
 
-
-.lang-switch-buttons md-filled-tonal-button {
-  --md-filled-tonal-button-container-color: transparent;
-  --md-filled-tonal-button-label-text-color: var(--md-sys-color-outline);
+.drawer-divider-top {
+  margin-bottom: 12px;
 }
 
-.lang-en #btn-lang-en,
-.lang-zh #btn-lang-zh {
-  --md-filled-tonal-button-container-color: var(--md-sys-color-secondary-container);
-  --md-filled-tonal-button-label-text-color: var(--md-sys-color-on-secondary-container);
-  --md-filled-tonal-button-label-text-weight: bold;
+.drawer-divider-bottom {
+  margin-bottom: 4px;
+}
+
+.theme-toggle-btn {
+  margin-left: auto;
+}
+
+.status-list {
+  background: transparent;
+  padding: 0;
+  margin-top: 16px;
 }
 
 md-divider {
