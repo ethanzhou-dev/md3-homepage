@@ -209,9 +209,84 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // ==========================================================================
+    // MD3 Snackbar Manager
+    // ==========================================================================
+    const snackbarEl = document.getElementById('md-snackbar');
+    const snackbarLabel = document.getElementById('snackbar-label');
+    const snackbarActions = document.getElementById('snackbar-actions');
+    let snackbarTimer = null;
+
+    window.showSnackbar = function(options) {
+        if (!snackbarEl || !snackbarLabel || !snackbarActions) return;
+
+        const opts = typeof options === 'string' ? { message: options } : options;
+        const {
+            message = '',
+            actionText = '',
+            onAction = null,
+            duration = 4000,
+            hasClose = false
+        } = opts;
+
+        if (snackbarTimer) {
+            clearTimeout(snackbarTimer);
+            snackbarTimer = null;
+        }
+
+        snackbarLabel.textContent = message;
+        snackbarActions.innerHTML = '';
+
+        if (actionText && onAction) {
+            const actionBtn = document.createElement('md-text-button');
+            actionBtn.className = 'snackbar-action-btn';
+            actionBtn.textContent = actionText;
+            actionBtn.addEventListener('click', () => {
+                onAction();
+                hideSnackbar();
+            });
+            snackbarActions.appendChild(actionBtn);
+        }
+
+        if (hasClose) {
+            const closeBtn = document.createElement('md-icon-button');
+            closeBtn.className = 'snackbar-close-btn';
+            closeBtn.setAttribute('aria-label', 'Close');
+            closeBtn.innerHTML = '<md-icon translate="no">close</md-icon>';
+            closeBtn.addEventListener('click', () => {
+                hideSnackbar();
+            });
+            snackbarActions.appendChild(closeBtn);
+        }
+
+        snackbarEl.classList.add('visible');
+
+        if (duration > 0) {
+            snackbarTimer = setTimeout(() => {
+                hideSnackbar();
+            }, duration);
+        }
+    };
+
+    function hideSnackbar() {
+        if (snackbarEl) {
+            snackbarEl.classList.remove('visible');
+        }
+        if (snackbarTimer) {
+            clearTimeout(snackbarTimer);
+            snackbarTimer = null;
+        }
+    }
+
     if (themeToggleBtn) {
         themeToggleBtn.addEventListener('click', () => {
-            applyDynamicTheme(activeSeedColor, !isDarkMode, false, true);
+            const nextDark = !isDarkMode;
+            applyDynamicTheme(activeSeedColor, nextDark, false, true);
+            const isZh = (localStorage.getItem('preferredLang') || document.documentElement.lang) === 'zh';
+            const msg = nextDark 
+                ? (isZh ? '已切换至深色模式' : 'Switched to Dark theme')
+                : (isZh ? '已切换至浅色模式' : 'Switched to Light theme');
+            window.showSnackbar(msg);
         });
     }
 
@@ -221,6 +296,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (themeName) {
                 const color = getComputedStyle(document.documentElement).getPropertyValue('--md-custom-seed-' + themeName).trim();
                 applyDynamicTheme(color, isDarkMode, true, false);
+                const isZh = (localStorage.getItem('preferredLang') || document.documentElement.lang) === 'zh';
+                window.showSnackbar(isZh ? '主题配色已更新' : 'Theme palette updated');
             }
         });
     });
@@ -228,6 +305,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (customColorPicker) {
         customColorPicker.addEventListener('change', (e) => {
             applyDynamicTheme(e.target.value, isDarkMode, true, false);
+            const isZh = (localStorage.getItem('preferredLang') || document.documentElement.lang) === 'zh';
+            window.showSnackbar(isZh ? '自定义主题色已应用' : 'Custom theme color applied');
         });
     }
 
@@ -294,7 +373,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnEn = document.getElementById('btn-lang-en');
     const btnZh = document.getElementById('btn-lang-zh');
 
-
     function setLanguage(lang) {
         const currentLang = localStorage.getItem('preferredLang') || document.documentElement.lang;
         if (currentLang === lang) return;
@@ -307,14 +385,13 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.classList.add('lang-' + lang);
         
         document.title = lang === 'zh' ? "Ekiz 的主页" : "Ekiz's Homepage";
+        window.showSnackbar(lang === 'zh' ? '界面语言已切换为中文' : 'Language set to English');
     }
 
     if (btnEn && btnZh) {
         btnEn.addEventListener('click', (e) => { e.preventDefault(); setLanguage('en'); });
         btnZh.addEventListener('click', (e) => { e.preventDefault(); setLanguage('zh'); });
     }
-
-
 
     const backToTopFab = document.getElementById('back-to-top-fab');
     const updateScrollState = () => {
@@ -337,6 +414,4 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-
-
 });
