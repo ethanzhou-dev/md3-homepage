@@ -92,6 +92,16 @@ htmlClass += ' js-enabled';
     <md-fab id="back-to-top-fab" aria-label="Back to top">
         <md-icon slot="icon" translate="no">arrow_upward</md-icon>
     </md-fab>
+
+    <div id="md3-snackbar" class="md3-snackbar" role="status" aria-live="polite">
+        <div class="md3-snackbar-text" id="md3-snackbar-text"></div>
+        <div class="md3-snackbar-actions">
+            <md-text-button id="md3-snackbar-action" class="md3-snackbar-action-btn" hidden></md-text-button>
+            <md-icon-button id="md3-snackbar-close" class="md3-snackbar-close-btn" hidden>
+                <md-icon translate="no">close</md-icon>
+            </md-icon-button>
+        </div>
+    </div>
 </body>
 </html>
 
